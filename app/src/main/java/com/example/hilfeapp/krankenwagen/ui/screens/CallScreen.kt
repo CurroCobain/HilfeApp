@@ -20,7 +20,7 @@ fun CallScreen(callViewModel: CallViewModel) {
     ) {
         Button(
             onClick = {
-                callViewModel.makePhoneCall(context)
+                callViewModel.makePhoneCall()
             },
             colors = ButtonDefaults.buttonColors(Color.Red)
         ) {
