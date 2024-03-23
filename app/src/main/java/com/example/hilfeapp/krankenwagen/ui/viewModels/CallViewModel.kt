@@ -8,6 +8,7 @@ import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import java.util.*
+import android.media.AudioManager
 
 @SuppressLint("StaticFieldLeak")
 class CallViewModel(private val context: Context) : ViewModel() {
@@ -53,23 +54,28 @@ class CallViewModel(private val context: Context) : ViewModel() {
     }
 
     // Función para iniciar la conversión de texto a voz
-    fun startTextToSpeech() {
+    fun startTextToSpeech(callText: String) {
         // Configuración del listener para controlar el progreso de la conversión
         tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
             override fun onStart(utteranceId: String?) {
-                Log.d("CallViewModel", "TTS started")
+                // Log.d("CallViewModel", "TTS started")
             }
 
             override fun onDone(utteranceId: String?) {
-                Log.d("CallViewModel", "TTS done")
+                // Log.d("CallViewModel", "TTS done")
                 // Acciones después de que la conversión a voz haya finalizado
             }
 
-            @Deprecated("Deprecated in Java")
+            @Suppress("DEPRECATION")
             override fun onError(utteranceId: String?) {
-                Log.e("CallViewModel", "TTS error")
+                // Log.e("CallViewModel", "TTS error")
             }
         })
+
+        // Configurar el enrutamiento de audio al altavoz
+        val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        audioManager.mode = AudioManager.MODE_NORMAL
+        audioManager.isSpeakerphoneOn = true
 
         // Iniciar la conversión de texto a voz
         tts.speak(callText, TextToSpeech.QUEUE_FLUSH, null, "call_text")

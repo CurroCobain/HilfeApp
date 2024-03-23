@@ -1,5 +1,5 @@
 package com.example.hilfeapp.krankenwagen.apis
-/*
+
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -13,4 +13,3 @@ interface ApiService {
 
 data class TextToSpeechRequest(val text: String)
 
- */

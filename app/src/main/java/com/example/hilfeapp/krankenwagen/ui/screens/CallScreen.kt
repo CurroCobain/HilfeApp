@@ -26,6 +26,14 @@ fun CallScreen(callViewModel: CallViewModel) {
         ) {
             Text(text = "Llamar")
         }
+        Button(
+            onClick = {
+                callViewModel.startTextToSpeech("Esto es una prueba")
+            },
+            colors = ButtonDefaults.buttonColors(Color.Red)
+        ) {
+            Text(text = "Lanzar texto")
+        }
     }
 
 }
