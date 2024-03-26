@@ -5,7 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.hilfeapp.krankenwagen.ui.screens.CallScreen
-import com.example.hilfeapp.krankenwagen.ui.viewModels.CallViewModel
+import CallViewModel
 
 @Composable
 fun NavManager(callViewModel: CallViewModel){
