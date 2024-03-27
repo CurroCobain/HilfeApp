@@ -73,4 +73,33 @@ package com.example.hilfeapp.krankenwagen.ui.viewModels
       speechRecognizer.startListening(recognizerIntent)
   }
 
+ ---------------------------------------------  código de jitsi-meet -------------------------------------------------------
+
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Llama a esta función para iniciar la actividad de Jitsi Meet
+        startJitsiMeet()
+    }
+
+    private fun startJitsiMeet() {
+        val intent = Intent(this, JitsiMeetActivity::class.java)
+
+        val serverURL = "https://meet.jit.si" // URL del servidor Jitsi Meet
+        val roomName = "miSalaDeReuniones" // Nombre de la sala de reuniones
+
+        intent.putExtra("serverURL", serverURL)
+        intent.putExtra("roomName", roomName)
+
+        startActivity(intent)
+    }
+}
+
    */
