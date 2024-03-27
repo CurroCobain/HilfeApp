@@ -13,6 +13,7 @@ import com.example.hilfeapp.krankenwagen.navigation.NavManager
 import com.example.hilfeapp.ui.theme.HilfeAppTheme
 import CallViewModel
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val callViewModel = CallViewModel(this)

@@ -28,6 +28,7 @@ fun CallScreen(callViewModel: CallViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        MenuLateral()
         Button(
             onClick = {
                 callViewModel.makePhoneCall()
@@ -61,7 +62,8 @@ fun CallScreen(callViewModel: CallViewModel) {
             Text(text = "Detener grabación")
         }
         Text(text = resultText,
-            Modifier.border(width = 2.dp, color = Color.Black)
+            Modifier
+                .border(width = 2.dp, color = Color.Black)
                 .wrapContentSize())
     }
 }

@@ -84,5 +84,5 @@ dependencies {
     //Llamada
     implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-
+    implementation("com.jitsi-meet:2.0.9364")
 }
