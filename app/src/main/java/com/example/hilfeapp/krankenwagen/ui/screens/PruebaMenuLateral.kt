@@ -5,7 +5,9 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -18,6 +20,7 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,14 +35,14 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Preview
 @Composable
-fun MenuLateral(){
+fun MenuLateral(callViewModel: CallViewModel) {
     val context = LocalContext.current
-    val callViewModel = CallViewModel(context)
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val resultText by callViewModel.incomingText.collectAsState()
+    val message by callViewModel.callText.collectAsState()
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -67,6 +70,17 @@ fun MenuLateral(){
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()
             ) {
+                TextField(
+                    value = message,
+                    onValueChange = { newValue ->
+                        callViewModel.addCallText(newValue)
+                    },
+                    label = { Text(text = "Introduce el mensaje que quieres enviar") },
+                    modifier = Modifier
+                        .border(width = 2.dp, color = Color.Black)
+                        .fillMaxWidth(0.8f)
+                        .fillMaxHeight(0.2f),
+                )
                 Button(
                     onClick = {
                         callViewModel.makePhoneCall()
@@ -77,7 +91,7 @@ fun MenuLateral(){
                 }
                 Button(
                     onClick = {
-                        callViewModel.startTextToSpeech("Esto es una prueba")
+                        callViewModel.startTextToSpeech(message)
                     },
                     colors = ButtonDefaults.buttonColors(Color.Red)
                 ) {
@@ -99,10 +113,14 @@ fun MenuLateral(){
                 ) {
                     Text(text = "Detener grabación")
                 }
-                Text(text = resultText,
+                Text(
+                    text = resultText!!,
                     Modifier
                         .border(width = 2.dp, color = Color.Black)
-                        .wrapContentSize())
+                        .fillMaxWidth(0.8f)
+                        .fillMaxHeight(0.1f)
+                        .wrapContentSize()
+                )
             }
             //TestCallScreen {}
         }

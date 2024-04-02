@@ -24,12 +24,13 @@ import kotlin.concurrent.schedule
 class CallViewModel(private val context: Context) : ViewModel() {
 
     private val number = "619033460" // Número de teléfono fijo
-    private var callText = ""
+    var callText = MutableStateFlow("")
+        private set
     private var speechRecognizer: SpeechRecognizer? = null
     private lateinit var tts: TextToSpeech
-    var incomingText = MutableStateFlow("")
-    private var mediaRecorder: MediaRecorder? = null
-    private lateinit var outputFile: File
+    val incomingText = MutableStateFlow("")
+    // private var mediaRecorder: MediaRecorder? = null
+    // private lateinit var outputFile: File
 
     // Inicialización del TextToSpeech al crear una instancia del ViewModel
     init {
@@ -60,12 +61,12 @@ class CallViewModel(private val context: Context) : ViewModel() {
 
     // Función para agregar el texto que se convertirá a voz
     fun addCallText(text: String) {
-        callText = text
+        callText.value = text
     }
 
     // Función para eliminar el texto que se convertirá a voz
     fun removeCallText() {
-        callText = ""
+        callText.value = ""
     }
 
     // Función para iniciar el reconocimiento de voz
@@ -79,73 +80,65 @@ class CallViewModel(private val context: Context) : ViewModel() {
             return
         }
 
-        // Verificar si el reconocimiento de voz ya está en curso
-        if (speechRecognizer == null) {
-            // Configurar el SpeechRecognizer si no está en curso
-            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context)
-            speechRecognizer?.setRecognitionListener(object : RecognitionListener {
-                override fun onReadyForSpeech(params: Bundle?) {
-                    // Acciones cuando el reconocimiento de voz está listo para comenzar
-                    Log.d("CallViewModel", "Ready for speech")
-                }
-
-                override fun onBeginningOfSpeech() {
-                    // Acciones al comenzar el discurso
-                    Log.d("CallViewModel", "Beginning of speech")
-                }
-
-                override fun onRmsChanged(rmsdB: Float) {
-                    // Cambios en el nivel de volumen del habla
-                }
-
-                override fun onBufferReceived(buffer: ByteArray?) {
-                    // Buffer recibido
-                }
-
-                override fun onEndOfSpeech() {
-                    // Acciones al finalizar el discurso
-                    Log.d("CallViewModel", "End of speech")
-
-                    // Iniciar un temporizador para reiniciar el reconocimiento después de un breve período
-                    Timer("RestartSpeechRecognition", false).schedule(500) {
-                        startSpeechToText() // Llamar a startSpeechToText() después de 1 segundo
-                    }
-                }
-
-                override fun onError(error: Int) {
-                    // Manejar errores
-                    Log.e("CallViewModel", "Speech recognition error: $error")
-                }
-
-                override fun onResults(results: Bundle?) {
-                    // Resultados del reconocimiento de voz
-                    val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                    if (!matches.isNullOrEmpty()) {
-                        // Se ha reconocido el habla, actualiza el texto reconocido en MutableStateFlow
-                        val spokenText = matches[0]
-                        incomingText.value = spokenText
-                        Log.d("CallViewModel", "Spoken text: $spokenText")
-                    }
-                }
-
-                override fun onPartialResults(partialResults: Bundle?) {
-                    // Resultados parciales
-                }
-
-                override fun onEvent(eventType: Int, params: Bundle?) {
-                    // Evento del reconocimiento de voz
-                }
-            })
-
-            // Configurar el intent para iniciar el reconocimiento de voz
-            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
+        // Configurar el SpeechRecognizer
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context)
+        speechRecognizer?.setRecognitionListener(object : RecognitionListener {
+            override fun onReadyForSpeech(params: Bundle?) {
+                // Acciones cuando el reconocimiento de voz está listo para comenzar
+                Log.d("CallViewModel", "Ready for speech")
             }
 
-            // Comenzar el reconocimiento de voz
-            speechRecognizer?.startListening(intent)
+            override fun onBeginningOfSpeech() {
+                // Acciones al comenzar el discurso
+                Log.d("CallViewModel", "Beginning of speech")
+            }
+
+            override fun onRmsChanged(rmsdB: Float) {
+                // Cambios en el nivel de volumen del habla
+            }
+
+            override fun onBufferReceived(buffer: ByteArray?) {
+                // Buffer recibido
+            }
+
+            override fun onEndOfSpeech() {
+                // Acciones al finalizar el discurso
+                Log.d("CallViewModel", "End of speech")
+            }
+
+            override fun onError(error: Int) {
+                // Manejar errores
+                Log.e("CallViewModel", "Speech recognition error: $error")
+            }
+
+            override fun onResults(results: Bundle?) {
+                // Resultados del reconocimiento de voz
+                val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                if (!matches.isNullOrEmpty()) {
+                    // Se ha reconocido el habla, actualiza el texto reconocido en MutableStateFlow
+                    val spokenText = matches[0]
+                    editIncomingText(spokenText)
+                    Log.d("CallViewModel", "Spoken text: $spokenText")
+                }
+            }
+
+            override fun onPartialResults(partialResults: Bundle?) {
+                // Resultados parciales
+            }
+
+            override fun onEvent(eventType: Int, params: Bundle?) {
+                // Evento del reconocimiento de voz
+            }
+        })
+
+        // Configurar el intent para iniciar el reconocimiento de voz
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
         }
+
+        // Comenzar el reconocimiento de voz
+        speechRecognizer?.startListening(intent)
     }
 
     // Función para detener el reconocimiento de voz
@@ -191,4 +184,11 @@ class CallViewModel(private val context: Context) : ViewModel() {
         tts.shutdown()
     }
 
+    fun editIncomingText(text: String){
+        incomingText.value = text
+    }
+
+    fun deleteIncomingText(){
+        incomingText.value = ""
+    }
 }
