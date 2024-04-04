@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:2:1-34:12
+ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:2:1-35:12
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\Cobain\Documents\Programacion\Segundo\ProyectosAndroid\FinalInterfacesMovil\gradle\caches\transforms-3\cee9c405c93463350dc5fd12105b6b75\transformed\navigation-common-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.7.7] C:\Users\Cobain\Documents\Programacion\Segundo\ProyectosAndroid\FinalInterfacesMovil\gradle\caches\transforms-3\dae5029e846b2a4b1086fdd1b87e14a6\transformed\navigation-runtime-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.7.7] C:\Users\Cobain\Documents\Programacion\Segundo\ProyectosAndroid\FinalInterfacesMovil\gradle\caches\transforms-3\a51b099f44ff2ac067a7b2fdc0de2c39\transformed\navigation-common-ktx-2.7.7\AndroidManifest.xml:2:1-7:12
@@ -135,8 +135,8 @@ ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\mai
 	android:name
 		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:9:22-68
 application
-ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:11:5-32:19
-INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:11:5-32:19
+ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:11:5-33:19
+INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:11:5-33:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.0-alpha05] C:\Users\Cobain\Documents\Programacion\Segundo\ProyectosAndroid\FinalInterfacesMovil\gradle\caches\transforms-3\a6084d35450d41c4839b81ed00c703a5\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.0-alpha05] C:\Users\Cobain\Documents\Programacion\Segundo\ProyectosAndroid\FinalInterfacesMovil\gradle\caches\transforms-3\a6084d35450d41c4839b81ed00c703a5\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.firebase:firebase-auth-ktx:22.3.1] C:\Users\Cobain\Documents\Programacion\Segundo\ProyectosAndroid\FinalInterfacesMovil\gradle\caches\transforms-3\f7f4f56b28e185857d12fa0fbbf72b90\transformed\firebase-auth-ktx-22.3.1\AndroidManifest.xml:7:5-15:19
@@ -222,25 +222,27 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cobain\Documents\P
 	android:dataExtractionRules
 		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:13:9-65
 activity#com.example.hilfeapp.MainActivity
-ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:21:9-31:20
+ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:21:9-32:20
+	android:screenOrientation
+		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:23:13-49
 	android:label
-		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:24:13-45
+		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:25:13-45
 	android:exported
-		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:23:13-36
+		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:24:13-36
 	android:theme
-		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:25:13-50
+		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:26:13-50
 	android:name
 		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:22:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:26:13-30:29
+ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:27:13-31:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:27:17-69
+ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:28:17-69
 	android:name
-		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:27:25-66
+		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:28:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:29:17-77
+ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:30:17-77
 	android:name
-		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:29:27-74
+		ADDED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml:30:27-74
 uses-sdk
 INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Cobain\Documents\Programacion\Proyectos\HilfeApp\app\src\main\AndroidManifest.xml

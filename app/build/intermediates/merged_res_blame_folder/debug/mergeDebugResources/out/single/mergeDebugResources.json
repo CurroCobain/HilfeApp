@@ -4,6 +4,10 @@
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "com.example.hilfeapp-debug-4:/drawable_banner.png.flat",
+        "source": "com.example.hilfeapp-main-6:/drawable/banner.png"
+    },
+    {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\mipmap-mdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-mdpi\\ic_launcher.webp"
     },
@@ -12,60 +16,28 @@
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-xhdpi/ic_launcher.webp"
-    },
-    {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
-    },
-    {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
     },
     {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-hdpi/ic_launcher.webp"
-    },
-    {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-mdpi/ic_launcher_round.webp"
-    },
-    {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-hdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\xml\\data_extraction_rules.xml"
     },
     {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\mipmap-mdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\xml\\data_extraction_rules.xml"
-    },
-    {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-xxhdpi/ic_launcher_foreground.webp"
-    },
-    {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-mdpi/ic_launcher_foreground.webp"
-    },
-    {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\drawable_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\drawable\\ic_launcher_foreground.xml"
-    },
-    {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-mdpi/ic_launcher.webp"
     },
     {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\xml_backup_rules.xml.flat",
@@ -84,18 +56,6 @@
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\drawable\\icono.jpg"
     },
     {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-hdpi/ic_launcher_round.webp"
-    },
-    {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-xxxhdpi/ic_launcher.webp"
-    },
-    {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-xxxhdpi/ic_launcher_round.webp"
-    },
-    {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
@@ -112,20 +72,12 @@
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-xxhdpi/ic_launcher.webp"
-    },
-    {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
     },
     {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\mipmap-mdpi\\ic_launcher_foreground.webp"
-    },
-    {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
@@ -140,15 +92,7 @@
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-xhdpi/ic_launcher_foreground.webp"
-    },
-    {
         "merged": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-debug-4:\\drawable_logo.jpg.flat",
         "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\daemon\\8.4\\com.example.hilfeapp-main-6:\\drawable\\logo.jpg"
-    },
-    {
-        "merged": "com.example.hilfeapp-debug-4:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-6:/mipmap-xxhdpi/ic_launcher_round.webp"
     }
 ]

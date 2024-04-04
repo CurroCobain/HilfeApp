@@ -14,6 +14,7 @@ import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.io.File
 import java.util.Locale
@@ -190,5 +191,9 @@ class CallViewModel(private val context: Context) : ViewModel() {
 
     fun deleteIncomingText(){
         incomingText.value = ""
+    }
+
+    suspend fun wait(){
+        delay(1000)
     }
 }
