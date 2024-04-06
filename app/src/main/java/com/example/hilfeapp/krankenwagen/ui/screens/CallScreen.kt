@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -46,13 +47,17 @@ import kotlinx.coroutines.launch
  * Composable principal de la página de llamada
  */
 @Composable
-fun CallScreen(callViewModel: CallViewModel){
+fun CallScreen(
+    callViewModel: CallViewModel,
+    navController: NavController
+){
+
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                NavigationMenu()
+                NavigationMenu(navController)
             }
         })
     {
@@ -192,11 +197,4 @@ fun ButtonColorEffect(color: Color, onColorChange: (Color) -> Unit) {
             onColorChange(Color.Red)
         }
     }
-}
-@Preview
-@Composable
-fun PreviewCallScreen (){
-    val context = LocalContext.current
-    val callViewModel = CallViewModel(context)
-    CallScreen(callViewModel = callViewModel)
 }

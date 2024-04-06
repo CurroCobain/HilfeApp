@@ -6,6 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.hilfeapp.krankenwagen.ui.screens.CallScreen
 import CallViewModel
+import com.example.hilfeapp.krankenwagen.ui.screens.OptionsScreen
+import com.example.hilfeapp.krankenwagen.ui.screens.UserScreen
 
 @Composable
 fun NavManager(callViewModel: CallViewModel){
@@ -15,7 +17,13 @@ fun NavManager(callViewModel: CallViewModel){
         startDestination = Routes.PantallaCall.route)
     {
         composable(Routes.PantallaCall.route){
-            CallScreen(callViewModel)
+            CallScreen(callViewModel,navController)
+        }
+        composable(Routes.PantallaOptions.route){
+            OptionsScreen(navController)
+        }
+        composable(Routes.PantallaUser.route){
+            UserScreen(navController)
         }
     }
 }

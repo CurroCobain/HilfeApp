@@ -1,6 +1,8 @@
 package com.example.hilfeapp.krankenwagen.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,18 +20,31 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.hilfeapp.R
+import com.example.hilfeapp.krankenwagen.navigation.Routes
+import kotlinx.coroutines.delay
 
 /**
  * Composable que muestra el contenido del menú desplegable
  */
 @Composable
-fun NavigationMenu (){
+fun NavigationMenu (navController: NavController){
+    var row1Color by remember { mutableStateOf(Color.Transparent) }
+    var row2Color by remember { mutableStateOf(Color.Transparent) }
+    var row3Color by remember { mutableStateOf(Color.Transparent) }
+    var row4Color by remember { mutableStateOf(Color.Transparent) }
+
     Column (Modifier.fillMaxWidth(0.8f))
     {
         //  ------------------------------------------- Banner superior -------------------------------
@@ -45,8 +60,17 @@ fun NavigationMenu (){
         ){
             Spacer(modifier = Modifier.padding(50.dp))
 
+            // ---------------------------- Efecto de la linea configuración -------------------------------
+            RowColorEffect(row1Color) { newColor ->
+                row1Color = newColor
+            }
             //  ------------------------------------------- Configuración -------------------------------
-            Row(Modifier.fillMaxWidth())
+            Row(Modifier.fillMaxWidth()
+                .background(color = row1Color)
+                .clickable {
+                    row1Color = Color.LightGray
+                    navController.navigate(Routes.PantallaOptions.route)
+                })
             {
                 Icon(
                     imageVector = Icons.Default.Build,
@@ -63,8 +87,17 @@ fun NavigationMenu (){
             }
             Spacer(modifier = Modifier.padding(10.dp))
 
+            // ---------------------------- Efecto de la linea usuario -------------------------------
+            RowColorEffect(row2Color) { newColor ->
+                row2Color = newColor
+            }
             //  ------------------------------------------- Usuario -------------------------------
-            Row(Modifier.fillMaxWidth())
+            Row(Modifier.fillMaxWidth()
+                .background(color = row2Color)
+                .clickable {
+                    row2Color = Color.LightGray
+                    navController.navigate(Routes.PantallaUser.route)
+                })
             {
                 Icon(
                     imageVector = Icons.Default.Person,
@@ -81,8 +114,17 @@ fun NavigationMenu (){
             }
             Spacer(modifier = Modifier.padding(10.dp))
 
+            // ---------------------------- Efecto de la linea llamada -------------------------------
+            RowColorEffect(row3Color) { newColor ->
+                row3Color = newColor
+            }
             //  ------------------------------------------- Llamada -------------------------------
-            Row(Modifier.fillMaxWidth())
+            Row(Modifier.fillMaxWidth()
+                .background(color = row3Color)
+                .clickable {
+                    row3Color = Color.LightGray
+                    navController.navigate(Routes.PantallaCall.route)
+                })
             {
                 Icon(
                     imageVector = Icons.Default.Call,
@@ -99,8 +141,14 @@ fun NavigationMenu (){
             }
             Spacer(modifier = Modifier.padding(10.dp))
 
+            // ---------------------------- Efecto de la linea salir -------------------------------
+            RowColorEffect(row4Color) { newColor ->
+                row4Color = newColor
+            }
             //  ------------------------------------------- Salir -------------------------------
-            Row(Modifier.fillMaxWidth())
+            Row(Modifier.fillMaxWidth()
+                .background(color = row4Color)
+                .clickable { row4Color = Color.LightGray  })
             {
                 Icon(
                     imageVector = Icons.Default.Close,
@@ -115,6 +163,19 @@ fun NavigationMenu (){
                     color = Color.Black
                 )
             }
+        }
+    }
+}
+
+/**
+ * Funcion que realiza el efecto de cambio de color de los botones al ser pulsados
+ */
+@Composable
+fun RowColorEffect(color: Color, onColorChange: (Color) -> Unit) {
+    LaunchedEffect(color) {
+        if (color == Color.LightGray) {
+            delay(200)
+            onColorChange(Color.Transparent)
         }
     }
 }
