@@ -24,6 +24,10 @@
         "source": "com.example.hilfeapp-main-6:/mipmap-hdpi/ic_launcher.webp"
     },
     {
+        "merged": "com.example.hilfeapp-debug-4:/drawable_ambulancia.png.flat",
+        "source": "com.example.hilfeapp-main-6:/drawable/ambulancia.png"
+    },
+    {
         "merged": "com.example.hilfeapp-debug-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "com.example.hilfeapp-main-6:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
@@ -56,8 +60,16 @@
         "source": "com.example.hilfeapp-main-6:/drawable/ic_launcher_foreground.xml"
     },
     {
+        "merged": "com.example.hilfeapp-debug-4:/drawable_fondo_verde.png.flat",
+        "source": "com.example.hilfeapp-main-6:/drawable/fondo_verde.png"
+    },
+    {
         "merged": "com.example.hilfeapp-debug-4:/mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "com.example.hilfeapp-main-6:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.hilfeapp-debug-4:/drawable_fondo_rojo.png.flat",
+        "source": "com.example.hilfeapp-main-6:/drawable/fondo_rojo.png"
     },
     {
         "merged": "com.example.hilfeapp-debug-4:/mipmap-xxxhdpi_ic_launcher.webp.flat",
@@ -86,6 +98,10 @@
     {
         "merged": "com.example.hilfeapp-debug-4:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
         "source": "com.example.hilfeapp-main-6:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.hilfeapp-debug-4:/drawable_fondo_azul.png.flat",
+        "source": "com.example.hilfeapp-main-6:/drawable/fondo_azul.png"
     },
     {
         "merged": "com.example.hilfeapp-debug-4:/drawable_icono.jpg.flat",

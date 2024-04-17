@@ -6,21 +6,20 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-
 import androidx.compose.ui.Modifier
-
+import com.example.hilfeapp.krankenwagen.data.DatabaseBuilder
 import com.example.hilfeapp.krankenwagen.navigation.NavManager
 import com.example.hilfeapp.ui.theme.HilfeAppTheme
-import CallViewModel
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
+import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val database = DatabaseBuilder.getDatabase(applicationContext)
         val locationViewModel = LocationViewModel(this)
-        val callViewModel = CallViewModel(this)
+        val optionsViewModel = OptionsViewModel(database)
+        locationViewModel.getUserLocation()
         setContent {
             HilfeAppTheme {
                 // A surface container using the 'background' color from the theme
@@ -28,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavManager(callViewModel, locationViewModel)
+                    NavManager(locationViewModel, optionsViewModel)
                 }
             }
         }

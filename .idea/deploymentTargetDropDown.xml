@@ -2,14 +2,21 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="GoogleMapViewPreview">
-        <State />
-      </entry>
-      <entry key="PreviewMap">
-        <State />
-      </entry>
-      <entry key="app">
-        <State />
+      <entry key="App">
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="SERIAL_NUMBER" />
+                  <value value="wsaqhm4lyp5hwodi" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-04-19T07:44:00.374504500Z" />
+        </State>
       </entry>
     </value>
   </component>

@@ -1,130 +1,254 @@
 package com.example.hilfeapp.krankenwagen.ui.screens
 
-import androidx.compose.foundation.border
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.location.Geocoder
+import androidx.compose.material3.Icon
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.hilfeapp.R
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
+import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.common.collect.Maps
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
-import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import kotlinx.coroutines.launch
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun UserScreen(navController: NavController, locationViewModel: LocationViewModel){
+fun UserScreen(navController: NavController, locationViewModel: LocationViewModel, optionsViewModel: OptionsViewModel) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-
-    val locationText by locationViewModel.textLocation.collectAsState()
-    val lat  by locationViewModel.latLoc.collectAsState()
-    val long by locationViewModel.longLoc.collectAsState()
-    val textResp by locationViewModel.textRespond.collectAsState()
+    val locationText by locationViewModel.addressText.collectAsState()
+    val userLocation by locationViewModel.userLocation.collectAsState()
+    val emergencyLocation = LatLng(36.678804, -6.143728)
+    val context = LocalContext.current
+    val geocoder = Geocoder(context)
+    val focus by locationViewModel.focusErAmb.collectAsState()
+    val color1 by optionsViewModel.color1.collectAsState()
+    val fondo by optionsViewModel.fondo.collectAsState()
 
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                NavigationMenu(navController)
+                NavigationMenu(navController,optionsViewModel)
             }
         })
     {
-        Column(verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize())
-        {
-            MyMap()
-
-            Button(onClick = {
-                // locationViewModel.launchLocation()
-            })
-            {
-                Text(text = "Localización")
+        val scope = rememberCoroutineScope()
+        Scaffold(
+            floatingActionButton = {
+                ExtendedFloatingActionButton(
+                    modifier = Modifier.padding(bottom = 20.dp),
+                    containerColor = color1,
+                    text = { Text("Menú") },
+                    icon = { Icon(Icons.Filled.Menu, contentDescription = "") },
+                    onClick = {
+                        scope.launch {
+                            drawerState.apply {
+                                if (isClosed) open() else close()
+                            }
+                        }
+                    }
+                )
             }
-            Button(onClick = {
-                // locationViewModel.getAddressFromCoordinates(lat, long)
-            })
-            {
-                Text(text = "Dirección")
-            }
-            Text(text = locationText,
-                Modifier
-                    .border(width = 2.dp, color = Color.Black)
-                    .sizeIn(minWidth = 250.dp, minHeight = 50.dp, maxWidth = 300.dp)
-                    .wrapContentSize()
-            )
-            Text(text = textResp,
-                Modifier
-                    .border(width = 2.dp, color = Color.Black)
-                    .sizeIn(minWidth = 250.dp, minHeight = 50.dp, maxWidth = 300.dp)
-                    .wrapContentSize()
-            )
-            Text(text = lat.toString(),
-                Modifier
-                    .border(width = 2.dp, color = Color.Black)
-                    .sizeIn(minWidth = 250.dp, minHeight = 50.dp, maxWidth = 300.dp)
-                    .wrapContentSize()
-            )
-            Text(text = long.toString(),
-                Modifier
-                    .border(width = 2.dp, color = Color.Black)
-                    .sizeIn(minWidth = 250.dp, minHeight = 50.dp, maxWidth = 300.dp)
-                    .wrapContentSize()
+        ) {
+            UserContent(
+                context = context,
+                locationText = locationText,
+                userLocation = userLocation,
+                locationViewModel = locationViewModel,
+                geocoder = geocoder,
+                emergencyLocation = emergencyLocation,
+                focus = focus,
+                fondo = fondo
             )
         }
     }
 }
 
 @Composable
-fun MyMap(){
-    val singapore = LatLng(1.35, 103.87)
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(singapore, 10f)
+fun UserContent(
+    context: android.content.Context,
+    locationText: String,
+    userLocation: LatLng?,
+    locationViewModel: LocationViewModel,
+    geocoder: Geocoder,
+    emergencyLocation: LatLng?,
+    focus: Boolean,
+    fondo: Int
+) {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
+        Image(
+            painter = painterResource(id = fondo),
+            contentDescription = "Fondo",
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+        )
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            )
+            {
+                MyMap(
+                    geocoder,
+                    context,
+                    locationViewModel,
+                    locationText,
+                    userLocation,
+                    emergencyLocation,
+                    focus
+                )
+                Row(Modifier.padding(top = 10.dp)) {
+                    Button(
+                        onClick = {
+                            locationViewModel.alterFocusAmb()
+                        },
+                        colors = ButtonDefaults.buttonColors(Color.White)
+                    )
+                    {
+                        Text(text = "Ambulancia", color = Color.Black)
+                    }
+                    Spacer(modifier = Modifier.padding(start = 10.dp))
+                    Button(
+                        onClick = {
+                            locationViewModel.alterFocusEr()
+                        },
+                        colors = ButtonDefaults.buttonColors(Color.White)  
+                    )
+                    {
+                        Text(text = "Emergencia", color = Color.Black)
+                    }
+                }
+                Text(
+                    text = locationText,
+                    modifier = Modifier
+                        .sizeIn(minWidth = 200.dp, minHeight = 50.dp)
+                        .padding(start = 20.dp, top = 20.dp, end = 20.dp)
+                        .background(Color.White),
+                    fontSize = 20.sp
+                )
+            }
+        }
     }
+}
+
+@Composable
+fun MyMap(
+    geocoder: Geocoder,
+    context: Context,
+    locationViewModel: LocationViewModel,
+    locationText: String?,
+    userLocation: LatLng?,
+    emergencyLocation: LatLng?,
+    focus: Boolean
+) {
+
+    val cameraPositionState =
+        if (focus) rememberCameraPositionState {
+            position = CameraPosition.fromLatLngZoom(emergencyLocation!!, 16f)
+        }
+        else rememberCameraPositionState {
+            position = CameraPosition.fromLatLngZoom(userLocation!!, 16f)
+        }
+
     GoogleMap(
         modifier = Modifier
             .fillMaxHeight(0.5f)
             .fillMaxWidth(),
-        cameraPositionState = cameraPositionState
+        cameraPositionState = cameraPositionState,
+        properties = MapProperties(
+            isMyLocationEnabled = true,
+            isTrafficEnabled = true,
+            mapType = MapType.HYBRID)
     ) {
-        Marker(
-            state = MarkerState(position = singapore),
-            title = "Singapore",
-            snippet = "Marker in Singapore"
-        )
-    }
-    /*
-    GoogleMap(modifier = Modifier
-        .fillMaxHeight(0.5f)
-        .fillMaxWidth(),
-        properties = MapProperties(isMyLocationEnabled = true),
-        uiSettings = MapUiSettings(mapToolbarEnabled = true)
-        )
-    {
+        if (userLocation != null) {
 
-    }
+            // Cargamos el icono personalizado como un Bitmap
+            val iconBitmapEr: Bitmap =
+                BitmapFactory.decodeResource(context.resources, R.drawable.icono)
+            val iconBitmapAmb: Bitmap =
+                BitmapFactory.decodeResource(context.resources, R.drawable.ambulancia)
+            // Definimos el tamaño deseado para el icono (en píxeles)
+            val iconWidth = 60 // Ancho deseado del icono
+            val iconHeight = 100 // Altura deseada del icono
+            // Escalamos el Bitmap al tamaño deseado
+            val scaledIconBitmapAmb =
+                Bitmap.createScaledBitmap(iconBitmapAmb, iconHeight, iconHeight, false)
+            val scaledIconBitmapEr =
+                Bitmap.createScaledBitmap(iconBitmapEr, iconWidth, iconHeight, false)
+            // Convertimos el Bitmap escalado a un BitmapDescriptor
+            val scaledIconEr = BitmapDescriptorFactory.fromBitmap(scaledIconBitmapEr)
+            val scaledIconAmb = BitmapDescriptorFactory.fromBitmap(scaledIconBitmapAmb)
 
-     */
+            Marker(
+                state = MarkerState(position = userLocation),
+                snippet = locationText,
+                icon = scaledIconAmb,
+                onClick = {
+                    locationViewModel.getAddressFromCoordinates(geocoder, userLocation)
+                    false
+                }
+            )
+            Marker(
+                state = MarkerState(position = emergencyLocation!!),
+                snippet = locationText,
+                icon = scaledIconEr,
+                onClick = {
+                    locationViewModel.getAddressFromCoordinates(geocoder, emergencyLocation)
+                    false
+                }
+            )
+        }
+    }
 }

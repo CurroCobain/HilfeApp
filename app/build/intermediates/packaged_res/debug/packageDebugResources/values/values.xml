@@ -9,5 +9,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">HilfeApp</string>
+    <string name="esto_sirve_para_llamar">Llamamos!!</string>
     <style name="Theme.HilfeApp" parent="android:Theme.Material.Light.NoActionBar"/>
 </resources>
