@@ -2,6 +2,12 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="GoogleMapViewPreview">
+        <State />
+      </entry>
+      <entry key="PreviewMap">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>

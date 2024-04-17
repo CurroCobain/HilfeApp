@@ -6,15 +6,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.hilfeapp.krankenwagen.ui.screens.CallScreen
 import CallViewModel
+import com.example.hilfeapp.krankenwagen.ui.screens.MyMapScreen
 import com.example.hilfeapp.krankenwagen.ui.screens.OptionsScreen
 import com.example.hilfeapp.krankenwagen.ui.screens.UserScreen
+import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
 
 @Composable
-fun NavManager(callViewModel: CallViewModel){
+fun NavManager(callViewModel: CallViewModel, locationViewModel: LocationViewModel){
     val navController = rememberNavController()
     NavHost(
         navController = navController ,
-        startDestination = Routes.PantallaCall.route)
+        startDestination = Routes.PantallaUser.route)
     {
         composable(Routes.PantallaCall.route){
             CallScreen(callViewModel,navController)
@@ -23,7 +25,8 @@ fun NavManager(callViewModel: CallViewModel){
             OptionsScreen(navController)
         }
         composable(Routes.PantallaUser.route){
-            UserScreen(navController)
+            //UserScreen(navController, locationViewModel)
+            MyMapScreen()
         }
     }
 }

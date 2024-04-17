@@ -12,10 +12,14 @@ import androidx.compose.ui.Modifier
 import com.example.hilfeapp.krankenwagen.navigation.NavManager
 import com.example.hilfeapp.ui.theme.HilfeAppTheme
 import CallViewModel
-class MainActivity : ComponentActivity() {
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
+import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
 
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val locationViewModel = LocationViewModel(this)
         val callViewModel = CallViewModel(this)
         setContent {
             HilfeAppTheme {
@@ -24,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavManager(callViewModel = callViewModel)
+                    NavManager(callViewModel, locationViewModel)
                 }
             }
         }
