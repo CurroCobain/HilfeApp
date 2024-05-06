@@ -1,3 +1,5 @@
+// ------------------------ COMENTADO!! -----------------------------
+
 package com.example.hilfeapp.krankenwagen.ui.viewModels
 
 import android.annotation.SuppressLint
@@ -11,8 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import android.location.Geocoder
+import com.example.hilfeapp.krankenwagen.data.Urgencia
 
-
+/**
+ * ViewModel para manejar la lógica relacionada con la ubicación
+ */
 @SuppressLint("StaticFieldLeak")
 class LocationViewModel(private val context: Context) : ViewModel() {
 
@@ -20,30 +25,44 @@ class LocationViewModel(private val context: Context) : ViewModel() {
     private val fusedLocationClient: FusedLocationProviderClient by lazy {
         LocationServices.getFusedLocationProviderClient(context)
     }
+
+    // Flujo mutable para el texto de la dirección
     var addressText = MutableStateFlow("")
+
+    // Flujo mutable para la ubicación del usuario
     var userLocation = MutableStateFlow<LatLng?>(null)
+
+    // Flujo mutable para la ubicación de emergencia
     var emergencyLocation = MutableStateFlow<LatLng?>(null)
+
+    // Flujo mutable para indicar el foco en urgencias o ambulancias
     var focusErAmb = MutableStateFlow<Boolean>(true)
 
-    fun alterFocusEr(){
-        focusErAmb.value = true
-    }
-    fun alterFocusAmb(){
-        focusErAmb.value = false
+    /**
+     * Método para cambiar el foco entre urgencias y ambulancias
+     */
+    fun alterFocus(){
+        focusErAmb.value = !focusErAmb.value
     }
 
+    /**
+     * Método para obtener la ubicación del usuario
+     */
     @SuppressLint("MissingPermission")
     fun getUserLocation() {
         viewModelScope.launch {
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                    if (location != null) {
-                        // Actualiza el MutableStateFlow con la ubicación del usuario
-                        userLocation.value = LatLng(location.latitude, location.longitude)
-                    }
+                if (location != null) {
+                    // Actualiza el MutableStateFlow con la ubicación del usuario
+                    userLocation.value = LatLng(location.latitude, location.longitude)
                 }
+            }
         }
-    } 
+    }
 
+    /**
+     * Método para obtener la dirección a partir de las coordenadas
+     */
     fun getAddressFromCoordinates(geocoder: Geocoder, locat: LatLng) {
         viewModelScope.launch(Dispatchers.IO) {
             val locLat = locat.latitude
@@ -62,17 +81,17 @@ class LocationViewModel(private val context: Context) : ViewModel() {
         }
     }
 
+    /**
+     * Método para restablecer el texto de la dirección
+     */
     fun resetAddressText(){
         addressText.value = ""
     }
 
-    fun updateStatus(){
-        // TODO:
-    }
-
+    /**
+     * Método para actualizar la ubicación
+     */
     fun updateLocation(){
-        // TODO:
+        // TODO: Actualizar la ubicación
     }
 }
-
-

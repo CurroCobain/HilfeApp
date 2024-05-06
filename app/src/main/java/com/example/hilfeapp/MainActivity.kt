@@ -8,7 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.hilfeapp.krankenwagen.data.DatabaseBuilder
-import com.example.hilfeapp.krankenwagen.navigation.NavManager
+import com.example.hilfeapp.krankenwagen.ui.screens.AppInitializationScreen
+import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.ui.theme.HilfeAppTheme
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
@@ -19,6 +20,7 @@ class MainActivity : ComponentActivity() {
         val database = DatabaseBuilder.getDatabase(applicationContext)
         val locationViewModel = LocationViewModel(this)
         val optionsViewModel = OptionsViewModel(database)
+        val doctorViewModel = DoctorViewModel()
         locationViewModel.getUserLocation()
         setContent {
             HilfeAppTheme {
@@ -27,9 +29,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavManager(locationViewModel, optionsViewModel)
+                    AppInitializationScreen(
+                        optionsViewModel,
+                        locationViewModel,
+                        doctorViewModel)
                 }
             }
         }
     }
 }
+
+

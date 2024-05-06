@@ -10,6 +10,7 @@ color teal_700
 color white
 drawable ambulancia
 drawable banner
+drawable despedida
 drawable fondo_azul
 drawable fondo_rojo
 drawable fondo_verde
@@ -17,6 +18,9 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable icono
 drawable logo
+drawable portada_blue
+drawable portada_green
+drawable portada_red
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round

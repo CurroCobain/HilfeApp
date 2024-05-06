@@ -1,29 +1,18 @@
 package com.example.hilfeapp.krankenwagen.ui.screens
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.location.Geocoder
-import androidx.compose.material3.Icon
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
@@ -33,46 +22,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.hilfeapp.R
-import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.MapProperties
-import com.google.maps.android.compose.MapType
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
-import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun UserScreen(navController: NavController, locationViewModel: LocationViewModel, optionsViewModel: OptionsViewModel) {
+fun UserScreen(navController: NavController, optionsViewModel: OptionsViewModel) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val locationText by locationViewModel.addressText.collectAsState()
-    val userLocation by locationViewModel.userLocation.collectAsState()
-    val emergencyLocation = LatLng(36.678804, -6.143728)
-    val context = LocalContext.current
-    val geocoder = Geocoder(context)
-    val focus by locationViewModel.focusErAmb.collectAsState()
     val color1 by optionsViewModel.color1.collectAsState()
     val fondo by optionsViewModel.fondo.collectAsState()
 
+
     ModalNavigationDrawer(
+        modifier = Modifier.fillMaxSize(),
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet {
-                NavigationMenu(navController,optionsViewModel)
+            ModalDrawerSheet{
+                NavigationMenu(navController, optionsViewModel)
             }
         })
     {
@@ -94,31 +64,13 @@ fun UserScreen(navController: NavController, locationViewModel: LocationViewMode
                 )
             }
         ) {
-            UserContent(
-                context = context,
-                locationText = locationText,
-                userLocation = userLocation,
-                locationViewModel = locationViewModel,
-                geocoder = geocoder,
-                emergencyLocation = emergencyLocation,
-                focus = focus,
-                fondo = fondo
-            )
+            ContenidoUser(fondo)
         }
     }
 }
 
 @Composable
-fun UserContent(
-    context: android.content.Context,
-    locationText: String,
-    userLocation: LatLng?,
-    locationViewModel: LocationViewModel,
-    geocoder: Geocoder,
-    emergencyLocation: LatLng?,
-    focus: Boolean,
-    fondo: Int
-) {
+fun ContenidoUser(fondo: Int){
     Box(
         Modifier
             .fillMaxWidth()
@@ -134,121 +86,13 @@ fun UserContent(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
-            )
-            {
-                MyMap(
-                    geocoder,
-                    context,
-                    locationViewModel,
-                    locationText,
-                    userLocation,
-                    emergencyLocation,
-                    focus
-                )
-                Row(Modifier.padding(top = 10.dp)) {
-                    Button(
-                        onClick = {
-                            locationViewModel.alterFocusAmb()
-                        },
-                        colors = ButtonDefaults.buttonColors(Color.White)
-                    )
-                    {
-                        Text(text = "Ambulancia", color = Color.Black)
-                    }
-                    Spacer(modifier = Modifier.padding(start = 10.dp))
-                    Button(
-                        onClick = {
-                            locationViewModel.alterFocusEr()
-                        },
-                        colors = ButtonDefaults.buttonColors(Color.White)  
-                    )
-                    {
-                        Text(text = "Emergencia", color = Color.Black)
-                    }
-                }
-                Text(
-                    text = locationText,
-                    modifier = Modifier
-                        .sizeIn(minWidth = 200.dp, minHeight = 50.dp)
-                        .padding(start = 20.dp, top = 20.dp, end = 20.dp)
-                        .background(Color.White),
-                    fontSize = 20.sp
-                )
-            }
-        }
-    }
-}
 
-@Composable
-fun MyMap(
-    geocoder: Geocoder,
-    context: Context,
-    locationViewModel: LocationViewModel,
-    locationText: String?,
-    userLocation: LatLng?,
-    emergencyLocation: LatLng?,
-    focus: Boolean
-) {
-
-    val cameraPositionState =
-        if (focus) rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(emergencyLocation!!, 16f)
-        }
-        else rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(userLocation!!, 16f)
-        }
-
-    GoogleMap(
-        modifier = Modifier
-            .fillMaxHeight(0.5f)
-            .fillMaxWidth(),
-        cameraPositionState = cameraPositionState,
-        properties = MapProperties(
-            isMyLocationEnabled = true,
-            isTrafficEnabled = true,
-            mapType = MapType.HYBRID)
-    ) {
-        if (userLocation != null) {
-
-            // Cargamos el icono personalizado como un Bitmap
-            val iconBitmapEr: Bitmap =
-                BitmapFactory.decodeResource(context.resources, R.drawable.icono)
-            val iconBitmapAmb: Bitmap =
-                BitmapFactory.decodeResource(context.resources, R.drawable.ambulancia)
-            // Definimos el tamaño deseado para el icono (en píxeles)
-            val iconWidth = 60 // Ancho deseado del icono
-            val iconHeight = 100 // Altura deseada del icono
-            // Escalamos el Bitmap al tamaño deseado
-            val scaledIconBitmapAmb =
-                Bitmap.createScaledBitmap(iconBitmapAmb, iconHeight, iconHeight, false)
-            val scaledIconBitmapEr =
-                Bitmap.createScaledBitmap(iconBitmapEr, iconWidth, iconHeight, false)
-            // Convertimos el Bitmap escalado a un BitmapDescriptor
-            val scaledIconEr = BitmapDescriptorFactory.fromBitmap(scaledIconBitmapEr)
-            val scaledIconAmb = BitmapDescriptorFactory.fromBitmap(scaledIconBitmapAmb)
-
-            Marker(
-                state = MarkerState(position = userLocation),
-                snippet = locationText,
-                icon = scaledIconAmb,
-                onClick = {
-                    locationViewModel.getAddressFromCoordinates(geocoder, userLocation)
-                    false
-                }
-            )
-            Marker(
-                state = MarkerState(position = emergencyLocation!!),
-                snippet = locationText,
-                icon = scaledIconEr,
-                onClick = {
-                    locationViewModel.getAddressFromCoordinates(geocoder, emergencyLocation)
-                    false
-                }
+            Text(
+                text = "prueba de fondo",
+                modifier = Modifier.padding(65.dp)
             )
         }
     }
 }
+
+

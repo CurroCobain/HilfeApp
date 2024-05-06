@@ -40,6 +40,10 @@
         "source": "com.example.hilfeapp-main-6:/mipmap-hdpi/ic_launcher_foreground.webp"
     },
     {
+        "merged": "com.example.hilfeapp-debug-4:/drawable_despedida.gif.flat",
+        "source": "com.example.hilfeapp-main-6:/drawable/despedida.gif"
+    },
+    {
         "merged": "com.example.hilfeapp-debug-4:/xml_data_extraction_rules.xml.flat",
         "source": "com.example.hilfeapp-main-6:/xml/data_extraction_rules.xml"
     },
@@ -72,12 +76,20 @@
         "source": "com.example.hilfeapp-main-6:/drawable/fondo_rojo.png"
     },
     {
+        "merged": "com.example.hilfeapp-debug-4:/drawable_portada_green.png.flat",
+        "source": "com.example.hilfeapp-main-6:/drawable/portada_green.png"
+    },
+    {
         "merged": "com.example.hilfeapp-debug-4:/mipmap-xxxhdpi_ic_launcher.webp.flat",
         "source": "com.example.hilfeapp-main-6:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
         "merged": "com.example.hilfeapp-debug-4:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
         "source": "com.example.hilfeapp-main-6:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.hilfeapp-debug-4:/drawable_portada_blue.png.flat",
+        "source": "com.example.hilfeapp-main-6:/drawable/portada_blue.png"
     },
     {
         "merged": "com.example.hilfeapp-debug-4:/mipmap-xxhdpi_ic_launcher.webp.flat",
@@ -98,6 +110,10 @@
     {
         "merged": "com.example.hilfeapp-debug-4:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
         "source": "com.example.hilfeapp-main-6:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.hilfeapp-debug-4:/drawable_portada_red.png.flat",
+        "source": "com.example.hilfeapp-main-6:/drawable/portada_red.png"
     },
     {
         "merged": "com.example.hilfeapp-debug-4:/drawable_fondo_azul.png.flat",
