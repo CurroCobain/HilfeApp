@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.hilfeapp.krankenwagen.navigation.NavManager
+import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
@@ -25,7 +26,8 @@ import kotlinx.coroutines.delay
 fun AppInitializationScreen(
     optionsViewModel: OptionsViewModel,
     locationViewModel: LocationViewModel,
-    doctorViewModel: DoctorViewModel) {
+    doctorViewModel: DoctorViewModel,
+    dataBaseViewModel: DataBaseViewModel) {
     val image by optionsViewModel.initialImage.collectAsState()
     val imagePainter: Painter = painterResource(id = image)
 
@@ -49,7 +51,7 @@ fun AppInitializationScreen(
                 contentScale = ContentScale.Crop
             )
         } else {
-            NavManager(locationViewModel, optionsViewModel, doctorViewModel)
+            NavManager(locationViewModel, optionsViewModel, doctorViewModel, dataBaseViewModel)
         }
     }
 }

@@ -13,18 +13,21 @@ class DataBaseViewModel : ViewModel() {
     private val firestore = Firebase.firestore
     private var message = MutableStateFlow("")
 
+    val tempCounty = listOf("Almeria", "Cadiz", "Cordoba","Granada", "Huelva", "Jaen", "Malaga", "Sevilla" )
+
     //variable que se uso para determinar la provincia por la que se filtran los datos
     val provinciaFiltrar = MutableStateFlow("")
 
-    //variable que se uso para determinar la ciudad por la que se filtran los datos
-    val ciudadFiltrar = MutableStateFlow("")
 
+    //variable que se usa para determinar el hospital por el que se filtran los datos
+    val hospitalFiltrar = MutableStateFlow<Hospital>(Hospital())
 
     // lista de ambulancias filtradas
     var listAmbulancias = MutableStateFlow(mutableListOf<Ambulance>())
 
     // lista de hospitales filtrados
     val listHospitals = MutableStateFlow(mutableListOf<Hospital>())
+
 
     /**
      * Obtiene la lista de hospitales para una provincia específica desde Firestore.
@@ -87,14 +90,15 @@ class DataBaseViewModel : ViewModel() {
     /**
      * Función que modifica el valor de provinciaFiltrar
      */
-    fun setProv(text: String) {
+    fun setCounty(text: String, onSuccess: () -> Unit) {
         provinciaFiltrar.value = text
+        onSuccess()
     }
 
     /**
      * Función que modifica el valor de ciudadFiltrar
      */
-    fun setCity(text: String) {
-        ciudadFiltrar.value = text
+    fun setHosp(hosp: Hospital) {
+        hospitalFiltrar.value = hosp
     }
 }

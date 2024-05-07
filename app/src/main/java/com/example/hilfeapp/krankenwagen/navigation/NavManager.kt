@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.hilfeapp.krankenwagen.ui.screens.UserScreen
 import com.example.hilfeapp.krankenwagen.ui.screens.OptionsScreen
 import com.example.hilfeapp.krankenwagen.ui.screens.MapScreen
+import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
@@ -15,7 +16,8 @@ import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 fun NavManager(
     locationViewModel: LocationViewModel,
     optionsViewModel: OptionsViewModel,
-    doctorViewModel: DoctorViewModel)
+    doctorViewModel: DoctorViewModel,
+    dataBaseViewModel: DataBaseViewModel)
 {
     val navController = rememberNavController()
     NavHost(
@@ -23,10 +25,10 @@ fun NavManager(
         startDestination = Routes.PantallaAmb.route)
     {
         composable(Routes.PantallaAmb.route){
-            UserScreen(navController, optionsViewModel)
+            UserScreen(navController, optionsViewModel, doctorViewModel)
         }
         composable(Routes.PantallaOptions.route){
-            OptionsScreen(navController, optionsViewModel, doctorViewModel)
+            OptionsScreen(navController, optionsViewModel, doctorViewModel, dataBaseViewModel)
         }
         composable(Routes.PantallaUser.route){
             MapScreen(navController, locationViewModel, optionsViewModel)

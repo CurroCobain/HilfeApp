@@ -16,5 +16,5 @@ data class Hospital(
     val address: String,
 )
 {
-    constructor(): this("hosp1", "Hospital random de Cádiz", "Cádiz","Cádiz","Calle 1 de Cádiz")
+    constructor(): this("hosp1", "Hospital random", "Cádiz","Cádiz","Calle 1 de Cádiz")
 }

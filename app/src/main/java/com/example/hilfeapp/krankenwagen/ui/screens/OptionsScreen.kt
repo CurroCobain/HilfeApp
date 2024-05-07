@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -32,6 +31,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,6 +47,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hilfeapp.R
+import com.example.hilfeapp.krankenwagen.data.Hospital
+import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import kotlinx.coroutines.launch
@@ -56,15 +58,17 @@ import kotlinx.coroutines.launch
 fun OptionsScreen(
     navController: NavController,
     optionsViewModel: OptionsViewModel,
-    doctorViewModel: DoctorViewModel
+    doctorViewModel: DoctorViewModel,
+    dataBaseViewModel: DataBaseViewModel
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val color1 by optionsViewModel.color1.collectAsState()
     val fondo by optionsViewModel.fondo.collectAsState()
-    val listCounty = doctorViewModel.tempCounty
-    val listCity = doctorViewModel.tempCity
-    val selectedCounty by doctorViewModel.county.collectAsState()
-    val selectedCity by doctorViewModel.city.collectAsState()
+    val listCounty = dataBaseViewModel.tempCounty
+    val listHosp by dataBaseViewModel.listHospitals.collectAsState()
+    val selectedCounty by dataBaseViewModel.provinciaFiltrar.collectAsState()
+    val selectedHosp by dataBaseViewModel.hospitalFiltrar.collectAsState()
+    val myAmbulance by doctorViewModel.myAmbulance.collectAsState()
 
 
     ModalNavigationDrawer(
@@ -98,10 +102,11 @@ fun OptionsScreen(
                 fondo,
                 optionsViewModel,
                 doctorViewModel,
-                selectedCity,
+                dataBaseViewModel,
+                selectedHosp,
                 selectedCounty,
                 listCounty,
-                listCity
+                listHosp
             )
         }
     }
@@ -112,12 +117,13 @@ fun ContenidoOpt(
     fondo: Int,
     optionsViewModel: OptionsViewModel,
     doctorViewModel: DoctorViewModel,
-    selectedCity: String,
+    dataBaseViewModel: DataBaseViewModel,
+    selectedHosp: Hospital,
     selectedCounty: String,
     listCounty: List<String>,
-    listCity: List<String>
+    listHosp: MutableList<Hospital>
 ) {
-    var expandedCity by remember { mutableStateOf(false) }
+    var expandedHosp by remember { mutableStateOf(false) }
     var expandedCounty by remember { mutableStateOf(false) }
 
     Box(
@@ -196,18 +202,22 @@ fun ContenidoOpt(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                //Elije provincia
+                // Texto elige provincia
                 Box(modifier = Modifier.clip(RoundedCornerShape(4.dp))) {
                     Text(text = " Provincia ",
                         modifier = Modifier
                             .clickable { expandedCounty = true }
                             .background(color = Color.White))
                 }
-                // Elije ciudad
+                // Texto elige hospital
                 Box(modifier = Modifier.clip(RoundedCornerShape(4.dp))) {
-                    Text(text = " Ciudad ",
+                    Text(text = " Hospital ",
                         modifier = Modifier
-                            .clickable { expandedCity = true }
+                            .clickable {
+                                dataBaseViewModel.getHosp(selectedCounty) {
+                                    expandedHosp = true
+                                }
+                            }
                             .background(color = Color.White))
                 }
             }
@@ -228,25 +238,25 @@ fun ContenidoOpt(
                     Spacer(modifier = Modifier.padding(start = 8.dp))
                     DropdownMenu(
                         expanded = expandedCounty,
-                        onDismissRequest = { expandedCounty = false },
+                        onDismissRequest = { expandedCounty = false }, // Cierra el menú al hacer clic fuera de él
                         modifier = Modifier.width(IntrinsicSize.Max)
                     ) {
                         listCounty.forEach { county ->
                             DropdownMenuItem(
                                 text = { Text(text = county) },
                                 onClick = {
-                                    doctorViewModel.setCounty(county)
-                                    expandedCounty = false
-
+                                    dataBaseViewModel.setCounty(county) {
+                                        expandedCounty = false // Actualiza el estado de expansión al hacer clic en un elemento del menú
+                                    }
                                 })
                         }
                     }
                 }
 
-                //Elije ciudad
-                Column(modifier = Modifier.clickable(onClick = { expandedCity = true })) {
+                //Elije hospital
+                Column(modifier = Modifier.clickable(onClick = { expandedHosp = true })) {
                     Text(
-                        text = selectedCity, // Mostrar la ciudad actual
+                        text = selectedHosp.name, // Mostrar el hospital actual
                         modifier = Modifier
                             .padding(8.dp)
                             .align(Alignment.CenterHorizontally),
@@ -254,20 +264,21 @@ fun ContenidoOpt(
                     )
                     Spacer(modifier = Modifier.padding(start = 8.dp))
                     DropdownMenu(
-                        expanded = expandedCity,
-                        onDismissRequest = { expandedCity = false },
+                        expanded = expandedHosp,
+                        onDismissRequest = { expandedHosp = false }, // Cierra el menú al hacer clic fuera de él
                         modifier = Modifier.width(IntrinsicSize.Max)
                     ) {
-                        listCity.forEach { city ->
+                        listHosp.forEach { hosp ->
                             DropdownMenuItem(
-                                text = { Text(text = city) },
+                                text = { Text(text = hosp.name) },
                                 onClick = {
-                                    doctorViewModel.setCity(city)
-                                    expandedCity = false
+                                    dataBaseViewModel.setHosp(hosp)
+                                    expandedHosp = false // Actualiza el estado de expansión al hacer clic en un elemento del menú
                                 })
                         }
                     }
                 }
+
             }
             Row(
                 horizontalArrangement = Arrangement.Center,

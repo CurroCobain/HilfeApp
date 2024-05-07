@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.hilfeapp.krankenwagen.data.DatabaseBuilder
 import com.example.hilfeapp.krankenwagen.ui.screens.AppInitializationScreen
+import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.ui.theme.HilfeAppTheme
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
@@ -21,6 +22,7 @@ class MainActivity : ComponentActivity() {
         val locationViewModel = LocationViewModel(this)
         val optionsViewModel = OptionsViewModel(database)
         val doctorViewModel = DoctorViewModel()
+        val dataBaseViewModel = DataBaseViewModel()
         locationViewModel.getUserLocation()
         setContent {
             HilfeAppTheme {
@@ -32,7 +34,8 @@ class MainActivity : ComponentActivity() {
                     AppInitializationScreen(
                         optionsViewModel,
                         locationViewModel,
-                        doctorViewModel)
+                        doctorViewModel,
+                        dataBaseViewModel)
                 }
             }
         }
