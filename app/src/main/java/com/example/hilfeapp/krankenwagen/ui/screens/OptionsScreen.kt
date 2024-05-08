@@ -43,32 +43,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hilfeapp.R
+import com.example.hilfeapp.krankenwagen.data.Ambulance
 import com.example.hilfeapp.krankenwagen.data.Hospital
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import kotlinx.coroutines.launch
+import kotlin.math.round
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun OptionsScreen(
     navController: NavController,
     optionsViewModel: OptionsViewModel,
-    doctorViewModel: DoctorViewModel,
-    dataBaseViewModel: DataBaseViewModel
+    dataBaseViewModel: DataBaseViewModel,
+    doctorViewModel: DoctorViewModel
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val color1 by optionsViewModel.color1.collectAsState()
     val fondo by optionsViewModel.fondo.collectAsState()
     val listCounty = dataBaseViewModel.tempCounty
     val listHosp by dataBaseViewModel.listHospitals.collectAsState()
+    val listAmbs by dataBaseViewModel.listAmbulancias.collectAsState()
     val selectedCounty by dataBaseViewModel.provinciaFiltrar.collectAsState()
     val selectedHosp by dataBaseViewModel.hospitalFiltrar.collectAsState()
-    val myAmbulance by doctorViewModel.myAmbulance.collectAsState()
+    val myAmbulance by dataBaseViewModel.myAmb.collectAsState()
 
 
     ModalNavigationDrawer(
@@ -76,7 +80,7 @@ fun OptionsScreen(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                NavigationMenu(navController, optionsViewModel)
+                NavigationMenu(navController, optionsViewModel, doctorViewModel)
             }
         })
     {
@@ -86,7 +90,7 @@ fun OptionsScreen(
                 ExtendedFloatingActionButton(
                     modifier = Modifier.padding(bottom = 20.dp),
                     containerColor = color1,
-                    text = { Text("Menú") },
+                    text = { Text("Menú", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp) },
                     icon = { Icon(Icons.Filled.Menu, contentDescription = "") },
                     onClick = {
                         scope.launch {
@@ -101,12 +105,13 @@ fun OptionsScreen(
             ContenidoOpt(
                 fondo,
                 optionsViewModel,
-                doctorViewModel,
                 dataBaseViewModel,
                 selectedHosp,
                 selectedCounty,
                 listCounty,
-                listHosp
+                listHosp,
+                listAmbs,
+                myAmbulance
             )
         }
     }
@@ -116,15 +121,17 @@ fun OptionsScreen(
 fun ContenidoOpt(
     fondo: Int,
     optionsViewModel: OptionsViewModel,
-    doctorViewModel: DoctorViewModel,
     dataBaseViewModel: DataBaseViewModel,
     selectedHosp: Hospital,
     selectedCounty: String,
     listCounty: List<String>,
-    listHosp: MutableList<Hospital>
+    listHosp: MutableList<Hospital>,
+    listAmbs: MutableList<Ambulance>,
+    myAmbulance: Ambulance
 ) {
     var expandedHosp by remember { mutableStateOf(false) }
     var expandedCounty by remember { mutableStateOf(false) }
+    var expandedAmb by remember { mutableStateOf(false) }
 
     Box(
         Modifier
@@ -197,48 +204,69 @@ fun ContenidoOpt(
                 )
 
             }
-            Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.padding(20.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 // Texto elige provincia
                 Box(modifier = Modifier.clip(RoundedCornerShape(4.dp))) {
-                    Text(text = " Provincia ",
+                    Text(text = " Seleccione \n  provincia ",
                         modifier = Modifier
                             .clickable { expandedCounty = true }
-                            .background(color = Color.White))
+                            .background(color = Color.White),
+                        fontWeight = FontWeight.Bold
+                    )
                 }
                 // Texto elige hospital
                 Box(modifier = Modifier.clip(RoundedCornerShape(4.dp))) {
-                    Text(text = " Hospital ",
+                    Text(text = " Seleccione \n   hospital ",
                         modifier = Modifier
                             .clickable {
                                 dataBaseViewModel.getHosp(selectedCounty) {
                                     expandedHosp = true
                                 }
                             }
-                            .background(color = Color.White))
+                            .background(color = Color.White),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                // Texto elige ambulancia
+                Box(modifier = Modifier.clip(RoundedCornerShape(4.dp))) {
+                    Text(text = " Seleccione \n ambulancia ",
+                        modifier = Modifier
+                            .clickable {
+                                dataBaseViewModel.getAmb(selectedHosp.id) {
+                                    expandedAmb = true
+                                }
+                            }
+                            .background(color = Color.White),
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             }
             Spacer(modifier = Modifier.padding(8.dp))
             Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
+                horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 //Elije provincia
                 Column(modifier = Modifier.clickable(onClick = { expandedCounty = true })) {
                     Text(
-                        text = selectedCounty, // Mostrar la provincia actual
+                        text = " $selectedCounty ".uppercase(), // Mostrar la provincia actual
                         modifier = Modifier
                             .padding(8.dp)
                             .align(Alignment.CenterHorizontally),
-                        fontSize = 25.sp
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Color.White
                     )
                     Spacer(modifier = Modifier.padding(start = 8.dp))
                     DropdownMenu(
                         expanded = expandedCounty,
-                        onDismissRequest = { expandedCounty = false }, // Cierra el menú al hacer clic fuera de él
+                        onDismissRequest = {
+                            expandedCounty = false
+                        }, // Cierra el menú al hacer clic fuera de él
                         modifier = Modifier.width(IntrinsicSize.Max)
                     ) {
                         listCounty.forEach { county ->
@@ -246,55 +274,87 @@ fun ContenidoOpt(
                                 text = { Text(text = county) },
                                 onClick = {
                                     dataBaseViewModel.setCounty(county) {
-                                        expandedCounty = false // Actualiza el estado de expansión al hacer clic en un elemento del menú
+                                        expandedCounty =
+                                            false // Actualiza el estado de expansión al hacer clic en un elemento del menú
                                     }
                                 })
                         }
                     }
                 }
-
+            }
+            Spacer(modifier = Modifier.padding(8.dp))
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 //Elije hospital
                 Column(modifier = Modifier.clickable(onClick = { expandedHosp = true })) {
                     Text(
-                        text = selectedHosp.name, // Mostrar el hospital actual
+                        text = " ${selectedHosp.name} ".uppercase(), // Mostrar el hospital actual
                         modifier = Modifier
                             .padding(8.dp)
                             .align(Alignment.CenterHorizontally),
-                        fontSize = 25.sp
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Color.White
                     )
                     Spacer(modifier = Modifier.padding(start = 8.dp))
                     DropdownMenu(
                         expanded = expandedHosp,
-                        onDismissRequest = { expandedHosp = false }, // Cierra el menú al hacer clic fuera de él
+                        onDismissRequest = {
+                            expandedHosp = false
+                        }, // Cierra el menú al hacer clic fuera de él
                         modifier = Modifier.width(IntrinsicSize.Max)
                     ) {
                         listHosp.forEach { hosp ->
                             DropdownMenuItem(
                                 text = { Text(text = hosp.name) },
                                 onClick = {
-                                    dataBaseViewModel.setHosp(hosp)
-                                    expandedHosp = false // Actualiza el estado de expansión al hacer clic en un elemento del menú
+                                    dataBaseViewModel.setHosp(hosp) {}
+                                    expandedHosp = false
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.padding(8.dp))
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                //Elije ambulancia
+                Column(modifier = Modifier.clickable(onClick = { expandedAmb = true })) {
+                    Text(
+                        text = " ${myAmbulance.plate} ", // Mostrar ambulancia actual
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .align(Alignment.CenterHorizontally),
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Color.White
+
+                    )
+                    Spacer(modifier = Modifier.padding(start = 8.dp))
+                    DropdownMenu(
+                        expanded = expandedAmb,
+                        onDismissRequest = {
+                            expandedAmb = false
+                        }, // Cierra el menú al hacer clic fuera de él
+                        modifier = Modifier.width(IntrinsicSize.Max)
+                    ) {
+                        listAmbs.forEach { amb ->
+                            DropdownMenuItem(
+                                text = { Text(text = amb.plate) },
+                                onClick = {
+                                    dataBaseViewModel.setAmb(amb)
+                                    expandedAmb =
+                                        false // Actualiza el estado de expansión al hacer clic en un elemento del menú
                                 })
                         }
                     }
                 }
-
             }
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                // Elije hospital
-                Text(text = "Hospital")
-            }
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                // Elije ambulancia
-                Text(text = "Ambulancia")
-            }
-
         }
     }
 }

@@ -28,10 +28,10 @@ fun NavManager(
             UserScreen(navController, optionsViewModel, doctorViewModel)
         }
         composable(Routes.PantallaOptions.route){
-            OptionsScreen(navController, optionsViewModel, doctorViewModel, dataBaseViewModel)
+            OptionsScreen(navController, optionsViewModel, dataBaseViewModel, doctorViewModel)
         }
         composable(Routes.PantallaUser.route){
-            MapScreen(navController, locationViewModel, optionsViewModel)
+            MapScreen(navController, locationViewModel, optionsViewModel, doctorViewModel)
            // MyMapScreen()
         }
     }

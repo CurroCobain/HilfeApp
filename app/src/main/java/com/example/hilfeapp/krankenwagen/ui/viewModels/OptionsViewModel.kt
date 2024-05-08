@@ -30,6 +30,10 @@ class OptionsViewModel(private val database: AppDatabase) : ViewModel() {
     // Flujo mutable para la imagen de carga inicial de la aplicación
     val initialImage = MutableStateFlow(R.drawable.portada_red)
 
+    // Flujo mutable para el color del texto de la app
+    val textColor = MutableStateFlow(Color.White)
+
+
     // Inicialización: se obtienen las opciones de configuración almacenadas en la base de datos
     init {
         viewModelScope.launch {
@@ -109,4 +113,6 @@ class OptionsViewModel(private val database: AppDatabase) : ViewModel() {
     fun exit(){
         exitProcess(0)
     }
+
+
 }

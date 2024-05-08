@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
@@ -38,10 +39,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hilfeapp.R
+import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -57,7 +60,12 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MapScreen(navController: NavController, locationViewModel: LocationViewModel, optionsViewModel: OptionsViewModel) {
+fun MapScreen(
+    navController: NavController,
+    locationViewModel: LocationViewModel,
+    optionsViewModel: OptionsViewModel,
+    doctorViewModel: DoctorViewModel
+) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val locationText by locationViewModel.addressText.collectAsState()
     val userLocation by locationViewModel.userLocation.collectAsState()
@@ -72,7 +80,7 @@ fun MapScreen(navController: NavController, locationViewModel: LocationViewModel
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                NavigationMenu(navController,optionsViewModel)
+                NavigationMenu(navController,optionsViewModel, doctorViewModel)
             }
         })
     {
@@ -82,7 +90,7 @@ fun MapScreen(navController: NavController, locationViewModel: LocationViewModel
                 ExtendedFloatingActionButton(
                     modifier = Modifier.padding(bottom = 20.dp),
                     containerColor = color1,
-                    text = { Text("Menú") },
+                    text = { Text("Menú", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp) },
                     icon = { Icon(Icons.Filled.Menu, contentDescription = "") },
                     onClick = {
                         scope.launch {
@@ -154,20 +162,26 @@ fun MapContent(
                         onClick = {
                             locationViewModel.alterFocus()
                         },
-                        colors = ButtonDefaults.buttonColors(Color.White)
+                        colors = ButtonDefaults.buttonColors(Color.White),
+                        shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 8.dp, bottomEnd = 8.dp)
                     )
                     {
-                        Text(text = if(focus)"Ir a Ambulancia" else "Ir a Emergencia", color = Color.Black)
+                        Text(text = if(focus)"Ir a Ambulancia" else "Ir a Emergencia",
+                            fontWeight = FontWeight.ExtraBold, fontSize = 15.sp,
+                            color = Color.Black)
                     }
-                    Spacer(modifier = Modifier.padding(start = 10.dp))
+                    Spacer(modifier = Modifier.padding(start = 15.dp))
                     Button(
                         onClick = {
 
                         },
-                        colors = ButtonDefaults.buttonColors(Color.White)  
+                        colors = ButtonDefaults.buttonColors(Color.White)  ,
+                        shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 8.dp, bottomEnd = 8.dp) // Ajusta los valores según lo desees
+
                     )
                     {
-                        Text(text = "Aceptar aviso", color = Color.Black)
+                        Text(text = "Aceptar aviso", color = Color.Black,
+                            fontWeight = FontWeight.ExtraBold, fontSize = 15.sp)
                     }
                 }
                 Text(

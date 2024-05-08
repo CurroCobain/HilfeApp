@@ -28,6 +28,8 @@ class DataBaseViewModel : ViewModel() {
     // lista de hospitales filtrados
     val listHospitals = MutableStateFlow(mutableListOf<Hospital>())
 
+    val myAmb = MutableStateFlow<Ambulance>(Ambulance())
+
 
     /**
      * Obtiene la lista de hospitales para una provincia específica desde Firestore.
@@ -98,7 +100,11 @@ class DataBaseViewModel : ViewModel() {
     /**
      * Función que modifica el valor de ciudadFiltrar
      */
-    fun setHosp(hosp: Hospital) {
+    fun setHosp(hosp: Hospital, onSuccess: () -> Unit) {
         hospitalFiltrar.value = hosp
+    }
+
+    fun setAmb(amb: Ambulance){
+        myAmb.value= amb
     }
 }

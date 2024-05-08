@@ -1,5 +1,6 @@
 package com.example.hilfeapp.krankenwagen.ui.viewModels
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -38,23 +39,6 @@ class DoctorViewModel : ViewModel(){
     // Flujo mutable para indicar si el usuario está registrado
     val userRegistered = MutableStateFlow(false)
 
-    // Flujo mutable para la lista de ambulancias
-    val listAmb = MutableStateFlow<MutableList<Any>>(mutableListOf())
-
-    // Flujo mutable para la ambulancia del usuario
-    val myAmbulance = MutableStateFlow<Ambulance?>(null)
-
-    // Flujo mutable para el hospital del usuario
-    val myHosp = MutableStateFlow<Hospital>(Hospital())
-
-    var tempCounty = listOf("Almería", "Cadiz", "Córdoba","Granada", "Huelva", "Jaén", "Málaga", "Sevilla" )
-
-    // Flujo mutable para la provincia
-    val county = MutableStateFlow("")
-
-    // Flujo mutable para la ciudad
-    val city = MutableStateFlow("")
-
     // Flujo mutable para la lista de urgencias
     val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf())
 
@@ -85,8 +69,20 @@ class DoctorViewModel : ViewModel(){
     /**
      * Asigna el nombre del usuario
      */
-    fun cambiaNombre(value: String) {
-        nombreDoc.value = value
+    fun cambiaNombre() {
+        // Realiza la consulta a Firestore para obtener el nombre del usuario actual
+        firestore.collection("Users").whereEqualTo("userId", auth.currentUser?.uid).get()
+            .addOnSuccessListener { documents ->
+                // Cuando se obtienen los documentos exitosamente
+                for (document in documents) {
+                    // Asigna el nombre del usuario a la variable `nombreDoc`
+                    nombreDoc.value = document.getString("name")!!
+                }
+            }
+            .addOnFailureListener { exception ->
+                // En caso de fallo al obtener el nombre del usuario
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
     }
 
     /**

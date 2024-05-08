@@ -37,17 +37,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hilfeapp.R
+import com.example.hilfeapp.krankenwagen.navigation.Routes
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun UserScreen(navController: NavController, optionsViewModel: OptionsViewModel, doctorViewModel: DoctorViewModel) {
+fun UserScreen(
+    navController: NavController,
+    optionsViewModel: OptionsViewModel,
+    doctorViewModel: DoctorViewModel
+) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val color1 by optionsViewModel.color1.collectAsState()
     val fondo by optionsViewModel.fondo.collectAsState()
@@ -62,8 +68,8 @@ fun UserScreen(navController: NavController, optionsViewModel: OptionsViewModel,
         modifier = Modifier.fillMaxSize(),
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet{
-                NavigationMenu(navController, optionsViewModel)
+            ModalDrawerSheet {
+                NavigationMenu(navController, optionsViewModel, doctorViewModel)
             }
         })
     {
@@ -73,7 +79,7 @@ fun UserScreen(navController: NavController, optionsViewModel: OptionsViewModel,
                 ExtendedFloatingActionButton(
                     modifier = Modifier.padding(bottom = 20.dp),
                     containerColor = color1,
-                    text = { Text("Menú") },
+                    text = { Text("Menú", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp) },
                     icon = { Icon(Icons.Filled.Menu, contentDescription = "") },
                     onClick = {
                         scope.launch {
@@ -92,8 +98,9 @@ fun UserScreen(navController: NavController, optionsViewModel: OptionsViewModel,
                 passDoc,
                 nombeDoc,
                 context,
-                message
-                )
+                message,
+                navController
+            )
         }
     }
 }
@@ -106,8 +113,9 @@ fun ContenidoUser(
     passDoc: String,
     nombreDoc: String,
     context: Context,
-    message: String
-    ){
+    message: String,
+    navController: NavController
+) {
     Box(
         Modifier
             .fillMaxWidth()
@@ -122,13 +130,15 @@ fun ContenidoUser(
         )
         Column(
             modifier = Modifier
-                .padding(top = 100.dp)
+                .padding(top = 150.dp)
                 .fillMaxSize()
         )
         {
-            Row(modifier = Modifier.align(Alignment.CenterHorizontally)){
-                Text(text = "Inicie sesión por favor",
-                    fontSize = 30.sp)
+            Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                Text(
+                    text = "Inicie sesión por favor",
+                    fontSize = 30.sp
+                )
             }
 
             Spacer(modifier = Modifier.padding(40.dp))
@@ -165,30 +175,33 @@ fun ContenidoUser(
                     onClick = {
                         // Se lanza sesionÍnit y si finaliza correctamente se indica mediante un Toast
                         doctorViewModel.sesionInit {
-                            // sesionViewModel.getUser()
+                            navController.navigate(Routes.PantallaOptions.route)
+                            doctorViewModel.cambiaNombre()
                             Toast.makeText(
                                 context,
-                                "Sesión iniciada correctamente",
+                                "Sesión inicada correctamente",
                                 Toast.LENGTH_SHORT
                             ).show()
                             // sesionViewModel.setMessage("")
                         }
                     },
-                    colors = ButtonDefaults.buttonColors(Color(74, 121, 66))
+                    colors = ButtonDefaults.buttonColors(Color.White)
                 )
                 {
-                    Text(text = stringResource(R.string.confirmar))
+                    Text(text = stringResource(R.string.confirmar), color = Color.Black, fontWeight = FontWeight.Bold)
                 }
                 Spacer(modifier = Modifier.padding(20.dp))
                 // ------------------------ Botón volver a registro ------------------------
                 Button(
                     onClick = {
-                        // Cambia al modo de registro de usuarios
+                        // Borra los datos
+                        doctorViewModel.cambiaMail("")
+                        doctorViewModel.cambiaMail("")
                     },
-                    colors = ButtonDefaults.buttonColors(Color(233, 85, 85))
+                    colors = ButtonDefaults.buttonColors(Color.White)
                 )
                 {
-                    Text(text = "Volver")
+                    Text(text = "Borrar todo", color = Color.Black, fontWeight = FontWeight.Bold)
                 }
             }
             Spacer(modifier = Modifier.padding(10.dp))
@@ -198,7 +211,7 @@ fun ContenidoUser(
                 Text(
                     // Mensaje del sistema
                     text = message,
-                    color = Color.Red
+                    color = Color.White
                 )
             }
         }

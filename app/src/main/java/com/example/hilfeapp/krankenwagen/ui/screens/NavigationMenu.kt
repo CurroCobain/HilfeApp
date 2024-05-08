@@ -39,6 +39,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.hilfeapp.R
 import com.example.hilfeapp.krankenwagen.navigation.Routes
+import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -48,7 +49,8 @@ import kotlinx.coroutines.launch
  */
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewModel) {
+fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewModel, doctorViewModel: DoctorViewModel) {
+    val nombeDoc by doctorViewModel.nombreDoc.collectAsState()
     var row1Color by remember { mutableStateOf(Color.Transparent) }
     var row2Color by remember { mutableStateOf(Color.Transparent) }
     var row3Color by remember { mutableStateOf(Color.Transparent) }
@@ -81,6 +83,19 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                 Text(
                     text = "Menú principal",
                     fontSize = 30.sp,
+                    fontStyle = FontStyle.Italic,
+                    modifier = Modifier.padding(start = 30.dp, top = 15.dp)
+                )
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = Color.White)
+            ) {
+                //  --------------------------------------- Nombre de usuario activo -------------------------------
+                Text(
+                    text = "Usuario activo: Dr $nombeDoc",
+                    fontSize = 20.sp,
                     fontStyle = FontStyle.Italic,
                     modifier = Modifier.padding(start = 30.dp, top = 15.dp)
                 )
