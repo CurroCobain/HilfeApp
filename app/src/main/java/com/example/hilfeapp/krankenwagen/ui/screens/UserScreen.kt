@@ -3,9 +3,8 @@ package com.example.hilfeapp.krankenwagen.ui.screens
 import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
@@ -33,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -59,7 +60,6 @@ fun UserScreen(
     val fondo by optionsViewModel.fondo.collectAsState()
     val mailDoc by doctorViewModel.nuevoMail.collectAsState()
     val passDoc by doctorViewModel.nuevoPass.collectAsState()
-    val nombeDoc by doctorViewModel.nombreDoc.collectAsState()
     val context = LocalContext.current
     val message by doctorViewModel.sesionMessage.collectAsState()
 
@@ -96,7 +96,6 @@ fun UserScreen(
                 doctorViewModel,
                 mailDoc,
                 passDoc,
-                nombeDoc,
                 context,
                 message,
                 navController
@@ -111,7 +110,6 @@ fun ContenidoUser(
     doctorViewModel: DoctorViewModel,
     mailDoc: String,
     passDoc: String,
-    nombreDoc: String,
     context: Context,
     message: String,
     navController: NavController
@@ -151,7 +149,8 @@ fun ContenidoUser(
                         doctorViewModel.cambiaMail(newValue)
                     },
                     label = { Text(text = "Mail") },
-                    modifier = Modifier.border(width = 2.dp, color = Color.Black)
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(4.dp))
                 )
             }
             Spacer(modifier = Modifier.padding(10.dp))
@@ -164,7 +163,8 @@ fun ContenidoUser(
                         doctorViewModel.cambiaPass(newValue)
                     },
                     label = { Text(text = "Password") },
-                    modifier = Modifier.border(width = 2.dp, color = Color.Black)
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(4.dp))
                 )
             }
             Spacer(modifier = Modifier.padding(20.dp))
@@ -185,10 +185,16 @@ fun ContenidoUser(
                             // sesionViewModel.setMessage("")
                         }
                     },
-                    colors = ButtonDefaults.buttonColors(Color.White)
+                    colors = ButtonDefaults.buttonColors(Color.White),
+                    shape = RoundedCornerShape(6.dp),
+                    border = BorderStroke(2.dp, Color.Black)
                 )
                 {
-                    Text(text = stringResource(R.string.confirmar), color = Color.Black, fontWeight = FontWeight.Bold)
+                    Text(text = stringResource(R.string.confirmar),
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
                 }
                 Spacer(modifier = Modifier.padding(20.dp))
                 // ------------------------ Botón volver a registro ------------------------
@@ -196,13 +202,20 @@ fun ContenidoUser(
                     onClick = {
                         // Borra los datos
                         doctorViewModel.cambiaMail("")
-                        doctorViewModel.cambiaMail("")
+                        doctorViewModel.cambiaPass("")
                     },
-                    colors = ButtonDefaults.buttonColors(Color.White)
-                )
-                {
-                    Text(text = "Borrar todo", color = Color.Black, fontWeight = FontWeight.Bold)
+                    colors = ButtonDefaults.buttonColors(Color.White),
+                    shape = RoundedCornerShape(6.dp),
+                    border = BorderStroke(2.dp, Color.Black)
+                ) {
+                    Text(
+                        text = "Borrar todo",
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
                 }
+
             }
             Spacer(modifier = Modifier.padding(10.dp))
             // Mensaje que aparece si hay error al iniciar sesión --------------------------

@@ -36,6 +36,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -118,7 +119,7 @@ fun MapScreen(
 
 @Composable
 fun MapContent(
-    context: android.content.Context,
+    context: Context,
     locationText: String,
     userLocation: LatLng?,
     locationViewModel: LocationViewModel,
@@ -170,7 +171,9 @@ fun MapContent(
                             fontWeight = FontWeight.ExtraBold, fontSize = 15.sp,
                             color = Color.Black)
                     }
-                    Spacer(modifier = Modifier.padding(start = 15.dp))
+                    Spacer(modifier = Modifier.padding(start = 15
+
+                         .dp))
                     Button(
                         onClick = {
 
@@ -184,14 +187,20 @@ fun MapContent(
                             fontWeight = FontWeight.ExtraBold, fontSize = 15.sp)
                     }
                 }
-                Text(
-                    text = locationText,
-                    modifier = Modifier
+                Row(modifier = Modifier.padding(start = 20.dp, top = 20.dp, end = 20.dp)
+                ) {
+                    Box(modifier = Modifier
+                        .clip(RoundedCornerShape(6.dp))
                         .sizeIn(minWidth = 200.dp, minHeight = 50.dp)
-                        .padding(start = 20.dp, top = 20.dp, end = 20.dp)
-                        .background(Color.White),
-                    fontSize = 20.sp
-                )
+                        .background(Color.White)
+                    ){
+                        Text(
+                            text = locationText,
+                            Modifier.padding(start = 10.dp, top = 10.dp, end = 10.dp),
+                            fontSize = 20.sp
+                        )
+                    }
+                }
             }
         }
     }

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -31,7 +32,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,7 +54,6 @@ import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import kotlinx.coroutines.launch
-import kotlin.math.round
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -252,15 +251,18 @@ fun ContenidoOpt(
             ) {
                 //Elije provincia
                 Column(modifier = Modifier.clickable(onClick = { expandedCounty = true })) {
-                    Text(
-                        text = " $selectedCounty ".uppercase(), // Mostrar la provincia actual
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .align(Alignment.CenterHorizontally),
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = Color.White
-                    )
+                    Box(modifier = Modifier.clip(RoundedCornerShape(6.dp))
+                        .background(color = Color.White)
+                        .align(Alignment.CenterHorizontally)) {
+                        Text(
+                            text = " $selectedCounty ".uppercase(), // Mostrar la provincia actual
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .sizeIn(minWidth = 100.dp, minHeight = 30.dp),
+                            fontSize = 25.sp,
+                            fontWeight = FontWeight.ExtraBold
+                        )
+                    }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
                     DropdownMenu(
                         expanded = expandedCounty,
@@ -289,15 +291,17 @@ fun ContenidoOpt(
             ) {
                 //Elije hospital
                 Column(modifier = Modifier.clickable(onClick = { expandedHosp = true })) {
-                    Text(
-                        text = " ${selectedHosp.name} ".uppercase(), // Mostrar el hospital actual
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .align(Alignment.CenterHorizontally),
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = Color.White
-                    )
+                    Box(modifier = Modifier.clip(RoundedCornerShape(6.dp))
+                        .background(color = Color.White)
+                        .align(Alignment.CenterHorizontally)){
+                        Text(
+                            text = " ${selectedHosp.name} ".uppercase(), // Mostrar el hospital actual
+                            modifier = Modifier
+                                .padding(8.dp),
+                            fontSize = 25.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                        )
+                    }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
                     DropdownMenu(
                         expanded = expandedHosp,
@@ -310,7 +314,7 @@ fun ContenidoOpt(
                             DropdownMenuItem(
                                 text = { Text(text = hosp.name) },
                                 onClick = {
-                                    dataBaseViewModel.setHosp(hosp) {}
+                                    dataBaseViewModel.setHosp(hosp)
                                     expandedHosp = false
                                 }
                             )
@@ -325,16 +329,17 @@ fun ContenidoOpt(
             ) {
                 //Elije ambulancia
                 Column(modifier = Modifier.clickable(onClick = { expandedAmb = true })) {
-                    Text(
-                        text = " ${myAmbulance.plate} ", // Mostrar ambulancia actual
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .align(Alignment.CenterHorizontally),
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = Color.White
-
-                    )
+                    Box(modifier = Modifier.clip(RoundedCornerShape(6.dp))
+                        .background(color = Color.White)
+                        .align(Alignment.CenterHorizontally)){
+                        Text(
+                            text = " ${myAmbulance.plate} ", // Mostrar ambulancia actual
+                            modifier = Modifier
+                                .padding(8.dp),
+                            fontSize = 25.sp,
+                            fontWeight = FontWeight.ExtraBold
+                        )
+                    }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
                     DropdownMenu(
                         expanded = expandedAmb,

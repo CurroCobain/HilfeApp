@@ -4,6 +4,7 @@ package com.example.hilfeapp.krankenwagen.ui.viewModels
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.location.Geocoder
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -12,8 +13,6 @@ import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import android.location.Geocoder
-import com.example.hilfeapp.krankenwagen.data.Urgencia
 
 /**
  * ViewModel para manejar la lógica relacionada con la ubicación
@@ -26,20 +25,20 @@ class LocationViewModel(private val context: Context) : ViewModel() {
         LocationServices.getFusedLocationProviderClient(context)
     }
 
-    // Flujo mutable para el texto de la dirección
+    // texto de la dirección
     var addressText = MutableStateFlow("")
 
-    // Flujo mutable para la ubicación del usuario
+    // ubicación del usuario
     var userLocation = MutableStateFlow<LatLng?>(null)
 
-    // Flujo mutable para la ubicación de emergencia
+    // ubicación de urgencia
     var emergencyLocation = MutableStateFlow<LatLng?>(null)
 
-    // Flujo mutable para indicar el foco en urgencias o ambulancias
-    var focusErAmb = MutableStateFlow<Boolean>(true)
+    // indica si el foco está en urgencia o ambulancia
+    var focusErAmb = MutableStateFlow(true)
 
     /**
-     * Método para cambiar el foco entre urgencias y ambulancias
+     * Método para cambiar el foco entre urgencia y ambulancia
      */
     fun alterFocus(){
         focusErAmb.value = !focusErAmb.value

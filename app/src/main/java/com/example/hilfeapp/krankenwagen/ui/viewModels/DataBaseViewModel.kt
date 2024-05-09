@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hilfeapp.krankenwagen.data.Ambulance
 import com.example.hilfeapp.krankenwagen.data.Hospital
+import com.example.hilfeapp.krankenwagen.data.Urgencia
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,14 +14,15 @@ class DataBaseViewModel : ViewModel() {
     private val firestore = Firebase.firestore
     private var message = MutableStateFlow("")
 
+    // listado de provincias
     val tempCounty = listOf("Almeria", "Cadiz", "Cordoba","Granada", "Huelva", "Jaen", "Malaga", "Sevilla" )
 
-    //variable que se uso para determinar la provincia por la que se filtran los datos
+    //variable que se usa para determinar la provincia por la que se filtran los datos
     val provinciaFiltrar = MutableStateFlow("")
 
 
     //variable que se usa para determinar el hospital por el que se filtran los datos
-    val hospitalFiltrar = MutableStateFlow<Hospital>(Hospital())
+    val hospitalFiltrar = MutableStateFlow(Hospital())
 
     // lista de ambulancias filtradas
     var listAmbulancias = MutableStateFlow(mutableListOf<Ambulance>())
@@ -28,7 +30,11 @@ class DataBaseViewModel : ViewModel() {
     // lista de hospitales filtrados
     val listHospitals = MutableStateFlow(mutableListOf<Hospital>())
 
-    val myAmb = MutableStateFlow<Ambulance>(Ambulance())
+    // ambulancia actual del usuario
+    val myAmb = MutableStateFlow(Ambulance())
+
+    // lista de urgencias
+    val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf())
 
 
     /**
@@ -53,7 +59,7 @@ class DataBaseViewModel : ViewModel() {
                         onSuccess()
                     }
                 }
-                .addOnFailureListener { exception ->
+                .addOnFailureListener {
                     // En caso de fallo al obtener los hospitales
                     message.value = "Error al obtener la lista de hospitales"
                 }
@@ -83,7 +89,7 @@ class DataBaseViewModel : ViewModel() {
                     onSuccess()
                 }
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
                 // En caso de fallo al obtener las ambulancias filtradas por hospital
                 message.value = "Error al obtener la lista de ambulancias"
             }
@@ -100,7 +106,7 @@ class DataBaseViewModel : ViewModel() {
     /**
      * Función que modifica el valor de ciudadFiltrar
      */
-    fun setHosp(hosp: Hospital, onSuccess: () -> Unit) {
+    fun setHosp(hosp: Hospital) {
         hospitalFiltrar.value = hosp
     }
 

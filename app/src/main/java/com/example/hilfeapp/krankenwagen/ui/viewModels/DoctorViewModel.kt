@@ -4,9 +4,6 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.hilfeapp.krankenwagen.data.Ambulance
-import com.example.hilfeapp.krankenwagen.data.Hospital
-import com.example.hilfeapp.krankenwagen.data.Urgencia
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -39,8 +36,6 @@ class DoctorViewModel : ViewModel(){
     // Flujo mutable para indicar si el usuario está registrado
     val userRegistered = MutableStateFlow(false)
 
-    // Flujo mutable para la lista de urgencias
-    val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf())
 
     /**
      * Inicia sesión
@@ -97,45 +92,6 @@ class DoctorViewModel : ViewModel(){
      */
     fun cambiaMail(valor: String) {
         nuevoMail.value = valor
-    }
-
-    /**
-     * Método para cargar las ambulancias
-     */
-    fun loadAmbulances(){
-        // TODO: Cargar lista de ambulancias de la base de datos
-    }
-
-    /**
-     * Método para seleccionar una ambulancia
-     */
-    fun selectAmbulance(amb: Any){
-        // TODO: Asignar a myAmbulance los valores de la ambulancia seleccionada
-    }
-
-    /**
-     * Método para establecer el estado de la ambulancia como libre
-     */
-    fun setFree(){
-        // TODO: Cambiar el valor del atributo isFree de la ambulancia actual
-        // myAmbulance.value.isFree = !myAmbulance.value.isFree
-        updateStatus()
-    }
-
-    /**
-     * Método para aceptar una urgencia
-     */
-    fun acceptEr(urgencia: Urgencia){
-        // TODO: Añadir aviso a la lista de avisos
-        listEr.value.add(urgencia)
-        setFree()
-    }
-
-    /**
-     * Método para actualizar el estado de la ambulancia en la base de datos
-     */
-    fun updateStatus(){
-        // TODO: Actualizar el estado de la ambulancia en la base de datos
     }
 
 }
