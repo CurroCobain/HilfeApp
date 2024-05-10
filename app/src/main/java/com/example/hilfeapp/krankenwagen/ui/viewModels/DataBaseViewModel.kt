@@ -34,7 +34,10 @@ class DataBaseViewModel : ViewModel() {
     val myAmb = MutableStateFlow(Ambulance())
 
     // lista de urgencias
-    val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf())
+    val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf(Urgencia()))
+
+    // urgencia actual
+    val miUrgenia = MutableStateFlow<Urgencia?>(null)
 
 
     /**
@@ -110,7 +113,31 @@ class DataBaseViewModel : ViewModel() {
         hospitalFiltrar.value = hosp
     }
 
+    /**
+     * Función para actualizar la ambulancia actual
+     */
     fun setAmb(amb: Ambulance){
         myAmb.value= amb
+    }
+
+    /**
+     * Función para actualizar la urgencia actual
+     */
+    fun setUrg(urg: Urgencia){
+        miUrgenia.value = urg
+    }
+
+    /**
+     * Función para actualizar el valor de la ambulancia asociada a la urgencia
+     */
+    fun intiUrg(){
+        miUrgenia.value?.ambulance = myAmb.value
+    }
+
+    /**
+     * Función para finalizar una urgencia
+     */
+    fun finishUrg(){
+        miUrgenia.value?.complete = true
     }
 }

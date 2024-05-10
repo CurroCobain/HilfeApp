@@ -31,11 +31,15 @@ class LocationViewModel(private val context: Context) : ViewModel() {
     // ubicación del usuario
     var userLocation = MutableStateFlow<LatLng?>(null)
 
-    // ubicación de urgencia
-    var emergencyLocation = MutableStateFlow<LatLng?>(null)
+    // ubicación de la urgencia
+    var urgencyLocation = MutableStateFlow<LatLng?>(null)
+
 
     // indica si el foco está en urgencia o ambulancia
-    var focusErAmb = MutableStateFlow(true)
+    var focusErAmb = MutableStateFlow(false)
+
+    // se usa para mostrar el diálogo con la información de la urgencia
+    var editUrg = MutableStateFlow(false)
 
     /**
      * Método para cambiar el foco entre urgencia y ambulancia
@@ -57,6 +61,13 @@ class LocationViewModel(private val context: Context) : ViewModel() {
                 }
             }
         }
+    }
+
+    /**
+     * Establece la ubicación de la urgencia en el mapa
+     */
+    fun setUrLocation(location: LatLng){
+        urgencyLocation.value = location
     }
 
     /**
@@ -92,5 +103,9 @@ class LocationViewModel(private val context: Context) : ViewModel() {
      */
     fun updateLocation(){
         // TODO: Actualizar la ubicación
+    }
+
+    fun openCloseEditUrg(){
+        editUrg.value = !editUrg.value
     }
 }

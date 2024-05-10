@@ -31,7 +31,7 @@ fun NavManager(
             OptionsScreen(navController, optionsViewModel, dataBaseViewModel, doctorViewModel)
         }
         composable(Routes.PantallaUser.route){
-            MapScreen(navController, locationViewModel, optionsViewModel, doctorViewModel)
+            MapScreen(navController, locationViewModel, optionsViewModel, doctorViewModel, dataBaseViewModel)
            // MyMapScreen()
         }
     }

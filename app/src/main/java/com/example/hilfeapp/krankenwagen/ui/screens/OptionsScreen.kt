@@ -251,7 +251,8 @@ fun ContenidoOpt(
             ) {
                 //Elije provincia
                 Column(modifier = Modifier.clickable(onClick = { expandedCounty = true })) {
-                    Box(modifier = Modifier.clip(RoundedCornerShape(6.dp))
+                    Box(modifier = Modifier
+                        .clip(RoundedCornerShape(6.dp))
                         .background(color = Color.White)
                         .align(Alignment.CenterHorizontally)) {
                         Text(
@@ -291,7 +292,8 @@ fun ContenidoOpt(
             ) {
                 //Elije hospital
                 Column(modifier = Modifier.clickable(onClick = { expandedHosp = true })) {
-                    Box(modifier = Modifier.clip(RoundedCornerShape(6.dp))
+                    Box(modifier = Modifier
+                        .clip(RoundedCornerShape(6.dp))
                         .background(color = Color.White)
                         .align(Alignment.CenterHorizontally)){
                         Text(
@@ -329,7 +331,8 @@ fun ContenidoOpt(
             ) {
                 //Elije ambulancia
                 Column(modifier = Modifier.clickable(onClick = { expandedAmb = true })) {
-                    Box(modifier = Modifier.clip(RoundedCornerShape(6.dp))
+                    Box(modifier = Modifier
+                        .clip(RoundedCornerShape(6.dp))
                         .background(color = Color.White)
                         .align(Alignment.CenterHorizontally)){
                         Text(

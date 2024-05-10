@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.location.Geocoder
+import android.widget.Toast
 import androidx.compose.material3.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -45,6 +46,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hilfeapp.R
+import com.example.hilfeapp.krankenwagen.data.Urgencia
+import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
@@ -57,6 +60,7 @@ import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -65,23 +69,30 @@ fun MapScreen(
     navController: NavController,
     locationViewModel: LocationViewModel,
     optionsViewModel: OptionsViewModel,
-    doctorViewModel: DoctorViewModel
+    doctorViewModel: DoctorViewModel,
+    dataBaseViewModel: DataBaseViewModel
 ) {
+    val listUrgencias by dataBaseViewModel.listEr.collectAsState()
+    val miUrgencia by dataBaseViewModel.miUrgenia.collectAsState()
+    val editUrgencia by locationViewModel.editUrg.collectAsState()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val locationText by locationViewModel.addressText.collectAsState()
     val userLocation by locationViewModel.userLocation.collectAsState()
-    val emergencyLocation = LatLng(36.678804, -6.143728)
+    locationViewModel.setUrLocation(userLocation!!)
+    val urgencyLocation by locationViewModel.urgencyLocation.collectAsState()
     val context = LocalContext.current
     val geocoder = Geocoder(context)
     val focus by locationViewModel.focusErAmb.collectAsState()
     val color1 by optionsViewModel.color1.collectAsState()
     val fondo by optionsViewModel.fondo.collectAsState()
 
+
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                NavigationMenu(navController,optionsViewModel, doctorViewModel)
+                NavigationMenu(navController, optionsViewModel, doctorViewModel)
             }
         })
     {
@@ -107,11 +118,15 @@ fun MapScreen(
                 context = context,
                 locationText = locationText,
                 userLocation = userLocation,
+                urgencyLocation = urgencyLocation!!,
                 locationViewModel = locationViewModel,
                 geocoder = geocoder,
-                emergencyLocation = emergencyLocation,
                 focus = focus,
-                fondo = fondo
+                fondo = fondo,
+                dataBaseViewModel,
+                listUrgencias,
+                miUrgencia,
+                editUrgencia
             )
         }
     }
@@ -122,11 +137,15 @@ fun MapContent(
     context: Context,
     locationText: String,
     userLocation: LatLng?,
+    urgencyLocation: LatLng,
     locationViewModel: LocationViewModel,
     geocoder: Geocoder,
-    emergencyLocation: LatLng?,
     focus: Boolean,
-    fondo: Int
+    fondo: Int,
+    dataBaseViewModel: DataBaseViewModel,
+    listUrgencias: MutableList<Urgencia>,
+    miUrgencia: Urgencia?,
+    editUrgencia: Boolean
 ) {
     Box(
         Modifier
@@ -155,45 +174,52 @@ fun MapContent(
                     locationViewModel,
                     locationText,
                     userLocation,
-                    emergencyLocation,
-                    focus
+                    urgencyLocation,
+                    focus,
+                    dataBaseViewModel,
+                    listUrgencias,
+                    miUrgencia,
+                    editUrgencia
                 )
                 Row(Modifier.padding(top = 10.dp)) {
                     Button(
                         onClick = {
-                            locationViewModel.alterFocus()
+                            if (miUrgencia != null) {
+                                locationViewModel.alterFocus()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "No tiene urgencias asignadas",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                         },
                         colors = ButtonDefaults.buttonColors(Color.White),
-                        shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 8.dp, bottomEnd = 8.dp)
+                        shape = RoundedCornerShape(
+                            topStart = 8.dp,
+                            topEnd = 8.dp,
+                            bottomStart = 8.dp,
+                            bottomEnd = 8.dp
+                        )
                     )
                     {
-                        Text(text = if(focus)"Ir a Ambulancia" else "Ir a Emergencia",
+                        Text(
+                            text = if (focus) "Ir a Ambulancia" else "Ir a Emergencia",
                             fontWeight = FontWeight.ExtraBold, fontSize = 15.sp,
-                            color = Color.Black)
+                            color = Color.Black
+                        )
                     }
-                    Spacer(modifier = Modifier.padding(start = 15
-
-                         .dp))
-                    Button(
-                        onClick = {
-
-                        },
-                        colors = ButtonDefaults.buttonColors(Color.White)  ,
-                        shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 8.dp, bottomEnd = 8.dp) // Ajusta los valores según lo desees
-
-                    )
-                    {
-                        Text(text = "Aceptar aviso", color = Color.Black,
-                            fontWeight = FontWeight.ExtraBold, fontSize = 15.sp)
-                    }
+                    Spacer(modifier = Modifier.padding(start = 15.dp))
                 }
-                Row(modifier = Modifier.padding(start = 20.dp, top = 20.dp, end = 20.dp)
+                Row(
+                    modifier = Modifier.padding(start = 20.dp, top = 20.dp, end = 20.dp)
                 ) {
-                    Box(modifier = Modifier
-                        .clip(RoundedCornerShape(6.dp))
-                        .sizeIn(minWidth = 200.dp, minHeight = 50.dp)
-                        .background(Color.White)
-                    ){
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(6.dp))
+                            .sizeIn(minWidth = 200.dp, minHeight = 50.dp)
+                            .background(Color.White)
+                    ) {
                         Text(
                             text = locationText,
                             Modifier.padding(start = 10.dp, top = 10.dp, end = 10.dp),
@@ -213,13 +239,16 @@ fun MyMap(
     locationViewModel: LocationViewModel,
     locationText: String?,
     userLocation: LatLng?,
-    emergencyLocation: LatLng?,
-    focus: Boolean
+    urgencyLocation: LatLng,
+    focus: Boolean,
+    dataBaseViewModel: DataBaseViewModel,
+    listUrgencias: MutableList<Urgencia>,
+    miUrgencia: Urgencia?,
+    editUrgencia: Boolean
 ) {
-
     val cameraPositionState =
         if (focus) rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(emergencyLocation!!, 16f)
+            position = CameraPosition.fromLatLngZoom(urgencyLocation, 16f)
         }
         else rememberCameraPositionState {
             position = CameraPosition.fromLatLngZoom(userLocation!!, 16f)
@@ -233,7 +262,8 @@ fun MyMap(
         properties = MapProperties(
             isMyLocationEnabled = true,
             isTrafficEnabled = true,
-            mapType = MapType.HYBRID)
+            mapType = MapType.HYBRID
+        )
     ) {
         if (userLocation != null) {
 
@@ -263,15 +293,34 @@ fun MyMap(
                     false
                 }
             )
-            Marker(
-                state = MarkerState(position = emergencyLocation!!),
-                snippet = locationText,
-                icon = scaledIconEr,
-                onClick = {
-                    locationViewModel.getAddressFromCoordinates(geocoder, emergencyLocation)
-                    false
-                }
-            )
+            for (i in listUrgencias) {
+                Marker(
+                    state = MarkerState(position = i.location),
+                    snippet = locationText,
+                    icon = scaledIconEr,
+                    onClick = {
+                        locationViewModel.getAddressFromCoordinates(geocoder, i.location)
+                        dataBaseViewModel.setUrg(i)
+                        locationViewModel.setUrLocation(i.location)
+                        locationViewModel.openCloseEditUrg()
+                        false
+                    }
+                )
+            }
+            if (editUrgencia) {
+                UrgenciaDialog(
+                    urgencia = miUrgencia!!,
+                    locationViewModel = locationViewModel,
+                    onIniciarAvisoClick = {
+                        dataBaseViewModel.intiUrg()
+                        locationViewModel.openCloseEditUrg()
+                    },
+                    onFinalizarAvisoClick = {
+                        dataBaseViewModel.finishUrg()
+                        locationViewModel.openCloseEditUrg()
+                    }
+                )
+            }
         }
     }
 }
