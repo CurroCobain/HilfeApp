@@ -1,18 +1,34 @@
 package com.example.hilfeapp.krankenwagen.ui.viewModels
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hilfeapp.krankenwagen.data.Ambulance
 import com.example.hilfeapp.krankenwagen.data.Hospital
 import com.example.hilfeapp.krankenwagen.data.Urgencia
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 
 class DataBaseViewModel : ViewModel() {
     private val firestore = Firebase.firestore
     private var message = MutableStateFlow("")
+    @RequiresApi(Build.VERSION_CODES.O)
+    var urgencia2 = Urgencia(
+        "paciente 2",
+        "12345678Y",
+        23,
+        2,
+        LatLng(36.688690, -6.156502),
+        LocalDateTime.now(),
+        "Se muere",
+        Ambulance(),
+        false
+    )
 
     // listado de provincias
     val tempCounty = listOf("Almeria", "Cadiz", "Cordoba","Granada", "Huelva", "Jaen", "Malaga", "Sevilla" )
@@ -34,7 +50,9 @@ class DataBaseViewModel : ViewModel() {
     val myAmb = MutableStateFlow(Ambulance())
 
     // lista de urgencias
-    val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf(Urgencia()))
+    @RequiresApi(Build.VERSION_CODES.O)
+    val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf(Urgencia(), urgencia2))
+
 
     // urgencia actual
     val miUrgenia = MutableStateFlow<Urgencia?>(null)
@@ -137,7 +155,19 @@ class DataBaseViewModel : ViewModel() {
     /**
      * Función para finalizar una urgencia
      */
+    @RequiresApi(Build.VERSION_CODES.O)
     fun finishUrg(){
         miUrgenia.value?.complete = true
+        // todo: Actualizar urgencia en base de datos, eliminar urgencia de variable interna
+        listEr.value.remove(miUrgenia.value)
+        miUrgenia.value = null
+
+    }
+
+    /**
+     * Función para actualizar la ubicación de la ambulancia actual
+     */
+    fun setAmbLoc(location: LatLng){
+        myAmb.value.location = location
     }
 }

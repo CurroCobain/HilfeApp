@@ -5,7 +5,9 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.location.Geocoder
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -47,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hilfeapp.R
 import com.example.hilfeapp.krankenwagen.data.Urgencia
+import com.example.hilfeapp.krankenwagen.navigation.Routes
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
@@ -60,9 +63,9 @@ import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MapScreen(
@@ -79,6 +82,7 @@ fun MapScreen(
     val locationText by locationViewModel.addressText.collectAsState()
     val userLocation by locationViewModel.userLocation.collectAsState()
     locationViewModel.setUrLocation(userLocation!!)
+    dataBaseViewModel.setAmbLoc(userLocation!!)
     val urgencyLocation by locationViewModel.urgencyLocation.collectAsState()
     val context = LocalContext.current
     val geocoder = Geocoder(context)
@@ -126,12 +130,15 @@ fun MapScreen(
                 dataBaseViewModel,
                 listUrgencias,
                 miUrgencia,
-                editUrgencia
+                editUrgencia,
+                navController,
+                color1
             )
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MapContent(
     context: Context,
@@ -145,7 +152,9 @@ fun MapContent(
     dataBaseViewModel: DataBaseViewModel,
     listUrgencias: MutableList<Urgencia>,
     miUrgencia: Urgencia?,
-    editUrgencia: Boolean
+    editUrgencia: Boolean,
+    navController: NavController,
+    color: Color
 ) {
     Box(
         Modifier
@@ -179,7 +188,9 @@ fun MapContent(
                     dataBaseViewModel,
                     listUrgencias,
                     miUrgencia,
-                    editUrgencia
+                    editUrgencia,
+                    navController,
+                    color
                 )
                 Row(Modifier.padding(top = 10.dp)) {
                     Button(
@@ -232,6 +243,7 @@ fun MapContent(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MyMap(
     geocoder: Geocoder,
@@ -244,7 +256,9 @@ fun MyMap(
     dataBaseViewModel: DataBaseViewModel,
     listUrgencias: MutableList<Urgencia>,
     miUrgencia: Urgencia?,
-    editUrgencia: Boolean
+    editUrgencia: Boolean,
+    navController: NavController,
+    color: Color
 ) {
     val cameraPositionState =
         if (focus) rememberCameraPositionState {
@@ -312,13 +326,27 @@ fun MyMap(
                     urgencia = miUrgencia!!,
                     locationViewModel = locationViewModel,
                     onIniciarAvisoClick = {
-                        dataBaseViewModel.intiUrg()
+                        if(dataBaseViewModel.myAmb.value.plate != "No definida"){
+                            dataBaseViewModel.intiUrg()
+                            Toast.makeText(context, "Aviso iniciado", Toast.LENGTH_LONG).show()
+                        }else{
+                            Toast.makeText(
+                                context,
+                                "Debe seleccionar una ambulancia",
+                                Toast.LENGTH_LONG
+                                )
+                                .show()
+                            navController.navigate(Routes.PantallaOptions.route)
+                        }
                         locationViewModel.openCloseEditUrg()
                     },
                     onFinalizarAvisoClick = {
                         dataBaseViewModel.finishUrg()
                         locationViewModel.openCloseEditUrg()
-                    }
+                        Toast.makeText(context, "Aviso finalizado", Toast.LENGTH_LONG).show()
+                        locationViewModel.alterFocus()
+                    },
+                    color = color
                 )
             }
         }

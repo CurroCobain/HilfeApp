@@ -182,6 +182,7 @@ fun ContenidoUser(
                                 "Sesión inicada correctamente",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            doctorViewModel.trueFalseSesionIniti()
                             // sesionViewModel.setMessage("")
                         }
                     },

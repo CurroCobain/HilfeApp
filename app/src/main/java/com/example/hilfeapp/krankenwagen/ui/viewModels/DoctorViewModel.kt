@@ -94,4 +94,11 @@ class DoctorViewModel : ViewModel(){
         nuevoMail.value = valor
     }
 
+    /**
+     * Cambia el valor de userRegistered
+     */
+    fun trueFalseSesionIniti(){
+        userRegistered.value = !userRegistered.value
+    }
+
 }

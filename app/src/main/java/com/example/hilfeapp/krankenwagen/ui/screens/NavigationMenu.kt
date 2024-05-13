@@ -2,6 +2,7 @@
 package com.example.hilfeapp.krankenwagen.ui.screens
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -31,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,6 +60,8 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
     val color1 by optionsViewModel.color1.collectAsState()
     var exit by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
+    val userRegistered by doctorViewModel.userRegistered.collectAsState()
+    val context = LocalContext.current
 
 
     if (exit) {
@@ -118,7 +122,14 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                         .background(color = row1Color)
                         .clickable {
                             row1Color = Color.White
-                            navController.navigate(Routes.PantallaOptions.route)
+                            if(userRegistered){
+                                navController.navigate(Routes.PantallaOptions.route)
+                            }else{
+                                Toast.makeText(context,
+                                    "Por favor inicie sesión",
+                                    Toast.LENGTH_LONG)
+                                    .show()
+                            }
                         })
                 {
                     Icon(
@@ -148,7 +159,14 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                         .background(color = row2Color)
                         .clickable {
                             row2Color = Color.White
-                            navController.navigate(Routes.PantallaUser.route)
+                            if(userRegistered){
+                                navController.navigate(Routes.PantallaUser.route)
+                            }else{
+                                Toast.makeText(context,
+                                    "Por favor inicie sesión",
+                                    Toast.LENGTH_LONG)
+                                    .show()
+                            }
                         })
                 {
                     Icon(
@@ -178,7 +196,14 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                         .background(color = row3Color)
                         .clickable {
                             row3Color = Color.White
-                            navController.navigate(Routes.PantallaAmb.route)
+                            if(userRegistered){
+                                navController.navigate(Routes.PantallaAmb.route)
+                            }else{
+                                Toast.makeText(context,
+                                    "Por favor inicie sesión",
+                                    Toast.LENGTH_LONG)
+                                    .show()
+                            }
                         })
                 {
                     Icon(

@@ -1,5 +1,7 @@
 package com.example.hilfeapp.krankenwagen.data
 
+import com.google.android.gms.maps.model.LatLng
+
 /**
  * Clase que enumera los tipos de ambulancias
  */
@@ -17,9 +19,10 @@ data class Ambulance(
     val plate: String,
     var isFree: Boolean,
     var types: AmbulanceTypes,
-    var hospital: String
+    var hospital: String,
+    var location: LatLng
 ){
-    constructor() : this("amb1", "1234ABC", true, AmbulanceTypes.doctor, "")
+    constructor() : this("amb1", "No definida", true, AmbulanceTypes.doctor, "", LatLng(0.0,0.0))
 }
 
 
