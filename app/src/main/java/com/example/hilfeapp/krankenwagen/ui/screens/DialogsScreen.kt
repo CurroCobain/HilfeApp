@@ -42,7 +42,7 @@ fun UrgenciaDialog(
                     Text("Prioridad: ${urgencia.priority}")
                     Text("Fecha: ${urgencia.date}")
                     Text("Descripción: ${urgencia.issues}")
-                    Text("Ambulancia: ${urgencia.ambulance!!.plate}")
+                    Text("Ambulancia: ${urgencia.ambulance}")
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),

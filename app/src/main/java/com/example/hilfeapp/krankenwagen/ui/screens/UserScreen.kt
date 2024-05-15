@@ -2,7 +2,9 @@ package com.example.hilfeapp.krankenwagen.ui.screens
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -44,16 +46,19 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hilfeapp.R
 import com.example.hilfeapp.krankenwagen.navigation.Routes
+import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun UserScreen(
     navController: NavController,
     optionsViewModel: OptionsViewModel,
-    doctorViewModel: DoctorViewModel
+    doctorViewModel: DoctorViewModel,
+    dataBaseViewModel: DataBaseViewModel
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val color1 by optionsViewModel.color1.collectAsState()
@@ -94,6 +99,7 @@ fun UserScreen(
             ContenidoUser(
                 fondo,
                 doctorViewModel,
+                dataBaseViewModel,
                 mailDoc,
                 passDoc,
                 context,
@@ -104,10 +110,12 @@ fun UserScreen(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ContenidoUser(
     fondo: Int,
     doctorViewModel: DoctorViewModel,
+    dataBaseViewModel:DataBaseViewModel,
     mailDoc: String,
     passDoc: String,
     context: Context,
@@ -185,6 +193,7 @@ fun ContenidoUser(
                             doctorViewModel.trueFalseSesionIniti()
                             // sesionViewModel.setMessage("")
                         }
+                        dataBaseViewModel.getUrgencies {}
                     },
                     colors = ButtonDefaults.buttonColors(Color.White),
                     shape = RoundedCornerShape(6.dp),

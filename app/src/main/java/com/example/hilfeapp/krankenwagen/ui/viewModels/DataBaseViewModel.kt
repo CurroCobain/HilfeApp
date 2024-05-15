@@ -9,6 +9,7 @@ import com.example.hilfeapp.krankenwagen.data.Hospital
 import com.example.hilfeapp.krankenwagen.data.Urgencia
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +20,8 @@ class DataBaseViewModel : ViewModel() {
     private var message = MutableStateFlow("")
 
     // listado de provincias
-    val tempCounty = listOf("Almeria", "Cadiz", "Cordoba","Granada", "Huelva", "Jaen", "Malaga", "Sevilla" )
+    val tempCounty =
+        listOf("Almeria", "Cadiz", "Cordoba", "Granada", "Huelva", "Jaen", "Malaga", "Sevilla")
 
     //variable que se usa para determinar la provincia por la que se filtran los datos
     val provinciaFiltrar = MutableStateFlow("")
@@ -29,13 +31,13 @@ class DataBaseViewModel : ViewModel() {
     val hospitalFiltrar = MutableStateFlow(Hospital())
 
     // lista de ambulancias filtradas
-    var listAmbulancias = MutableStateFlow(mutableListOf<Ambulance>())
+    var listAmbulancias = MutableStateFlow(mutableListOf(""))
 
     // lista de hospitales filtrados
     val listHospitals = MutableStateFlow(mutableListOf<Hospital>())
 
     // ambulancia actual del usuario
-    val myAmb = MutableStateFlow(Ambulance())
+    val myAmb = MutableStateFlow("")
 
     // lista de urgencias
     @RequiresApi(Build.VERSION_CODES.O)
@@ -81,27 +83,29 @@ class DataBaseViewModel : ViewModel() {
      * @param onSuccess La acción a ejecutar cuando se obtienen las ambulancias exitosamente.
      */
     fun getAmb(hospital: String, onSuccess: () -> Unit) {
-        // Se limpia la caché local de Firestore para asegurar la obtención de los datos más recientes
-        firestore.clearPersistence()
+        viewModelScope.launch {
+            // Se limpia la caché local de Firestore para asegurar la obtención de los datos más recientes
+            firestore.clearPersistence()
 
-        // Se vacía la lista de ambulancias para evitar duplicados
-        listAmbulancias.value.clear()
+            // Se vacía la lista de ambulancias para evitar duplicados
+            listAmbulancias.value.clear()
 
-        // Se realiza la consulta a Firestore para obtener las ambulancias filtradas por hospital de referencia
-        firestore.collection("Ambulances").whereEqualTo("hospital", hospital).get()
-            .addOnSuccessListener { documents ->
-                // Cuando se obtienen los documentos exitosamente
-                for (document in documents) {
-                    // Se añade cada ambulancia filtrada por hospital a la lista
-                    listAmbulancias.value.add(document.toObject(Ambulance::class.java))
-                    // Se ejecuta la acción onSuccess para manejar el éxito de la operación
-                    onSuccess()
+            // Se realiza la consulta a Firestore para obtener las ambulancias filtradas por hospital de referencia
+            firestore.collection("Ambulances").whereEqualTo("hospital", hospital).get()
+                .addOnSuccessListener { documents ->
+                    // Cuando se obtienen los documentos exitosamente
+                    for (document in documents) {
+                        // Se añade cada ambulancia filtrada por hospital a la lista
+                        listAmbulancias.value.add(getPlateFromDocumentSnapshot(document))
+                        // Se ejecuta la acción onSuccess para manejar el éxito de la operación
+                        onSuccess()
+                    }
                 }
-            }
-            .addOnFailureListener {
-                // En caso de fallo al obtener las ambulancias filtradas por hospital
-                message.value = "Error al obtener la lista de ambulancias"
-            }
+                .addOnFailureListener {
+                    // En caso de fallo al obtener las ambulancias filtradas por hospital
+                    message.value = "Error al obtener la lista de ambulancias"
+                }
+        }
     }
 
     /**
@@ -122,54 +126,58 @@ class DataBaseViewModel : ViewModel() {
     /**
      * Función para actualizar la ambulancia actual
      */
-    fun setAmb(amb: Ambulance){
-        myAmb.value= amb
+    fun setAmb(amb: String) {
+        myAmb.value = amb
     }
 
     /**
      * Función para actualizar la urgencia actual
      */
-    fun setUrg(urg: Urgencia){
+    fun setUrg(urg: Urgencia) {
         miUrgencia.value = urg
     }
 
     /**
      * Función para actualizar el valor de la ambulancia asociada a la urgencia
      */
-    fun intiUrg(){
+    fun intiUrg() {
         miUrgencia.value?.ambulance = myAmb.value
+        updateUrgenciasIfMatches(miUrgencia.value!!){}
     }
 
     /**
      * Función para finalizar una urgencia
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    fun finishUrg(){
+    fun finishUrg() {
         miUrgencia.value?.complete = true
-        updateUrgenciasIfMatches(miUrgencia.value!!)
-        // todo: Actualizar urgencia en base de datos, eliminar urgencia de variable interna
-        listEr.value.remove(miUrgencia.value)
-        miUrgencia.value = null
-
+        viewModelScope.launch {
+            updateUrgenciasIfMatches(miUrgencia.value!!) {
+                getUrgencies {  }
+            }
+        }
     }
+
 
     /**
      * Función para actualizar la ubicación de la ambulancia actual
      */
-    fun setAmbLoc(location: LatLng){
-        myAmb.value.location = location
+    fun setAmbLoc(location: LatLng) {
+        viewModelScope.launch {
+            updateAmbulanceLocation(location)
+        }
     }
 
     /**
      * Función para obtener la lista de urgencias de la base de datos
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getUrgencies(onSuccess: () -> Unit){
+    fun getUrgencies(onSuccess: () -> Unit) {
         firestore.collection(("Urgencias"))
             .whereEqualTo("complete", false)
             .get()
             .addOnSuccessListener { documents ->
-                for (document in documents){
+                for (document in documents) {
                     listEr.value.add(Urgencia.fromDocumentSnapshot(document))
                     onSuccess()
                 }
@@ -179,14 +187,13 @@ class DataBaseViewModel : ViewModel() {
             }
     }
 
-    private fun updateUrgenciasIfMatches(miUrgencia: Urgencia) {
+    private fun updateUrgenciasIfMatches(miUrgencia: Urgencia, onSuccess: () -> Unit) {
 
         val urgenciasCollection = firestore.collection("Urgencias")
 
         // Realizar una consulta para recuperar todas las urgencias que coinciden con doc y location de miUrgencia
         val query: Query = urgenciasCollection
-            .whereEqualTo("doc", miUrgencia.doc)
-            .whereEqualTo("location", miUrgencia.location)
+            .whereEqualTo("id",miUrgencia.id)
 
         query.get()
             .addOnSuccessListener { querySnapshot ->
@@ -197,6 +204,7 @@ class DataBaseViewModel : ViewModel() {
                     if (urgencia != miUrgencia) {
                         // Actualizar la urgencia en la base de datos
                         updateUrgencia(document.id, miUrgencia)
+                        onSuccess()
                     }
                 }
             }
@@ -210,6 +218,7 @@ class DataBaseViewModel : ViewModel() {
         val urgenciasCollection = firestore.collection("Urgencias")
 
         val data = hashMapOf(
+            "id" to urgencia.id,
             "name" to urgencia.name,
             "doc" to urgencia.doc,
             "age" to urgencia.age,
@@ -225,7 +234,7 @@ class DataBaseViewModel : ViewModel() {
         )
 
         urgenciasCollection.document(urgenciaId)
-            .update(data)
+            .update(data as Map<String, Any>)
             .addOnSuccessListener {
                 // La urgencia se actualizó exitosamente
             }
@@ -233,6 +242,44 @@ class DataBaseViewModel : ViewModel() {
                 // Ocurrió un error al actualizar la urgencia
                 println("Error al actualizar la urgencia: $e")
             }
+    }
+
+    /**
+     * Función para actualizar la ubicación de la ambulancia en la base de datos de Firestore
+     */
+    private fun updateAmbulanceLocation(location: LatLng) {
+        val data = hashMapOf(
+            "ambLocation" to hashMapOf(
+                "latitude" to location.latitude,
+                "longitude" to location.longitude
+            )
+        )
+
+        // Consultamos la ambulancia por su placa
+        firestore.collection("Ambulances")
+            .whereEqualTo("plate", myAmb.value)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    // Actualizamos los datos de ubicación en el documento correspondiente
+                    document.reference.update(data as Map<String, Any>)
+                        .addOnSuccessListener {
+                            // La ubicación de la ambulancia se actualizó exitosamente en Firestore
+                        }
+                        .addOnFailureListener { e ->
+                            // Ocurrió un error al actualizar la ubicación de la ambulancia en Firestore
+                            println("Error al actualizar la ubicación de la ambulancia: $e")
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                // Ocurrió un error al obtener la ambulancia de Firestore
+                println("Error al obtener la ambulancia: $e")
+            }
+    }
+
+    fun getPlateFromDocumentSnapshot(documentSnapshot: DocumentSnapshot): String {
+        return documentSnapshot.getString("plate") ?: ""
     }
 }
 

@@ -315,6 +315,7 @@ fun MyMap(
                 icon = scaledIconAmb,
                 onClick = {
                     locationViewModel.getAddressFromCoordinates(geocoder, userLocation)
+                    dataBaseViewModel.setAmbLoc(userLocation)
                     false
                 }
             )
@@ -337,7 +338,7 @@ fun MyMap(
                     urgencia = miUrgencia!!,
                     locationViewModel = locationViewModel,
                     onIniciarAvisoClick = {
-                        if (dataBaseViewModel.myAmb.value.plate != "No definida") {
+                        if (dataBaseViewModel.myAmb.value != "No definida") {
                             dataBaseViewModel.intiUrg()
                             Toast.makeText(context, "Aviso iniciado", Toast.LENGTH_LONG).show()
                         } else {
@@ -358,6 +359,7 @@ fun MyMap(
                         if(!focus){
                             locationViewModel.alterFocus()
                         }
+                        dataBaseViewModel.getUrgencies {  }
                     },
                     color = color
                 )

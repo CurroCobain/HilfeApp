@@ -125,8 +125,8 @@ fun ContenidoOpt(
     selectedCounty: String,
     listCounty: List<String>,
     listHosp: MutableList<Hospital>,
-    listAmbs: MutableList<Ambulance>,
-    myAmbulance: Ambulance
+    listAmbs: MutableList<String>,
+    myAmbulance: String
 ) {
     var expandedHosp by remember { mutableStateOf(false) }
     var expandedCounty by remember { mutableStateOf(false) }
@@ -336,7 +336,7 @@ fun ContenidoOpt(
                         .background(color = Color.White)
                         .align(Alignment.CenterHorizontally)){
                         Text(
-                            text = " ${myAmbulance.plate} ", // Mostrar ambulancia actual
+                            text = " $myAmbulance ", // Mostrar ambulancia actual
                             modifier = Modifier
                                 .padding(8.dp),
                             fontSize = 25.sp,
@@ -353,7 +353,7 @@ fun ContenidoOpt(
                     ) {
                         listAmbs.forEach { amb ->
                             DropdownMenuItem(
-                                text = { Text(text = amb.plate) },
+                                text = { Text(text = amb) },
                                 onClick = {
                                     dataBaseViewModel.setAmb(amb)
                                     expandedAmb =

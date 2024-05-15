@@ -20,7 +20,7 @@ data class Ambulance(
     var isFree: Boolean,
     var types: AmbulanceTypes,
     var hospital: String,
-    var location: LatLng
+    var ambLocation: LatLng
 ){
     constructor() : this("amb1", "No definida", true, AmbulanceTypes.doctor, "", LatLng(0.0,0.0))
 }

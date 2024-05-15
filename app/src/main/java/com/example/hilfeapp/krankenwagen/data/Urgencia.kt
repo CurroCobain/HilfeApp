@@ -21,6 +21,7 @@ import java.time.ZoneOffset
  * @property issues: descripción de la urgencia
  */
 data class Urgencia(
+    val id: String,
     val name: String,
     val doc: String,
     val age: Int,
@@ -28,7 +29,7 @@ data class Urgencia(
     val location: LatLng,
     val date: Timestamp?,
     val issues: String,
-    var ambulance: Ambulance?,
+    var ambulance: String,
     var complete: Boolean
 ){
 
@@ -36,6 +37,7 @@ data class Urgencia(
     companion object {
         @SuppressLint("NewApi")
         fun fromDocumentSnapshot(documentSnapshot: DocumentSnapshot): Urgencia {
+            val id = documentSnapshot.getString("id") ?: ""
             val name = documentSnapshot.getString("name") ?: ""
             val doc = documentSnapshot.getString("doc") ?: ""
             val age = documentSnapshot.getLong("age")?.toInt() ?: 0
@@ -53,12 +55,14 @@ data class Urgencia(
                 date = Timestamp(System.currentTimeMillis())
             }
             val issues = documentSnapshot.getString("issues") ?: ""
-            return Urgencia(name, doc, age, priority, location, date!!, issues, Ambulance(), false)
+            val ambulance = documentSnapshot.getString("ambulance") ?: ""
+            return Urgencia(id, name, doc, age, priority, location, date, issues, ambulance,false)
         }
     }
 
     @SuppressLint("NewApi")
     constructor() : this(
+        "urg0",
         "Paciente1",
         "30876923H",
         24,
@@ -66,7 +70,7 @@ data class Urgencia(
         LatLng(36.678804, -6.143728),
         Timestamp(System.currentTimeMillis()),
         "Parada cardio respiratoria",
-        Ambulance(),
+        "No definida",
         false
         )
 }

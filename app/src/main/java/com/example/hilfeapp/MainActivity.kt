@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
         val doctorViewModel = DoctorViewModel()
         val dataBaseViewModel = DataBaseViewModel()
         locationViewModel.getUserLocation()
-        dataBaseViewModel.getUrgencies {}
         setContent {
             HilfeAppTheme {
                 // A surface container using the 'background' color from the theme
