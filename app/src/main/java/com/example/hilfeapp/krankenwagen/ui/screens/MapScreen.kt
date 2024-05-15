@@ -75,8 +75,17 @@ fun MapScreen(
     doctorViewModel: DoctorViewModel,
     dataBaseViewModel: DataBaseViewModel
 ) {
+    val context = LocalContext.current
     val listUrgencias by dataBaseViewModel.listEr.collectAsState()
-    val miUrgencia by dataBaseViewModel.miUrgenia.collectAsState()
+    if (listUrgencias.size >= 1) {
+        Toast.makeText(
+            context,
+            "Hay urgencias pendientes",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    val miUrgencia by dataBaseViewModel.miUrgencia.collectAsState()
     val editUrgencia by locationViewModel.editUrg.collectAsState()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val locationText by locationViewModel.addressText.collectAsState()
@@ -84,11 +93,11 @@ fun MapScreen(
     locationViewModel.setUrLocation(userLocation!!)
     dataBaseViewModel.setAmbLoc(userLocation!!)
     val urgencyLocation by locationViewModel.urgencyLocation.collectAsState()
-    val context = LocalContext.current
     val geocoder = Geocoder(context)
     val focus by locationViewModel.focusErAmb.collectAsState()
     val color1 by optionsViewModel.color1.collectAsState()
     val fondo by optionsViewModel.fondo.collectAsState()
+
 
 
 
@@ -197,7 +206,9 @@ fun MapContent(
                         onClick = {
                             if (miUrgencia != null) {
                                 locationViewModel.alterFocus()
-                            } else {
+                            } else if (focus){
+                                locationViewModel.alterFocus()
+                            }else{
                                 Toast.makeText(
                                     context,
                                     "No tiene urgencias asignadas",
@@ -326,15 +337,15 @@ fun MyMap(
                     urgencia = miUrgencia!!,
                     locationViewModel = locationViewModel,
                     onIniciarAvisoClick = {
-                        if(dataBaseViewModel.myAmb.value.plate != "No definida"){
+                        if (dataBaseViewModel.myAmb.value.plate != "No definida") {
                             dataBaseViewModel.intiUrg()
                             Toast.makeText(context, "Aviso iniciado", Toast.LENGTH_LONG).show()
-                        }else{
+                        } else {
                             Toast.makeText(
                                 context,
                                 "Debe seleccionar una ambulancia",
                                 Toast.LENGTH_LONG
-                                )
+                            )
                                 .show()
                             navController.navigate(Routes.PantallaOptions.route)
                         }
@@ -344,7 +355,9 @@ fun MyMap(
                         dataBaseViewModel.finishUrg()
                         locationViewModel.openCloseEditUrg()
                         Toast.makeText(context, "Aviso finalizado", Toast.LENGTH_LONG).show()
-                        locationViewModel.alterFocus()
+                        if(!focus){
+                            locationViewModel.alterFocus()
+                        }
                     },
                     color = color
                 )

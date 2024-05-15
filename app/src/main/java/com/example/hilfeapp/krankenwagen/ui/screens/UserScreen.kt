@@ -216,7 +216,6 @@ fun ContenidoUser(
                         fontSize = 16.sp
                     )
                 }
-
             }
             Spacer(modifier = Modifier.padding(10.dp))
             // Mensaje que aparece si hay error al iniciar sesión --------------------------

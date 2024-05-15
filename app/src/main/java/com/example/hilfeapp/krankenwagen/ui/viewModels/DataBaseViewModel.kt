@@ -9,26 +9,14 @@ import com.example.hilfeapp.krankenwagen.data.Hospital
 import com.example.hilfeapp.krankenwagen.data.Urgencia
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 
 class DataBaseViewModel : ViewModel() {
     private val firestore = Firebase.firestore
     private var message = MutableStateFlow("")
-    @RequiresApi(Build.VERSION_CODES.O)
-    var urgencia2 = Urgencia(
-        "paciente 2",
-        "12345678Y",
-        23,
-        2,
-        LatLng(36.688690, -6.156502),
-        LocalDateTime.now(),
-        "Se muere",
-        Ambulance(),
-        false
-    )
 
     // listado de provincias
     val tempCounty = listOf("Almeria", "Cadiz", "Cordoba","Granada", "Huelva", "Jaen", "Malaga", "Sevilla" )
@@ -51,11 +39,11 @@ class DataBaseViewModel : ViewModel() {
 
     // lista de urgencias
     @RequiresApi(Build.VERSION_CODES.O)
-    val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf(Urgencia(), urgencia2))
+    val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf())
 
 
     // urgencia actual
-    val miUrgenia = MutableStateFlow<Urgencia?>(null)
+    val miUrgencia = MutableStateFlow<Urgencia?>(null)
 
 
     /**
@@ -142,14 +130,14 @@ class DataBaseViewModel : ViewModel() {
      * Función para actualizar la urgencia actual
      */
     fun setUrg(urg: Urgencia){
-        miUrgenia.value = urg
+        miUrgencia.value = urg
     }
 
     /**
      * Función para actualizar el valor de la ambulancia asociada a la urgencia
      */
     fun intiUrg(){
-        miUrgenia.value?.ambulance = myAmb.value
+        miUrgencia.value?.ambulance = myAmb.value
     }
 
     /**
@@ -157,10 +145,11 @@ class DataBaseViewModel : ViewModel() {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     fun finishUrg(){
-        miUrgenia.value?.complete = true
+        miUrgencia.value?.complete = true
+        updateUrgenciasIfMatches(miUrgencia.value!!)
         // todo: Actualizar urgencia en base de datos, eliminar urgencia de variable interna
-        listEr.value.remove(miUrgenia.value)
-        miUrgenia.value = null
+        listEr.value.remove(miUrgencia.value)
+        miUrgencia.value = null
 
     }
 
@@ -170,4 +159,80 @@ class DataBaseViewModel : ViewModel() {
     fun setAmbLoc(location: LatLng){
         myAmb.value.location = location
     }
+
+    /**
+     * Función para obtener la lista de urgencias de la base de datos
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getUrgencies(onSuccess: () -> Unit){
+        firestore.collection(("Urgencias"))
+            .whereEqualTo("complete", false)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents){
+                    listEr.value.add(Urgencia.fromDocumentSnapshot(document))
+                    onSuccess()
+                }
+            }
+            .addOnFailureListener {
+                message.value = "Error al recuperar las urgencias"
+            }
+    }
+
+    private fun updateUrgenciasIfMatches(miUrgencia: Urgencia) {
+
+        val urgenciasCollection = firestore.collection("Urgencias")
+
+        // Realizar una consulta para recuperar todas las urgencias que coinciden con doc y location de miUrgencia
+        val query: Query = urgenciasCollection
+            .whereEqualTo("doc", miUrgencia.doc)
+            .whereEqualTo("location", miUrgencia.location)
+
+        query.get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    val urgencia = Urgencia.fromDocumentSnapshot(document)
+
+                    // Actualizar la urgencia solo si es diferente de miUrgencia
+                    if (urgencia != miUrgencia) {
+                        // Actualizar la urgencia en la base de datos
+                        updateUrgencia(document.id, miUrgencia)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                // Manejar el error al obtener las urgencias
+                println("Error al obtener las urgencias: $e")
+            }
+    }
+
+    private fun updateUrgencia(urgenciaId: String, urgencia: Urgencia) {
+        val urgenciasCollection = firestore.collection("Urgencias")
+
+        val data = hashMapOf(
+            "name" to urgencia.name,
+            "doc" to urgencia.doc,
+            "age" to urgencia.age,
+            "priority" to urgencia.priority,
+            "location" to hashMapOf(
+                "latitude" to urgencia.location.latitude,
+                "longitude" to urgencia.location.longitude
+            ),
+            "date" to urgencia.date,
+            "issues" to urgencia.issues,
+            "ambulance" to urgencia.ambulance,
+            "complete" to urgencia.complete
+        )
+
+        urgenciasCollection.document(urgenciaId)
+            .update(data)
+            .addOnSuccessListener {
+                // La urgencia se actualizó exitosamente
+            }
+            .addOnFailureListener { e ->
+                // Ocurrió un error al actualizar la urgencia
+                println("Error al actualizar la urgencia: $e")
+            }
+    }
 }
+
