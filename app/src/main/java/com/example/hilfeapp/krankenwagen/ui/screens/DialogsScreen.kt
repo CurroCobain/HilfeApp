@@ -23,7 +23,7 @@ fun UrgenciaDialog(
     locationViewModel: LocationViewModel,
     onIniciarAvisoClick: () -> Unit,
     onFinalizarAvisoClick: () -> Unit,
-    color: Color
+    color: Color,
 ) {
     Dialog(
         onDismissRequest = { locationViewModel.openCloseEditUrg() },

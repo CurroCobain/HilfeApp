@@ -12,12 +12,15 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class DataBaseViewModel : ViewModel() {
     private val firestore = Firebase.firestore
-    private var message = MutableStateFlow("")
+    val message = MutableStateFlow("")
+
+    val shown = MutableStateFlow(false)
 
     // listado de provincias
     val tempCounty =
@@ -142,7 +145,8 @@ class DataBaseViewModel : ViewModel() {
      */
     fun intiUrg() {
         miUrgencia.value?.ambulance = myAmb.value
-        updateUrgenciasIfMatches(miUrgencia.value!!){}
+        updateUrgenciasIfMatches(miUrgencia.value!!) {
+        }
     }
 
     /**
@@ -152,9 +156,11 @@ class DataBaseViewModel : ViewModel() {
     fun finishUrg() {
         miUrgencia.value?.complete = true
         viewModelScope.launch {
-            updateUrgenciasIfMatches(miUrgencia.value!!) {
-                getUrgencies {  }
-            }
+            updateUrgenciasIfMatches(miUrgencia.value!!) {}
+            listEr.value.remove(miUrgencia.value)
+            //count.value += 1
+            miUrgencia.value = null
+            getUrgencies { }
         }
     }
 
@@ -173,18 +179,22 @@ class DataBaseViewModel : ViewModel() {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     fun getUrgencies(onSuccess: () -> Unit) {
-        firestore.collection(("Urgencias"))
-            .whereEqualTo("complete", false)
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    listEr.value.add(Urgencia.fromDocumentSnapshot(document))
-                    onSuccess()
+        listEr.value.clear()
+        viewModelScope.launch {
+            firestore.collection(("Urgencias"))
+                .whereEqualTo("complete", false)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        listEr.value.add(Urgencia.fromDocumentSnapshot(document))
+                        message.value = "Listado actualizado"
+                        onSuccess()
+                    }
                 }
-            }
-            .addOnFailureListener {
-                message.value = "Error al recuperar las urgencias"
-            }
+                .addOnFailureListener {
+                    message.value = "Error al recuperar las urgencias"
+                }
+        }
     }
 
     private fun updateUrgenciasIfMatches(miUrgencia: Urgencia, onSuccess: () -> Unit) {
@@ -193,7 +203,7 @@ class DataBaseViewModel : ViewModel() {
 
         // Realizar una consulta para recuperar todas las urgencias que coinciden con doc y location de miUrgencia
         val query: Query = urgenciasCollection
-            .whereEqualTo("id",miUrgencia.id)
+            .whereEqualTo("id", miUrgencia.id)
 
         query.get()
             .addOnSuccessListener { querySnapshot ->
@@ -281,5 +291,10 @@ class DataBaseViewModel : ViewModel() {
     fun getPlateFromDocumentSnapshot(documentSnapshot: DocumentSnapshot): String {
         return documentSnapshot.getString("plate") ?: ""
     }
+
+    fun updateMessage(newValue: String) {
+        message.value = newValue
+    }
+
 }
 

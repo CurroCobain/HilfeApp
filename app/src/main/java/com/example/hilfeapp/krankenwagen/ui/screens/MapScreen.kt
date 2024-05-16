@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.location.Geocoder
 import android.os.Build
+import android.os.Message
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.Icon
@@ -36,7 +37,11 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -77,13 +82,13 @@ fun MapScreen(
 ) {
     val context = LocalContext.current
     val listUrgencias by dataBaseViewModel.listEr.collectAsState()
-    if (listUrgencias.size >= 1) {
+
+    if (listUrgencias.size != 0)
         Toast.makeText(
             context,
             "Hay urgencias pendientes",
             Toast.LENGTH_SHORT
         ).show()
-    }
 
     val miUrgencia by dataBaseViewModel.miUrgencia.collectAsState()
     val editUrgencia by locationViewModel.editUrg.collectAsState()
@@ -97,8 +102,7 @@ fun MapScreen(
     val focus by locationViewModel.focusErAmb.collectAsState()
     val color1 by optionsViewModel.color1.collectAsState()
     val fondo by optionsViewModel.fondo.collectAsState()
-
-
+    val message by dataBaseViewModel.message.collectAsState()
 
 
     ModalNavigationDrawer(
@@ -141,7 +145,8 @@ fun MapScreen(
                 miUrgencia,
                 editUrgencia,
                 navController,
-                color1
+                color1,
+                message,
             )
         }
     }
@@ -163,7 +168,8 @@ fun MapContent(
     miUrgencia: Urgencia?,
     editUrgencia: Boolean,
     navController: NavController,
-    color: Color
+    color: Color,
+    message: String,
 ) {
     Box(
         Modifier
@@ -199,16 +205,20 @@ fun MapContent(
                     miUrgencia,
                     editUrgencia,
                     navController,
-                    color
+                    color,
+                    message,
                 )
-                Row(Modifier.padding(top = 10.dp)) {
+                Row(
+                    Modifier.padding(top = 10.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
                     Button(
                         onClick = {
                             if (miUrgencia != null) {
                                 locationViewModel.alterFocus()
-                            } else if (focus){
+                            } else if (focus) {
                                 locationViewModel.alterFocus()
-                            }else{
+                            } else {
                                 Toast.makeText(
                                     context,
                                     "No tiene urgencias asignadas",
@@ -231,7 +241,33 @@ fun MapContent(
                             color = Color.Black
                         )
                     }
-                    Spacer(modifier = Modifier.padding(start = 15.dp))
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Button(
+                        onClick = {
+                            dataBaseViewModel.getUrgencies {
+                                    Toast.makeText(
+                                        context,
+                                        "Listado de urgencias actualizado",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                            }
+                            dataBaseViewModel.updateMessage("")
+                        },
+                        colors = ButtonDefaults.buttonColors(Color.White),
+                        shape = RoundedCornerShape(
+                            topStart = 8.dp,
+                            topEnd = 8.dp,
+                            bottomStart = 8.dp,
+                            bottomEnd = 8.dp
+                        )
+                    )
+                    {
+                        Text(
+                            text = "Actualizar lista",
+                            fontWeight = FontWeight.ExtraBold, fontSize = 15.sp,
+                            color = Color.Black
+                        )
+                    }
                 }
                 Row(
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, end = 20.dp)
@@ -269,7 +305,8 @@ fun MyMap(
     miUrgencia: Urgencia?,
     editUrgencia: Boolean,
     navController: NavController,
-    color: Color
+    color: Color,
+    message: String,
 ) {
     val cameraPositionState =
         if (focus) rememberCameraPositionState {
@@ -356,10 +393,10 @@ fun MyMap(
                         dataBaseViewModel.finishUrg()
                         locationViewModel.openCloseEditUrg()
                         Toast.makeText(context, "Aviso finalizado", Toast.LENGTH_LONG).show()
-                        if(!focus){
+                        if (!focus) {
                             locationViewModel.alterFocus()
                         }
-                        dataBaseViewModel.getUrgencies {  }
+                        dataBaseViewModel.getUrgencies { }
                     },
                     color = color
                 )
