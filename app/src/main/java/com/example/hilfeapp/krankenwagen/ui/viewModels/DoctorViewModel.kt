@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 
 class DoctorViewModel : ViewModel(){
     // Instancias de Firebase
-    private val auth: FirebaseAuth = Firebase.auth
-    private val firestore = Firebase.firestore
+    var auth: FirebaseAuth = Firebase.auth
+    var firestore = Firebase.firestore
     // Flujo mutable para el texto del documento
     val documentText = MutableStateFlow("")
 
