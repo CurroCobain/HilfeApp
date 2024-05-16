@@ -168,6 +168,9 @@ drawable ic_call_decline
 drawable ic_call_decline_low
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_other_sign_in
+drawable ic_passkey
+drawable ic_password
 drawable icono
 drawable logo
 drawable notification_action_background
@@ -299,6 +302,7 @@ id visible_removing_fragment_view_tag
 id wide
 id wrapped_composition_tag
 integer google_play_services_version
+integer m3c_window_layout_in_display_cutout_mode
 integer status_bar_notification_info_maxnum
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
@@ -315,6 +319,8 @@ mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 raw firebase_common_keep
+string android_credentials_TYPE_PASSWORD_CREDENTIAL
+string androidx_credentials_TYPE_PUBLIC_KEY_CREDENTIAL
 string androidx_startup
 string app_name
 string call_notification_answer_action
@@ -423,6 +429,7 @@ string project_id
 string range_end
 string range_start
 string selected
+string state_empty
 string state_off
 string state_on
 string status_bar_notification_info_overflow
@@ -432,6 +439,8 @@ string template_percent
 string tooltip_description
 string tooltip_label
 style DialogWindowTheme
+style EdgeToEdgeFloatingDialogTheme
+style EdgeToEdgeFloatingDialogWindowTheme
 style FloatingDialogTheme
 style FloatingDialogWindowTheme
 style TextAppearance_Compat_Notification
@@ -439,6 +448,7 @@ style TextAppearance_Compat_Notification_Info
 style TextAppearance_Compat_Notification_Line2
 style TextAppearance_Compat_Notification_Time
 style TextAppearance_Compat_Notification_Title
+style Theme_Hidden
 style Theme_HilfeApp
 style Widget_Compat_NotificationActionContainer
 style Widget_Compat_NotificationActionText
