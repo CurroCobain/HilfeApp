@@ -338,7 +338,8 @@ fun ContenidoOpt(
                         Text(
                             text = " $myAmbulance ", // Mostrar ambulancia actual
                             modifier = Modifier
-                                .padding(8.dp),
+                                .padding(8.dp)
+                            .sizeIn(minWidth = 100.dp, minHeight = 30.dp),
                             fontSize = 25.sp,
                             fontWeight = FontWeight.ExtraBold
                         )

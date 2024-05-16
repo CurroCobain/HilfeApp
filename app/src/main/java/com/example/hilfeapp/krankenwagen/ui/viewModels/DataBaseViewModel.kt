@@ -153,14 +153,11 @@ class DataBaseViewModel : ViewModel() {
      * Función para finalizar una urgencia
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    fun finishUrg() {
+    fun finishUrg(onSuccess: () -> Unit) {
         miUrgencia.value?.complete = true
         viewModelScope.launch {
             updateUrgenciasIfMatches(miUrgencia.value!!) {}
-            listEr.value.remove(miUrgencia.value)
-            //count.value += 1
-            miUrgencia.value = null
-            getUrgencies { }
+            onSuccess()
         }
     }
 
@@ -296,5 +293,11 @@ class DataBaseViewModel : ViewModel() {
         message.value = newValue
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun setNull(){
+        val ind = listEr.value.indexOf(miUrgencia.value)
+        listEr.value.removeAt(ind)
+        miUrgencia.value = null
+    }
 }
 

@@ -390,13 +390,15 @@ fun MyMap(
                         locationViewModel.openCloseEditUrg()
                     },
                     onFinalizarAvisoClick = {
-                        dataBaseViewModel.finishUrg()
+                        dataBaseViewModel.finishUrg(){
+                            dataBaseViewModel.setNull()
+                            dataBaseViewModel.getUrgencies { }
+                        }
                         locationViewModel.openCloseEditUrg()
                         Toast.makeText(context, "Aviso finalizado", Toast.LENGTH_LONG).show()
                         if (!focus) {
                             locationViewModel.alterFocus()
                         }
-                        dataBaseViewModel.getUrgencies { }
                     },
                     color = color
                 )

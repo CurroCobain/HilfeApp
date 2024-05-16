@@ -62,6 +62,21 @@ class DoctorViewModel : ViewModel(){
     }
 
     /**
+     * Cierra la sesión del usuario actual
+     */
+    fun cerrarSesion(onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            try {
+                // Cierra la sesión del usuario actual
+                auth.signOut()
+                onSuccess()
+            } catch (e: Exception) {
+                sesionMessage.value ="Error al cerrar sesión: ${e.localizedMessage}"
+            }
+        }
+    }
+
+    /**
      * Asigna el nombre del usuario
      */
     fun cambiaNombre() {
@@ -75,6 +90,7 @@ class DoctorViewModel : ViewModel(){
                 }
             }
             .addOnFailureListener { exception ->
+                nombreDoc.value = ""
                 // En caso de fallo al obtener el nombre del usuario
                 Log.w(TAG, "Error getting documents: ", exception)
             }
@@ -101,4 +117,7 @@ class DoctorViewModel : ViewModel(){
         userRegistered.value = !userRegistered.value
     }
 
+    fun setMessage(value: String){
+        sesionMessage.value = value
+    }
 }

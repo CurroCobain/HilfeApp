@@ -67,6 +67,7 @@ fun UserScreen(
     val passDoc by doctorViewModel.nuevoPass.collectAsState()
     val context = LocalContext.current
     val message by doctorViewModel.sesionMessage.collectAsState()
+    val sesionInit by doctorViewModel.userRegistered.collectAsState()
 
 
     ModalNavigationDrawer(
@@ -104,7 +105,8 @@ fun UserScreen(
                 passDoc,
                 context,
                 message,
-                navController
+                navController,
+                sesionInit
             )
         }
     }
@@ -120,7 +122,8 @@ fun ContenidoUser(
     passDoc: String,
     context: Context,
     message: String,
-    navController: NavController
+    navController: NavController,
+    sesionInit: Boolean
 ) {
     Box(
         Modifier
@@ -142,7 +145,8 @@ fun ContenidoUser(
         {
             Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
                 Text(
-                    text = "Inicie sesión por favor",
+                    text = if(!sesionInit) "Inicie sesión por favor"
+                    else "Bienvenido Dr",
                     fontSize = 30.sp
                 )
             }
@@ -191,7 +195,7 @@ fun ContenidoUser(
                                 Toast.LENGTH_SHORT
                             ).show()
                             doctorViewModel.trueFalseSesionIniti()
-                            // sesionViewModel.setMessage("")
+                            doctorViewModel.setMessage("")
                         }
                         dataBaseViewModel.getUrgencies {}
                     },
@@ -200,14 +204,15 @@ fun ContenidoUser(
                     border = BorderStroke(2.dp, Color.Black)
                 )
                 {
-                    Text(text = stringResource(R.string.confirmar),
+                    Text(
+                        text = stringResource(R.string.confirmar),
                         color = Color.Black,
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp
                     )
                 }
                 Spacer(modifier = Modifier.padding(20.dp))
-                // ------------------------ Botón volver a registro ------------------------
+                // ------------------------ Botón borrar datos ------------------------
                 Button(
                     onClick = {
                         // Borra los datos
@@ -220,6 +225,37 @@ fun ContenidoUser(
                 ) {
                     Text(
                         text = "Borrar todo",
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.padding(16.dp))
+            Row(modifier = Modifier.align(Alignment.CenterHorizontally))
+            {
+                // ---------------------- botón cerrar sesión ---------------------------
+                Button(
+                    onClick = {
+                        // Se lanza cerrarSesion y si finaliza correctamente se indica mediante un Toast
+                        doctorViewModel.cerrarSesion {
+                            doctorViewModel.cambiaNombre()
+                            Toast.makeText(
+                                context,
+                                "Sesión cerrada",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            doctorViewModel.trueFalseSesionIniti()
+                        }
+                        dataBaseViewModel.getUrgencies {}
+                    },
+                    colors = ButtonDefaults.buttonColors(Color.White),
+                    shape = RoundedCornerShape(6.dp),
+                    border = BorderStroke(2.dp, Color.Black)
+                )
+                {
+                    Text(
+                        text = "Cerrar sesión",
                         color = Color.Black,
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp
