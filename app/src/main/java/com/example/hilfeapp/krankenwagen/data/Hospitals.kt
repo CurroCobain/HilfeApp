@@ -16,5 +16,6 @@ data class Hospital(
     val address: String,
 )
 {
+    // Constructor sin parámetros de la clase
     constructor(): this("hosp1", " Hospital ", "Cádiz","Cádiz","Calle 1 de Cádiz")
 }

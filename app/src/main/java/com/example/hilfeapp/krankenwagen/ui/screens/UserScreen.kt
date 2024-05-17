@@ -51,6 +51,15 @@ import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import kotlinx.coroutines.launch
 
+
+/**
+ * Composable que representa la pantalla de usuario.
+ *
+ * @param navController Controlador de navegación.
+ * @param optionsViewModel ViewModel que maneja las opciones de la aplicación.
+ * @param dataBaseViewModel ViewModel que maneja la base de datos.
+ * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -60,16 +69,21 @@ fun UserScreen(
     doctorViewModel: DoctorViewModel,
     dataBaseViewModel: DataBaseViewModel
 ) {
+    // Estado del drawer
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    // Estado del color de la aplicación
     val color1 by optionsViewModel.color1.collectAsState()
+    // Estado del fondo
     val fondo by optionsViewModel.fondo.collectAsState()
+    // Estado del mail
     val mailDoc by doctorViewModel.nuevoMail.collectAsState()
+    //Estado de la contraseña
     val passDoc by doctorViewModel.nuevoPass.collectAsState()
     val context = LocalContext.current
     val message by doctorViewModel.sesionMessage.collectAsState()
     val sesionInit by doctorViewModel.userRegistered.collectAsState()
 
-
+    // Drawer de navegación
     ModalNavigationDrawer(
         modifier = Modifier.fillMaxSize(),
         drawerState = drawerState,
@@ -80,6 +94,7 @@ fun UserScreen(
         })
     {
         val scope = rememberCoroutineScope()
+        // Sacaffold para la pantalla de usuario
         Scaffold(
             floatingActionButton = {
                 ExtendedFloatingActionButton(
@@ -97,6 +112,7 @@ fun UserScreen(
                 )
             }
         ) {
+            // Contenido de la pantalla usuario
             ContenidoUser(
                 fondo,
                 doctorViewModel,
@@ -112,12 +128,25 @@ fun UserScreen(
     }
 }
 
+/**
+ * Composable que representa el contenido de la pantalla de usuario.
+ *
+ * @param fondo Fondo de la pantalla de usuario.
+ * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
+ * @param dataBaseViewModel ViewModel que maneja la base de datos.
+ * @param mailDoc Correo electrónico del doctor.
+ * @param passDoc Contraseña del doctor.
+ * @param context Contexto de la aplicación.
+ * @param message Mensaje de error o confirmación.
+ * @param navController Controlador de navegación.
+ * @param sesionInit Indica si la sesión está iniciada o no.
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ContenidoUser(
     fondo: Int,
     doctorViewModel: DoctorViewModel,
-    dataBaseViewModel:DataBaseViewModel,
+    dataBaseViewModel: DataBaseViewModel,
     mailDoc: String,
     passDoc: String,
     context: Context,
@@ -125,11 +154,13 @@ fun ContenidoUser(
     navController: NavController,
     sesionInit: Boolean
 ) {
+    // Contenedor principal
     Box(
         Modifier
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
+        // Fondo de la pantalla de usuario
         Image(
             painter = painterResource(id = fondo),
             contentDescription = "Fondo",
@@ -137,12 +168,14 @@ fun ContenidoUser(
                 .fillMaxWidth()
                 .fillMaxHeight()
         )
+        // Columna para organizar los elementos de la pantalla de usuario
         Column(
             modifier = Modifier
                 .padding(top = 150.dp)
                 .fillMaxSize()
         )
         {
+            // Mensaje de bienvenida o inicio de sesión
             Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
                 Text(
                     text = if(!sesionInit) "Inicie sesión por favor"
@@ -152,7 +185,7 @@ fun ContenidoUser(
             }
 
             Spacer(modifier = Modifier.padding(40.dp))
-            // ------------------------ TextField mail -----------------------------
+            // Campo de texto para el correo electrónico
             Row(modifier = Modifier.align(Alignment.CenterHorizontally))
             {
                 TextField(
@@ -166,7 +199,7 @@ fun ContenidoUser(
                 )
             }
             Spacer(modifier = Modifier.padding(10.dp))
-            // ------------------------ TextField password -----------------------------
+            // Campo de texto para la contraseña
             Row(modifier = Modifier.align(Alignment.CenterHorizontally))
             {
                 TextField(
@@ -180,12 +213,12 @@ fun ContenidoUser(
                 )
             }
             Spacer(modifier = Modifier.padding(20.dp))
-            // --------------------- Botón confirmar --------------------------------
+            // Botón de confirmar inicio de sesión
             Row(modifier = Modifier.align(Alignment.CenterHorizontally))
             {
                 Button(
                     onClick = {
-                        // Se lanza sesionÍnit y si finaliza correctamente se indica mediante un Toast
+                        // Inicia la sesión y muestra un mensaje de confirmación
                         doctorViewModel.sesionInit {
                             navController.navigate(Routes.PantallaOptions.route)
                             doctorViewModel.cambiaNombre()
@@ -212,10 +245,10 @@ fun ContenidoUser(
                     )
                 }
                 Spacer(modifier = Modifier.padding(20.dp))
-                // ------------------------ Botón borrar datos ------------------------
+                // Botón para borrar los datos
                 Button(
                     onClick = {
-                        // Borra los datos
+                        // Borra los datos del correo electrónico y la contraseña
                         doctorViewModel.cambiaMail("")
                         doctorViewModel.cambiaPass("")
                     },
@@ -232,12 +265,12 @@ fun ContenidoUser(
                 }
             }
             Spacer(modifier = Modifier.padding(16.dp))
+            // Botón para cerrar sesión
             Row(modifier = Modifier.align(Alignment.CenterHorizontally))
             {
-                // ---------------------- botón cerrar sesión ---------------------------
                 Button(
                     onClick = {
-                        // Se lanza cerrarSesion y si finaliza correctamente se indica mediante un Toast
+                        // Cierra la sesión y muestra un mensaje de confirmación
                         doctorViewModel.cerrarSesion {
                             doctorViewModel.cambiaNombre()
                             Toast.makeText(
@@ -263,11 +296,11 @@ fun ContenidoUser(
                 }
             }
             Spacer(modifier = Modifier.padding(10.dp))
-            // Mensaje que aparece si hay error al iniciar sesión --------------------------
+            // Mensaje de error o confirmación
             Row(modifier = Modifier.align(Alignment.CenterHorizontally))
             {
                 Text(
-                    // Mensaje del sistema
+                    // Muestra el mensaje del sistema
                     text = message,
                     color = Color.White
                 )
@@ -275,5 +308,4 @@ fun ContenidoUser(
         }
     }
 }
-
 

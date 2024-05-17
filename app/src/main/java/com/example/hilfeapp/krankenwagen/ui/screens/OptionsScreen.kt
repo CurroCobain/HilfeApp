@@ -55,6 +55,14 @@ import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * Composable que representa la pantalla de opciones.
+ *
+ * @param navController Controlador de navegación.
+ * @param optionsViewModel ViewModel que maneja las opciones de la aplicación.
+ * @param dataBaseViewModel ViewModel que maneja la base de datos.
+ * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
+ */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun OptionsScreen(
@@ -63,17 +71,22 @@ fun OptionsScreen(
     dataBaseViewModel: DataBaseViewModel,
     doctorViewModel: DoctorViewModel
 ) {
+    // Estado del drawer
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    // Estado del color de la aplicación
     val color1 by optionsViewModel.color1.collectAsState()
+    // Estado del fondo
     val fondo by optionsViewModel.fondo.collectAsState()
+    // Listas de provincias, hospitales y ambulancias
     val listCounty = dataBaseViewModel.tempCounty
     val listHosp by dataBaseViewModel.listHospitals.collectAsState()
     val listAmbs by dataBaseViewModel.listAmbulancias.collectAsState()
+    // Estado de la provincia, hospital y ambulancia seleccionados
     val selectedCounty by dataBaseViewModel.provinciaFiltrar.collectAsState()
     val selectedHosp by dataBaseViewModel.hospitalFiltrar.collectAsState()
     val myAmbulance by dataBaseViewModel.myAmb.collectAsState()
 
-
+    // Drawer de navegación
     ModalNavigationDrawer(
         modifier = Modifier.fillMaxSize(),
         drawerState = drawerState,
@@ -84,6 +97,7 @@ fun OptionsScreen(
         })
     {
         val scope = rememberCoroutineScope()
+        // Scaffold para la pantalla de opciones
         Scaffold(
             floatingActionButton = {
                 ExtendedFloatingActionButton(
@@ -101,6 +115,7 @@ fun OptionsScreen(
                 )
             }
         ) {
+            // Contenido de las opciones
             ContenidoOpt(
                 fondo,
                 optionsViewModel,
@@ -116,6 +131,20 @@ fun OptionsScreen(
     }
 }
 
+
+/**
+ * Composable que representa el contenido de las opciones.
+ *
+ * @param fondo Fondo de la pantalla de opciones.
+ * @param optionsViewModel ViewModel que maneja las opciones de la aplicación.
+ * @param dataBaseViewModel ViewModel que maneja la base de datos.
+ * @param selectedHosp Hospital seleccionado.
+ * @param selectedCounty Provincia seleccionada.
+ * @param listCounty Lista de provincias.
+ * @param listHosp Lista de hospitales.
+ * @param listAmbs Lista de ambulancias.
+ * @param myAmbulance Ambulancia seleccionada.
+ */
 @Composable
 fun ContenidoOpt(
     fondo: Int,
@@ -128,15 +157,18 @@ fun ContenidoOpt(
     listAmbs: MutableList<String>,
     myAmbulance: String
 ) {
+    // Estados para la expansión de las listas desplegables
     var expandedHosp by remember { mutableStateOf(false) }
     var expandedCounty by remember { mutableStateOf(false) }
     var expandedAmb by remember { mutableStateOf(false) }
 
+    // Contenedor principal
     Box(
         Modifier
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
+        // Fondo de la pantalla de opciones
         Image(
             painter = painterResource(id = fondo),
             contentDescription = "Fondo",
@@ -144,9 +176,11 @@ fun ContenidoOpt(
                 .fillMaxWidth()
                 .fillMaxHeight()
         )
+        // Columna para organizar los elementos de las opciones
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
+            // Línea de selección del tema de la app
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
@@ -159,10 +193,12 @@ fun ContenidoOpt(
                     fontSize = 40.sp
                 )
             }
+            // Selección de tema
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                // Tema rojo
                 Image(
                     painter = painterResource(id = R.drawable.fondo_rojo),
                     contentDescription = "rojo",
@@ -176,6 +212,7 @@ fun ContenidoOpt(
                         .clip(RoundedCornerShape(8.dp))
                 )
                 Spacer(modifier = Modifier.padding(20.dp))
+                // Tema verde
                 Image(
                     painter = painterResource(id = R.drawable.fondo_verde),
                     contentDescription = "verde",
@@ -189,6 +226,7 @@ fun ContenidoOpt(
                         .clip(RoundedCornerShape(8.dp))
                 )
                 Spacer(modifier = Modifier.padding(20.dp))
+                // Tema azul
                 Image(
                     painter = painterResource(id = R.drawable.fondo_azul),
                     contentDescription = "azul",

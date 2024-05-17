@@ -70,6 +70,15 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.launch
 
+/**
+ * Función composable que muestra la pantalla del mapa.
+ *
+ * @param navController Controlador de navegación.
+ * @param locationViewModel ViewModel que maneja la lógica relacionada con la ubicación.
+ * @param optionsViewModel ViewModel que maneja las opciones de la aplicación.
+ * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
+ * @param dataBaseViewModel ViewModel que maneja la lógica relacionada con la base de datos.
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -83,12 +92,14 @@ fun MapScreen(
     val context = LocalContext.current
     val listUrgencias by dataBaseViewModel.listEr.collectAsState()
 
-    if (listUrgencias.size != 0)
-        Toast.makeText(
-            context,
-            "Hay urgencias pendientes",
-            Toast.LENGTH_SHORT
-        ).show()
+    // Estado para controlar si el mensaje ya se ha mostrado
+    var showToast by remember { mutableStateOf(true) }
+
+    // Muestra un mensaje si hay urgencias pendientes y si aún no se ha mostrado el Toast
+    if (listUrgencias.isNotEmpty() && showToast) {
+        Toast.makeText(context, "Hay urgencias pendientes", Toast.LENGTH_SHORT).show()
+        showToast = false // Actualiza el estado para no volver a mostrar el Toast
+    }
 
     val miUrgencia by dataBaseViewModel.miUrgencia.collectAsState()
     val editUrgencia by locationViewModel.editUrg.collectAsState()
@@ -104,7 +115,7 @@ fun MapScreen(
     val fondo by optionsViewModel.fondo.collectAsState()
     val message by dataBaseViewModel.message.collectAsState()
 
-
+    // ModalNavigationDrawer para el menú de navegación
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -152,6 +163,25 @@ fun MapScreen(
     }
 }
 
+/**
+ * Función composable que muestra el contenido del mapa.
+ *
+ * @param context Contexto de la aplicación.
+ * @param locationText Texto de la ubicación.
+ * @param userLocation Ubicación del usuario.
+ * @param urgencyLocation Ubicación de la urgencia.
+ * @param locationViewModel ViewModel que maneja la lógica relacionada con la ubicación.
+ * @param geocoder Geocoder para convertir coordenadas en direcciones.
+ * @param focus Indica si el foco está en la ambulancia o en la urgencia.
+ * @param fondo ID del recurso de la imagen de fondo.
+ * @param dataBaseViewModel ViewModel que maneja la lógica relacionada con la base de datos.
+ * @param listUrgencias Lista de urgencias.
+ * @param miUrgencia Urgencia actual.
+ * @param editUrgencia Indica si se está editando una urgencia.
+ * @param navController Controlador de navegación.
+ * @param color Color del botón.
+ * @param message Mensaje a mostrar.
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MapContent(
@@ -176,6 +206,7 @@ fun MapContent(
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
+        // Imagen de fondo
         Image(
             painter = painterResource(id = fondo),
             contentDescription = "Fondo",
@@ -192,6 +223,7 @@ fun MapContent(
                 modifier = Modifier.fillMaxSize()
             )
             {
+                // Mapa interactivo
                 MyMap(
                     geocoder,
                     context,
@@ -212,6 +244,7 @@ fun MapContent(
                     Modifier.padding(top = 10.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
+                    // Botón para alternar el foco entre la ambulancia y la urgencia
                     Button(
                         onClick = {
                             if (miUrgencia != null) {
@@ -242,6 +275,7 @@ fun MapContent(
                         )
                     }
                     Spacer(modifier = Modifier.padding(10.dp))
+                    // Botón para actualizar la lista de urgencias
                     Button(
                         onClick = {
                             dataBaseViewModel.getUrgencies {
@@ -290,6 +324,24 @@ fun MapContent(
     }
 }
 
+/**
+ * Función composable que muestra el mapa con los marcadores y permite la interacción.
+ *
+ * @param geocoder Geocoder para convertir coordenadas en direcciones.
+ * @param context Contexto de la aplicación.
+ * @param locationViewModel ViewModel que maneja la lógica relacionada con la ubicación.
+ * @param locationText Texto de la ubicación.
+ * @param userLocation Ubicación del usuario.
+ * @param urgencyLocation Ubicación de la urgencia.
+ * @param focus Indica si el foco está en la ambulancia o en la urgencia.
+ * @param dataBaseViewModel ViewModel que maneja la lógica relacionada con la base de datos.
+ * @param listUrgencias Lista de urgencias.
+ * @param miUrgencia Urgencia actual.
+ * @param editUrgencia Indica si se está editando una urgencia.
+ * @param navController Controlador de navegación.
+ * @param color Color del botón.
+ * @param message Mensaje
+ */
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MyMap(
@@ -345,7 +397,7 @@ fun MyMap(
             // Convertimos el Bitmap escalado a un BitmapDescriptor
             val scaledIconEr = BitmapDescriptorFactory.fromBitmap(scaledIconBitmapEr)
             val scaledIconAmb = BitmapDescriptorFactory.fromBitmap(scaledIconBitmapAmb)
-
+            // Muestra el icono de la ambulancia
             Marker(
                 state = MarkerState(position = userLocation),
                 snippet = locationText,
@@ -356,6 +408,7 @@ fun MyMap(
                     false
                 }
             )
+            // Por cada urgencia se muestra el icono correspondiente
             for (i in listUrgencias) {
                 Marker(
                     state = MarkerState(position = i.location),
@@ -370,11 +423,14 @@ fun MyMap(
                     }
                 )
             }
+            // Se muestra el diálogo de edición de la urgencia al pulsar sobre el icono de la misma
             if (editUrgencia) {
                 UrgenciaDialog(
                     urgencia = miUrgencia!!,
                     locationViewModel = locationViewModel,
+                    // Al pulsar el botón de "iniciar aviso" se llama a la función "initUrg" del viewModel
                     onIniciarAvisoClick = {
+                        // Si no hemos indicado la ambulancia en la que vamos se lanza mensaje de error y se redirige al usuario a la pantalla de opciones
                         if (dataBaseViewModel.myAmb.value != "No definida") {
                             dataBaseViewModel.intiUrg()
                             Toast.makeText(context, "Aviso iniciado", Toast.LENGTH_LONG).show()
@@ -389,6 +445,7 @@ fun MyMap(
                         }
                         locationViewModel.openCloseEditUrg()
                     },
+                    // Al pulsar el botón de "finalizar aviso" se llama a la función "finishUrg" del viewModel
                     onFinalizarAvisoClick = {
                         dataBaseViewModel.finishUrg(){
                             dataBaseViewModel.setNull()

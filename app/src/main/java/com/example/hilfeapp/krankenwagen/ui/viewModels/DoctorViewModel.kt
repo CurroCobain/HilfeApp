@@ -11,6 +11,10 @@ import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
+
+/**
+ *
+ */
 class DoctorViewModel : ViewModel(){
     // Instancias de Firebase
     var auth: FirebaseAuth = Firebase.auth
@@ -117,6 +121,9 @@ class DoctorViewModel : ViewModel(){
         userRegistered.value = !userRegistered.value
     }
 
+    /**
+     * Modifica el valor del mensaje del sistema
+     */
     fun setMessage(value: String){
         sesionMessage.value = value
     }

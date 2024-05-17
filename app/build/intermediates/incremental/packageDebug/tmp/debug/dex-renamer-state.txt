@@ -1,29 +1,26 @@
-#Thu May 16 12:58:21 CEST 2024
+#Fri May 17 08:58:34 CEST 2024
 base.0=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.10=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
 base.2=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\13\\classes.dex
 base.3=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
 base.4=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
 base.5=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
 base.6=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
-base.7=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
-base.8=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.9=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+base.7=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.8=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+base.9=C\:\\ProyectosAndroid\\Test\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
 path.0=classes.dex
 path.1=0/classes.dex
-path.10=classes4.dex
 path.2=13/classes.dex
 path.3=14/classes.dex
 path.4=15/classes.dex
 path.5=6/classes.dex
 path.6=7/classes.dex
-path.7=9/classes.dex
-path.8=classes2.dex
-path.9=classes3.dex
+path.7=classes2.dex
+path.8=classes3.dex
+path.9=classes4.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
-renamed.10=classes11.dex
 renamed.2=classes3.dex
 renamed.3=classes4.dex
 renamed.4=classes5.dex

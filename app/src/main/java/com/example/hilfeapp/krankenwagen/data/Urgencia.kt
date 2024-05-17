@@ -12,6 +12,7 @@ import java.time.ZoneOffset
 /**
  * Clase "Urgencia", que almacena la información de la emergencia para transmitirla al
  * servicio de emergencias
+ * @property id: identificador de la urgencia
  * @property name: nombre y apellidos del paciente
  * @property doc: documento de identidad del usuario
  * @property age: edad del usuario
@@ -19,6 +20,8 @@ import java.time.ZoneOffset
  * @property location: localización del usuario
  * @property date: fecha de la urgencia
  * @property issues: descripción de la urgencia
+ * @property ambulance: matrícula de la ambulancia que gestiona la urgencia
+ * @property complete: indica si la urgencia ha sido resuelta
  */
 data class Urgencia(
     val id: String,
@@ -34,7 +37,12 @@ data class Urgencia(
 ){
 
 
+
     companion object {
+        /**
+         * Función para deserializar un objeto urgencia desde la base de datos
+         * Se ha personalizado para evitar errores
+         */
         @SuppressLint("NewApi")
         fun fromDocumentSnapshot(documentSnapshot: DocumentSnapshot): Urgencia {
             val id = documentSnapshot.getString("id") ?: ""
@@ -60,6 +68,7 @@ data class Urgencia(
         }
     }
 
+    // Constructor sin parámetros de la clase
     @SuppressLint("NewApi")
     constructor() : this(
         "urg0",

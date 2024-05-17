@@ -16,7 +16,15 @@ import androidx.compose.ui.window.Dialog
 import com.example.hilfeapp.krankenwagen.data.Urgencia
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
 
-
+/**
+ * Función composable que muestra un cuadro de diálogo con los detalles de una urgencia.
+ *
+ * @param urgencia Objeto que contiene los detalles de la urgencia.
+ * @param locationViewModel ViewModel que maneja la lógica relacionada con la ubicación.
+ * @param onIniciarAvisoClick Función lambda que se ejecuta al hacer clic en el botón "Iniciar aviso".
+ * @param onFinalizarAvisoClick Función lambda que se ejecuta al hacer clic en el botón "Finalizar aviso".
+ * @param color Color del botón de acción.
+ */
 @Composable
 fun UrgenciaDialog(
     urgencia: Urgencia,
@@ -25,18 +33,24 @@ fun UrgenciaDialog(
     onFinalizarAvisoClick: () -> Unit,
     color: Color,
 ) {
+    // Muestra un cuadro de diálogo.
     Dialog(
         onDismissRequest = { locationViewModel.openCloseEditUrg() },
         content = {
+            // Contenedor de la superficie del diálogo.
             Surface(
                 modifier = Modifier.width(300.dp),
                 shape = MaterialTheme.shapes.medium
             ) {
+                // Columna que organiza el contenido verticalmente.
                 Column(
                     modifier = Modifier.padding(16.dp)
                 ) {
+                    // Título del diálogo.
                     Text("Detalles de la urgencia", style = MaterialTheme.typography.headlineLarge)
                     Spacer(modifier = Modifier.height(8.dp))
+
+                    // Muestra los detalles de la urgencia.
                     Text("Nombre: ${urgencia.name}")
                     Text("Edad: ${urgencia.age}")
                     Text("Prioridad: ${urgencia.priority}")
@@ -44,10 +58,13 @@ fun UrgenciaDialog(
                     Text("Descripción: ${urgencia.issues}")
                     Text("Ambulancia: ${urgencia.ambulance}")
                     Spacer(modifier = Modifier.height(16.dp))
+
+                    // Fila que contiene los botones de acción.
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
+                        // Botón para iniciar el aviso.
                         Button(
                             onClick = { onIniciarAvisoClick() },
                             modifier = Modifier.padding(8.dp),
@@ -57,6 +74,8 @@ fun UrgenciaDialog(
                         ) {
                             Text("Iniciar aviso")
                         }
+
+                        // Botón para finalizar el aviso.
                         Button(
                             onClick = { onFinalizarAvisoClick() },
                             modifier = Modifier.padding(8.dp),
@@ -72,4 +91,3 @@ fun UrgenciaDialog(
         }
     )
 }
-

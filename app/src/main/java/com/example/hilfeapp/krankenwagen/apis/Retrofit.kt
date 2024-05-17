@@ -1,5 +1,7 @@
 package com.example.hilfeapp.krankenwagen.apis
 
+// ------------------------------------ No se usa revisar y borrar --------------------------
+/*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
@@ -13,3 +15,5 @@ object RetrofitInstance {
             .create(GeocodingService::class.java)
     }
 }
+
+ */

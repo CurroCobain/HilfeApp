@@ -2,6 +2,9 @@ package com.example.hilfeapp.krankenwagen.data
 
 import com.google.android.gms.maps.model.LatLng
 
+// ------------------------------------ No se usa revisar y borrar --------------------------
+
+
 /**
  * Clase que enumera los tipos de ambulancias
  */
@@ -13,6 +16,7 @@ enum class AmbulanceTypes { doctor, nurse, driver }
  * @property isFree indica si la ambulancia está disponible
  * @property types indica de que tipo es la ambulancia
  * @property hospital indica el hospital de referencia
+ * @property ambLocation indica la localización de la ambulancia
  */
 data class Ambulance(
     val id: String,

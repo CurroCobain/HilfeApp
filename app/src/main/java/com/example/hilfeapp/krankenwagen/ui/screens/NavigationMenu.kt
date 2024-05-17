@@ -47,23 +47,36 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
- * Composable que muestra el contenido del menú desplegable
+ * Composable que muestra el contenido del menú de navegación.
+ *
+ * @param navController Controlador de navegación.
+ * @param optionsViewModel ViewModel que maneja las opciones de la aplicación.
+ * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
  */
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewModel, doctorViewModel: DoctorViewModel) {
+fun NavigationMenu (
+    navController: NavController,
+    optionsViewModel: OptionsViewModel,
+    doctorViewModel: DoctorViewModel
+) {
+    // Estado del nombre del doctor
     val nombeDoc by doctorViewModel.nombreDoc.collectAsState()
+    // Estado para el color de cada fila del menú
     var row1Color by remember { mutableStateOf(Color.Transparent) }
     var row2Color by remember { mutableStateOf(Color.Transparent) }
     var row3Color by remember { mutableStateOf(Color.Transparent) }
     var row4Color by remember { mutableStateOf(Color.Transparent) }
+    // Estado del color de la aplicación
     val color1 by optionsViewModel.color1.collectAsState()
+    // Estado para salir de la aplicación
     var exit by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
+    // Estado del usuario registrado
     val userRegistered by doctorViewModel.userRegistered.collectAsState()
     val context = LocalContext.current
 
-
+    // Si se solicita salir, muestra una pantalla de despedida y sale de la aplicación
     if (exit) {
         Despedida(color1)
         coroutineScope.launch {
@@ -71,19 +84,18 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
             optionsViewModel.exit()
         }
     } else {
-
+        // Contenido del menú
         Column(
             Modifier
                 .fillMaxWidth(0.8f)
                 .background(color1)
-        )
-        {
+        ) {
+            // Banner superior
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White)
             ) {
-                //  ------------------------------------------- Banner superior -------------------------------
                 Text(
                     text = "Menú principal",
                     fontSize = 30.sp,
@@ -91,12 +103,12 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                     modifier = Modifier.padding(start = 30.dp, top = 15.dp)
                 )
             }
+            // Nombre de usuario activo
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White)
             ) {
-                //  --------------------------------------- Nombre de usuario activo -------------------------------
                 Text(
                     text = "Usuario activo: Dr $nombeDoc",
                     fontSize = 20.sp,
@@ -111,11 +123,11 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
             ) {
                 Spacer(modifier = Modifier.padding(50.dp))
 
-                // ---------------------------- Efecto de la linea configuración -------------------------------
+                // Efecto de la línea de configuración
                 RowColorEffect(row1Color) { newColor ->
                     row1Color = newColor
                 }
-                //  ------------------------------------------- Configuración -------------------------------
+                // Configuración
                 Row(
                     Modifier
                         .fillMaxWidth()
@@ -130,8 +142,8 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                                     Toast.LENGTH_LONG)
                                     .show()
                             }
-                        })
-                {
+                        }
+                ) {
                     Icon(
                         imageVector = Icons.Default.Build,
                         contentDescription = "Android Icon",
@@ -148,11 +160,11 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                 }
                 Spacer(modifier = Modifier.padding(20.dp))
 
-                // ---------------------------- Efecto de la linea mapa -------------------------------
+                // Efecto de la línea del mapa
                 RowColorEffect(row2Color) { newColor ->
                     row2Color = newColor
                 }
-                //  ------------------------------------------- Mapa -------------------------------
+                // Mapa
                 Row(
                     Modifier
                         .fillMaxWidth()
@@ -160,15 +172,15 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                         .clickable {
                             row2Color = Color.White
                             if(userRegistered){
-                                navController.navigate(Routes.PantallaUser.route)
+                                navController.navigate(Routes.PantallaMap.route)
                             }else{
                                 Toast.makeText(context,
                                     "Por favor inicie sesión",
                                     Toast.LENGTH_LONG)
                                     .show()
                             }
-                        })
-                {
+                        }
+                ) {
                     Icon(
                         imageVector = Icons.Default.Place,
                         contentDescription = "Android Icon",
@@ -185,11 +197,11 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                 }
                 Spacer(modifier = Modifier.padding(20.dp))
 
-                // ---------------------------- Efecto de la linea usuario -------------------------------
+                // Efecto de la línea de usuario
                 RowColorEffect(row3Color) { newColor ->
                     row3Color = newColor
                 }
-                //  ------------------------------------------- Usuario -------------------------------
+                // Usuario
                 Row(
                     Modifier
                         .fillMaxWidth()
@@ -197,15 +209,15 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                         .clickable {
                             row3Color = Color.White
                             if(userRegistered){
-                                navController.navigate(Routes.PantallaAmb.route)
+                                navController.navigate(Routes.PantallaUser.route)
                             }else{
                                 Toast.makeText(context,
                                     "Por favor inicie sesión",
                                     Toast.LENGTH_LONG)
                                     .show()
                             }
-                        })
-                {
+                        }
+                ) {
                     Icon(
                         imageVector = Icons.Default.Person,
                         contentDescription = "Android Icon",
@@ -222,11 +234,11 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                 }
                 Spacer(modifier = Modifier.padding(20.dp))
 
-                // ---------------------------- Efecto de la linea salir -------------------------------
+                // Efecto de la línea de salida
                 RowColorEffect(row4Color) { newColor ->
                     row4Color = newColor
                 }
-                //  ------------------------------------------- Salir -------------------------------
+                // Salir
                 Row(
                     Modifier
                         .fillMaxWidth()
@@ -234,8 +246,8 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
                         .clickable {
                             row4Color = Color.White
                             exit = true
-                        })
-                {
+                        }
+                ) {
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Android Icon",
@@ -256,7 +268,10 @@ fun NavigationMenu (navController: NavController, optionsViewModel: OptionsViewM
 }
 
 /**
- * Funcion que realiza el efecto de cambio de color de los botones al ser pulsados
+ * Función que realiza el efecto de cambio de color de los botones al ser pulsados.
+ *
+ * @param color Color actual de la fila.
+ * @param onColorChange Función para cambiar el color.
  */
 @Composable
 fun RowColorEffect(color: Color, onColorChange: (Color) -> Unit) {
@@ -268,13 +283,15 @@ fun RowColorEffect(color: Color, onColorChange: (Color) -> Unit) {
     }
 }
 
-
 /**
- * Composable que muestra un gif al cerrar la app
+ * Composable que muestra un gif al cerrar la app.
+ *
+ * @param color1 Color de fondo.
  */
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun Despedida(
+
     color1: Color
 ){
     Column(Modifier.fillMaxSize()

@@ -15,7 +15,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 /**
- * ViewModel para manejar la lógica relacionada con la ubicación
+ * ViewModel para manejar la lógica relacionada con la ubicación.
+ *
+ * @property fusedLocationClient proporciona el cliente de ubiccación
+ * @property addressText texto de la dirección
+ * @property userLocation coordenadas de la ubicación del usuario
+ * @property urgencyLocation coordenadas de la ubicación de la urgencia
+ * @property focusErAmb indica dónde si enfoca el mapa
+ * @property editUrg gestiona cuando se muestra el diálogo con la información de la urgencia
  */
 @SuppressLint("StaticFieldLeak")
 class LocationViewModel(private val context: Context) : ViewModel() {
@@ -99,12 +106,8 @@ class LocationViewModel(private val context: Context) : ViewModel() {
     }
 
     /**
-     * Método para actualizar la ubicación
+     * Función que muestra u oculta el diálogo con la información de la urgencia
      */
-    fun updateLocation(){
-        // TODO: Actualizar la ubicación
-    }
-
     fun openCloseEditUrg(){
         editUrg.value = !editUrg.value
     }

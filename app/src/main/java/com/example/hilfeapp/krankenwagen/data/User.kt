@@ -1,5 +1,8 @@
 package com.example.hilfeapp.krankenwagen.data
 
+// ------------------------------------ No se usa revisar y borrar --------------------------
+
+// Posible uso para ampliación de funcionalidades
 
 /**
  * Clase Usuario del sistema

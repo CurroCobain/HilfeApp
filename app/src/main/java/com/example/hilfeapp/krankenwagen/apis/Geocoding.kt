@@ -1,5 +1,8 @@
 package com.example.hilfeapp.krankenwagen.apis
 
+// ------------------------------------ No se usa revisar y borrar --------------------------
+
+/*
 import com.example.hilfeapp.krankenwagen.data.NominatimResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,3 +15,6 @@ interface GeocodingService {
         @Query("lon") lon: Double
     ): List<NominatimResponse>
 }
+
+
+ */

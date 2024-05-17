@@ -2,6 +2,8 @@ package com.example.hilfeapp.krankenwagen.data
 
 //--------------- no usado hasta ahora, comentar para posible mejora ------------------
 
+/*
+
 /**
  * Clase Benutzer ("usuario"), que almacena la información del usuario para transmitirla al
  * servicio de emergencias
@@ -37,3 +39,5 @@ data class Location (
     val number: Int,
     val other: String
 )
+
+*/

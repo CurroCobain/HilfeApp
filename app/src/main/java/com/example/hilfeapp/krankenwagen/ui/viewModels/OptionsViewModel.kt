@@ -15,6 +15,7 @@ import kotlin.system.exitProcess
 
 /**
  * ViewModel para manejar la lógica de las opciones de la aplicación
+ *
  * @property color1 almacena el color principal de la aplicación
  * @property fondo almacena el fondo de la aplicación
  * @property initialImage almacena la imagen de carga de la aplicación
@@ -30,7 +31,7 @@ class OptionsViewModel(private val database: AppDatabase) : ViewModel() {
     // Flujo mutable para la imagen de carga inicial de la aplicación
     val initialImage = MutableStateFlow(R.drawable.portada_red)
 
-    // Flujo mutable para el color del texto de la app
+    // Flujo mutable para el color del texto de la app, actualmente no se usa
     val textColor = MutableStateFlow(Color.White)
 
 

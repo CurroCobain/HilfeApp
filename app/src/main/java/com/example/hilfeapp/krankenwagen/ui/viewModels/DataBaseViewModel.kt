@@ -16,11 +16,21 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel que gestiona la interacción con la base de datos y los datos relacionados con ella.
+ *
+ * @property message mensaje de respuesta
+ * @property tempCounty listado de provincias para mostrar en la lista de filtrado
+ * @property provinciaFiltrar provincia por la que se filtran los datos
+ * @property hospitalFiltrar hospital por el que se filtran los datos
+ * @property listAmbulancias listado de las matrículas de las ambulancias filtradas
+ * @property myAmb matrícula de la ambulancia actual del usuario
+ * @property listEr lista de las urgencias sin finalizar
+ * @property miUrgencia urgencia que se está gestionando actualmente
+ */
 class DataBaseViewModel : ViewModel() {
     private val firestore = Firebase.firestore
     val message = MutableStateFlow("")
-
-    val shown = MutableStateFlow(false)
 
     // listado de provincias
     val tempCounty =
@@ -69,7 +79,6 @@ class DataBaseViewModel : ViewModel() {
                     for (document in documents) {
                         // Se añade cada hospital a la lista
                         listHospitals.value.add(document.toObject(Hospital::class.java))
-                        // Se ejecuta la acción onSuccess para manejar el éxito de la operación
                         onSuccess()
                     }
                 }
@@ -194,6 +203,11 @@ class DataBaseViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Función para actualizar una urgencia si coincide con la actual que se está gestionando
+     * @param miUrgencia urgencia actual
+     * @param onSuccess acción a ejecutar si se actualiza la ambulancia con éxito
+     */
     private fun updateUrgenciasIfMatches(miUrgencia: Urgencia, onSuccess: () -> Unit) {
 
         val urgenciasCollection = firestore.collection("Urgencias")
@@ -221,6 +235,11 @@ class DataBaseViewModel : ViewModel() {
             }
     }
 
+    /**
+     * Función que recibe una urgencia y la actualiza en la base de datos
+     * @param urgenciaId id de la urgencia
+     * @param urgencia urgencia actual
+     */
     private fun updateUrgencia(urgenciaId: String, urgencia: Urgencia) {
         val urgenciasCollection = firestore.collection("Urgencias")
 
@@ -261,7 +280,6 @@ class DataBaseViewModel : ViewModel() {
                 "longitude" to location.longitude
             )
         )
-
         // Consultamos la ambulancia por su placa
         firestore.collection("Ambulances")
             .whereEqualTo("plate", myAmb.value)
@@ -271,28 +289,37 @@ class DataBaseViewModel : ViewModel() {
                     // Actualizamos los datos de ubicación en el documento correspondiente
                     document.reference.update(data as Map<String, Any>)
                         .addOnSuccessListener {
-                            // La ubicación de la ambulancia se actualizó exitosamente en Firestore
+                            message.value = "La ubicación de la ambulancia se actualizó exitosamente en Firestore"
                         }
                         .addOnFailureListener { e ->
                             // Ocurrió un error al actualizar la ubicación de la ambulancia en Firestore
-                            println("Error al actualizar la ubicación de la ambulancia: $e")
+                            message.value = "Error al actualizar la ubicación de la ambulancia: $e"
                         }
                 }
             }
             .addOnFailureListener { e ->
                 // Ocurrió un error al obtener la ambulancia de Firestore
-                println("Error al obtener la ambulancia: $e")
+                message.value = "Error al obtener la ambulancia: $e"
             }
     }
 
-    fun getPlateFromDocumentSnapshot(documentSnapshot: DocumentSnapshot): String {
+    /**
+     * Función para obtener la matrícula de una ambulancia concreta en la base de datos
+     */
+    private fun getPlateFromDocumentSnapshot(documentSnapshot: DocumentSnapshot): String {
         return documentSnapshot.getString("plate") ?: ""
     }
 
+    /**
+     * función para actualizar el valor del mensaje del sistema
+     */
     fun updateMessage(newValue: String) {
         message.value = newValue
     }
 
+    /**
+     * Función para modificar el valor de miUrgencia y eliminarla del listado de urgencias sin finalizar
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun setNull(){
         val ind = listEr.value.indexOf(miUrgencia.value)

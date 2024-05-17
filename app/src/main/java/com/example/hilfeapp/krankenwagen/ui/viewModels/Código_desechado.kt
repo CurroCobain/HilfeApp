@@ -1,4 +1,7 @@
 package com.example.hilfeapp.krankenwagen.ui.viewModels
+
+// Cotenido desechado ---------- borrar ------------------
+
 /*
 
 
