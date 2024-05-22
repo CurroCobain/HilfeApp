@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
  * @property miUrgencia urgencia que se está gestionando actualmente
  */
 class DataBaseViewModel : ViewModel() {
-    private val firestore = Firebase.firestore
+    var firestore = Firebase.firestore
     val message = MutableStateFlow("")
 
     // listado de provincias

@@ -1,13 +1,23 @@
 package com.example.hilfeapp.krankenwagen.ui.viewModels;
 
-@kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000`\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010!\n\u0002\u0010\u000e\n\u0002\b\u0004\n\u0002\u0018\u0002\n\u0002\b\f\n\u0002\u0010\u000b\n\u0002\b\u0002\n\u0002\u0010 \n\u0002\b\u0003\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0006\n\u0002\u0018\u0002\n\u0002\b\u0006\n\u0002\u0018\u0002\n\u0002\b\u000f\u0018\u00002\u00020\u0001B\u0005\u00a2\u0006\u0002\u0010\u0002J\u0016\u0010$\u001a\u00020%2\f\u0010&\u001a\b\u0012\u0004\u0012\u00020%0\'H\u0007J\u001c\u0010(\u001a\u00020%2\u0006\u0010)\u001a\u00020\f2\f\u0010&\u001a\b\u0012\u0004\u0012\u00020%0\'J\u001c\u0010*\u001a\u00020%2\u0006\u0010+\u001a\u00020\f2\f\u0010&\u001a\b\u0012\u0004\u0012\u00020%0\'J\u0010\u0010,\u001a\u00020\f2\u0006\u0010-\u001a\u00020.H\u0002J\u0016\u0010/\u001a\u00020%2\f\u0010&\u001a\b\u0012\u0004\u0012\u00020%0\'H\u0007J\u0006\u00100\u001a\u00020%J\u000e\u00101\u001a\u00020%2\u0006\u00102\u001a\u00020\fJ\u000e\u00103\u001a\u00020%2\u0006\u00104\u001a\u000205J\u001c\u00106\u001a\u00020%2\u0006\u00107\u001a\u00020\f2\f\u0010&\u001a\b\u0012\u0004\u0012\u00020%0\'J\u000e\u00108\u001a\u00020%2\u0006\u00109\u001a\u00020\u0007J\b\u0010:\u001a\u00020%H\u0007J\u000e\u0010;\u001a\u00020%2\u0006\u0010<\u001a\u00020\u0011J\u0010\u0010=\u001a\u00020%2\u0006\u00104\u001a\u000205H\u0002J\u000e\u0010>\u001a\u00020%2\u0006\u0010?\u001a\u00020\fJ\u0018\u0010@\u001a\u00020%2\u0006\u0010A\u001a\u00020\f2\u0006\u0010B\u001a\u00020\u0011H\u0002J\u001e\u0010C\u001a\u00020%2\u0006\u0010\u0017\u001a\u00020\u00112\f\u0010&\u001a\b\u0012\u0004\u0012\u00020%0\'H\u0002R\u000e\u0010\u0003\u001a\u00020\u0004X\u0082\u0004\u00a2\u0006\u0002\n\u0000R\u0017\u0010\u0005\u001a\b\u0012\u0004\u0012\u00020\u00070\u0006\u00a2\u0006\b\n\u0000\u001a\u0004\b\b\u0010\tR&\u0010\n\u001a\u000e\u0012\n\u0012\b\u0012\u0004\u0012\u00020\f0\u000b0\u0006X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\r\u0010\t\"\u0004\b\u000e\u0010\u000fR\"\u0010\u0010\u001a\u000e\u0012\n\u0012\b\u0012\u0004\u0012\u00020\u00110\u000b0\u00068\u0006X\u0087\u0004\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0012\u0010\tR\u001d\u0010\u0013\u001a\u000e\u0012\n\u0012\b\u0012\u0004\u0012\u00020\u00070\u000b0\u0006\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0014\u0010\tR\u0017\u0010\u0015\u001a\b\u0012\u0004\u0012\u00020\f0\u0006\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0016\u0010\tR\u0019\u0010\u0017\u001a\n\u0012\u0006\u0012\u0004\u0018\u00010\u00110\u0006\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0018\u0010\tR\u0017\u0010\u0019\u001a\b\u0012\u0004\u0012\u00020\f0\u0006\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001a\u0010\tR\u0017\u0010\u001b\u001a\b\u0012\u0004\u0012\u00020\f0\u0006\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001c\u0010\tR\u0017\u0010\u001d\u001a\b\u0012\u0004\u0012\u00020\u001e0\u0006\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001f\u0010\tR\u0017\u0010 \u001a\b\u0012\u0004\u0012\u00020\f0!\u00a2\u0006\b\n\u0000\u001a\u0004\b\"\u0010#\u00a8\u0006D"}, d2 = {"Lcom/example/hilfeapp/krankenwagen/ui/viewModels/DataBaseViewModel;", "Landroidx/lifecycle/ViewModel;", "()V", "firestore", "Lcom/google/firebase/firestore/FirebaseFirestore;", "hospitalFiltrar", "Lkotlinx/coroutines/flow/MutableStateFlow;", "Lcom/example/hilfeapp/krankenwagen/data/Hospital;", "getHospitalFiltrar", "()Lkotlinx/coroutines/flow/MutableStateFlow;", "listAmbulancias", "", "", "getListAmbulancias", "setListAmbulancias", "(Lkotlinx/coroutines/flow/MutableStateFlow;)V", "listEr", "Lcom/example/hilfeapp/krankenwagen/data/Urgencia;", "getListEr", "listHospitals", "getListHospitals", "message", "getMessage", "miUrgencia", "getMiUrgencia", "myAmb", "getMyAmb", "provinciaFiltrar", "getProvinciaFiltrar", "shown", "", "getShown", "tempCounty", "", "getTempCounty", "()Ljava/util/List;", "finishUrg", "", "onSuccess", "Lkotlin/Function0;", "getAmb", "hospital", "getHosp", "provincia", "getPlateFromDocumentSnapshot", "documentSnapshot", "Lcom/google/firebase/firestore/DocumentSnapshot;", "getUrgencies", "intiUrg", "setAmb", "amb", "setAmbLoc", "location", "Lcom/google/android/gms/maps/model/LatLng;", "setCounty", "text", "setHosp", "hosp", "setNull", "setUrg", "urg", "updateAmbulanceLocation", "updateMessage", "newValue", "updateUrgencia", "urgenciaId", "urgencia", "updateUrgenciasIfMatches", "app_debug"})
+/**
+ * ViewModel que gestiona la interacción con la base de datos y los datos relacionados con ella.
+ *
+ * @property message mensaje de respuesta
+ * @property tempCounty listado de provincias para mostrar en la lista de filtrado
+ * @property provinciaFiltrar provincia por la que se filtran los datos
+ * @property hospitalFiltrar hospital por el que se filtran los datos
+ * @property listAmbulancias listado de las matrículas de las ambulancias filtradas
+ * @property myAmb matrícula de la ambulancia actual del usuario
+ * @property listEr lista de las urgencias sin finalizar
+ * @property miUrgencia urgencia que se está gestionando actualmente
+ */
+@kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000Z\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010!\n\u0002\u0010\u000e\n\u0002\b\u0004\n\u0002\u0018\u0002\n\u0002\b\f\n\u0002\u0010 \n\u0002\b\u0003\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0006\n\u0002\u0018\u0002\n\u0002\b\u0006\n\u0002\u0018\u0002\n\u0002\b\u000f\u0018\u00002\u00020\u0001B\u0005\u00a2\u0006\u0002\u0010\u0002J\u0016\u0010%\u001a\u00020&2\f\u0010\'\u001a\b\u0012\u0004\u0012\u00020&0(H\u0007J\u001c\u0010)\u001a\u00020&2\u0006\u0010*\u001a\u00020\u00102\f\u0010\'\u001a\b\u0012\u0004\u0012\u00020&0(J\u001c\u0010+\u001a\u00020&2\u0006\u0010,\u001a\u00020\u00102\f\u0010\'\u001a\b\u0012\u0004\u0012\u00020&0(J\u0010\u0010-\u001a\u00020\u00102\u0006\u0010.\u001a\u00020/H\u0002J\u0016\u00100\u001a\u00020&2\f\u0010\'\u001a\b\u0012\u0004\u0012\u00020&0(H\u0007J\u0006\u00101\u001a\u00020&J\u000e\u00102\u001a\u00020&2\u0006\u00103\u001a\u00020\u0010J\u000e\u00104\u001a\u00020&2\u0006\u00105\u001a\u000206J\u001c\u00107\u001a\u00020&2\u0006\u00108\u001a\u00020\u00102\f\u0010\'\u001a\b\u0012\u0004\u0012\u00020&0(J\u000e\u00109\u001a\u00020&2\u0006\u0010:\u001a\u00020\u000bJ\b\u0010;\u001a\u00020&H\u0007J\u000e\u0010<\u001a\u00020&2\u0006\u0010=\u001a\u00020\u0015J\u0010\u0010>\u001a\u00020&2\u0006\u00105\u001a\u000206H\u0002J\u000e\u0010?\u001a\u00020&2\u0006\u0010@\u001a\u00020\u0010J\u0018\u0010A\u001a\u00020&2\u0006\u0010B\u001a\u00020\u00102\u0006\u0010C\u001a\u00020\u0015H\u0002J\u001e\u0010D\u001a\u00020&2\u0006\u0010\u001b\u001a\u00020\u00152\f\u0010\'\u001a\b\u0012\u0004\u0012\u00020&0(H\u0002R\u001a\u0010\u0003\u001a\u00020\u0004X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0005\u0010\u0006\"\u0004\b\u0007\u0010\bR\u0017\u0010\t\u001a\b\u0012\u0004\u0012\u00020\u000b0\n\u00a2\u0006\b\n\u0000\u001a\u0004\b\f\u0010\rR&\u0010\u000e\u001a\u000e\u0012\n\u0012\b\u0012\u0004\u0012\u00020\u00100\u000f0\nX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0011\u0010\r\"\u0004\b\u0012\u0010\u0013R\"\u0010\u0014\u001a\u000e\u0012\n\u0012\b\u0012\u0004\u0012\u00020\u00150\u000f0\n8\u0006X\u0087\u0004\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0016\u0010\rR\u001d\u0010\u0017\u001a\u000e\u0012\n\u0012\b\u0012\u0004\u0012\u00020\u000b0\u000f0\n\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0018\u0010\rR\u0017\u0010\u0019\u001a\b\u0012\u0004\u0012\u00020\u00100\n\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001a\u0010\rR\u0019\u0010\u001b\u001a\n\u0012\u0006\u0012\u0004\u0018\u00010\u00150\n\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001c\u0010\rR\u0017\u0010\u001d\u001a\b\u0012\u0004\u0012\u00020\u00100\n\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001e\u0010\rR\u0017\u0010\u001f\u001a\b\u0012\u0004\u0012\u00020\u00100\n\u00a2\u0006\b\n\u0000\u001a\u0004\b \u0010\rR\u0017\u0010!\u001a\b\u0012\u0004\u0012\u00020\u00100\"\u00a2\u0006\b\n\u0000\u001a\u0004\b#\u0010$\u00a8\u0006E"}, d2 = {"Lcom/example/hilfeapp/krankenwagen/ui/viewModels/DataBaseViewModel;", "Landroidx/lifecycle/ViewModel;", "()V", "firestore", "Lcom/google/firebase/firestore/FirebaseFirestore;", "getFirestore", "()Lcom/google/firebase/firestore/FirebaseFirestore;", "setFirestore", "(Lcom/google/firebase/firestore/FirebaseFirestore;)V", "hospitalFiltrar", "Lkotlinx/coroutines/flow/MutableStateFlow;", "Lcom/example/hilfeapp/krankenwagen/data/Hospital;", "getHospitalFiltrar", "()Lkotlinx/coroutines/flow/MutableStateFlow;", "listAmbulancias", "", "", "getListAmbulancias", "setListAmbulancias", "(Lkotlinx/coroutines/flow/MutableStateFlow;)V", "listEr", "Lcom/example/hilfeapp/krankenwagen/data/Urgencia;", "getListEr", "listHospitals", "getListHospitals", "message", "getMessage", "miUrgencia", "getMiUrgencia", "myAmb", "getMyAmb", "provinciaFiltrar", "getProvinciaFiltrar", "tempCounty", "", "getTempCounty", "()Ljava/util/List;", "finishUrg", "", "onSuccess", "Lkotlin/Function0;", "getAmb", "hospital", "getHosp", "provincia", "getPlateFromDocumentSnapshot", "documentSnapshot", "Lcom/google/firebase/firestore/DocumentSnapshot;", "getUrgencies", "intiUrg", "setAmb", "amb", "setAmbLoc", "location", "Lcom/google/android/gms/maps/model/LatLng;", "setCounty", "text", "setHosp", "hosp", "setNull", "setUrg", "urg", "updateAmbulanceLocation", "updateMessage", "newValue", "updateUrgencia", "urgenciaId", "urgencia", "updateUrgenciasIfMatches", "app_debug"})
 public final class DataBaseViewModel extends androidx.lifecycle.ViewModel {
     @org.jetbrains.annotations.NotNull()
-    private final com.google.firebase.firestore.FirebaseFirestore firestore = null;
+    private com.google.firebase.firestore.FirebaseFirestore firestore;
     @org.jetbrains.annotations.NotNull()
     private final kotlinx.coroutines.flow.MutableStateFlow<java.lang.String> message = null;
-    @org.jetbrains.annotations.NotNull()
-    private final kotlinx.coroutines.flow.MutableStateFlow<java.lang.Boolean> shown = null;
     @org.jetbrains.annotations.NotNull()
     private final java.util.List<java.lang.String> tempCounty = null;
     @org.jetbrains.annotations.NotNull()
@@ -31,12 +41,16 @@ public final class DataBaseViewModel extends androidx.lifecycle.ViewModel {
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final kotlinx.coroutines.flow.MutableStateFlow<java.lang.String> getMessage() {
+    public final com.google.firebase.firestore.FirebaseFirestore getFirestore() {
         return null;
     }
     
+    public final void setFirestore(@org.jetbrains.annotations.NotNull()
+    com.google.firebase.firestore.FirebaseFirestore p0) {
+    }
+    
     @org.jetbrains.annotations.NotNull()
-    public final kotlinx.coroutines.flow.MutableStateFlow<java.lang.Boolean> getShown() {
+    public final kotlinx.coroutines.flow.MutableStateFlow<java.lang.String> getMessage() {
         return null;
     }
     
@@ -162,9 +176,19 @@ public final class DataBaseViewModel extends androidx.lifecycle.ViewModel {
     kotlin.jvm.functions.Function0<kotlin.Unit> onSuccess) {
     }
     
+    /**
+     * Función para actualizar una urgencia si coincide con la actual que se está gestionando
+     * @param miUrgencia urgencia actual
+     * @param onSuccess acción a ejecutar si se actualiza la ambulancia con éxito
+     */
     private final void updateUrgenciasIfMatches(com.example.hilfeapp.krankenwagen.data.Urgencia miUrgencia, kotlin.jvm.functions.Function0<kotlin.Unit> onSuccess) {
     }
     
+    /**
+     * Función que recibe una urgencia y la actualiza en la base de datos
+     * @param urgenciaId id de la urgencia
+     * @param urgencia urgencia actual
+     */
     private final void updateUrgencia(java.lang.String urgenciaId, com.example.hilfeapp.krankenwagen.data.Urgencia urgencia) {
     }
     
@@ -174,14 +198,23 @@ public final class DataBaseViewModel extends androidx.lifecycle.ViewModel {
     private final void updateAmbulanceLocation(com.google.android.gms.maps.model.LatLng location) {
     }
     
+    /**
+     * Función para obtener la matrícula de una ambulancia concreta en la base de datos
+     */
     private final java.lang.String getPlateFromDocumentSnapshot(com.google.firebase.firestore.DocumentSnapshot documentSnapshot) {
         return null;
     }
     
+    /**
+     * función para actualizar el valor del mensaje del sistema
+     */
     public final void updateMessage(@org.jetbrains.annotations.NotNull()
     java.lang.String newValue) {
     }
     
+    /**
+     * Función para modificar el valor de miUrgencia y eliminarla del listado de urgencias sin finalizar
+     */
     @androidx.annotation.RequiresApi(value = android.os.Build.VERSION_CODES.O)
     public final void setNull() {
     }

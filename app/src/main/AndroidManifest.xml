@@ -4,31 +4,17 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ambulancia"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ambulancia"
         android:supportsRtl="true"
         android:theme="@style/Theme.HilfeApp"
         tools:targetApi="31">
-
-
-
-
-
-
-
-
-
-
-
 
 
         <meta-data
@@ -40,7 +26,7 @@
             android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.HilfeApp"
-            tools:ignore="LockedOrientationActivity">
+            tools:ignore="DiscouragedApi,LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

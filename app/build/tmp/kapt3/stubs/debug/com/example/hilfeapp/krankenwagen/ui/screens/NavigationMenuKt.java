@@ -4,7 +4,11 @@ package com.example.hilfeapp.krankenwagen.ui.screens;
 public final class NavigationMenuKt {
     
     /**
-     * Composable que muestra el contenido del menú desplegable
+     * Composable que muestra el contenido del menú de navegación.
+     *
+     * @param navController Controlador de navegación.
+     * @param optionsViewModel ViewModel que maneja las opciones de la aplicación.
+     * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
      */
     @android.annotation.SuppressLint(value = {"CoroutineCreationDuringComposition"})
     @androidx.compose.runtime.Composable()

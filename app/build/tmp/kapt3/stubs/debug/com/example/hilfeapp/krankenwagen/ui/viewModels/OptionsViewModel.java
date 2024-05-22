@@ -2,6 +2,7 @@ package com.example.hilfeapp.krankenwagen.ui.viewModels;
 
 /**
  * ViewModel para manejar la lógica de las opciones de la aplicación
+ *
  * @property color1 almacena el color principal de la aplicación
  * @property fondo almacena el fondo de la aplicación
  * @property initialImage almacena la imagen de carga de la aplicación

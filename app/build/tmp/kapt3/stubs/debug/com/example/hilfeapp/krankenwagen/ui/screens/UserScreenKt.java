@@ -3,6 +3,14 @@ package com.example.hilfeapp.krankenwagen.ui.screens;
 @kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000>\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0010\b\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u000e\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u000b\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\u001aP\u0010\u0000\u001a\u00020\u00012\u0006\u0010\u0002\u001a\u00020\u00032\u0006\u0010\u0004\u001a\u00020\u00052\u0006\u0010\u0006\u001a\u00020\u00072\u0006\u0010\b\u001a\u00020\t2\u0006\u0010\n\u001a\u00020\t2\u0006\u0010\u000b\u001a\u00020\f2\u0006\u0010\r\u001a\u00020\t2\u0006\u0010\u000e\u001a\u00020\u000f2\u0006\u0010\u0010\u001a\u00020\u0011H\u0007\u001a(\u0010\u0012\u001a\u00020\u00012\u0006\u0010\u000e\u001a\u00020\u000f2\u0006\u0010\u0013\u001a\u00020\u00142\u0006\u0010\u0004\u001a\u00020\u00052\u0006\u0010\u0006\u001a\u00020\u0007H\u0007\u00a8\u0006\u0015"}, d2 = {"ContenidoUser", "", "fondo", "", "doctorViewModel", "Lcom/example/hilfeapp/krankenwagen/ui/viewModels/DoctorViewModel;", "dataBaseViewModel", "Lcom/example/hilfeapp/krankenwagen/ui/viewModels/DataBaseViewModel;", "mailDoc", "", "passDoc", "context", "Landroid/content/Context;", "message", "navController", "Landroidx/navigation/NavController;", "sesionInit", "", "UserScreen", "optionsViewModel", "Lcom/example/hilfeapp/krankenwagen/ui/viewModels/OptionsViewModel;", "app_debug"})
 public final class UserScreenKt {
     
+    /**
+     * Composable que representa la pantalla de usuario.
+     *
+     * @param navController Controlador de navegación.
+     * @param optionsViewModel ViewModel que maneja las opciones de la aplicación.
+     * @param dataBaseViewModel ViewModel que maneja la base de datos.
+     * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
+     */
     @androidx.annotation.RequiresApi(value = android.os.Build.VERSION_CODES.O)
     @android.annotation.SuppressLint(value = {"UnusedMaterial3ScaffoldPaddingParameter"})
     @androidx.compose.runtime.Composable()
@@ -13,6 +21,19 @@ public final class UserScreenKt {
     com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel dataBaseViewModel) {
     }
     
+    /**
+     * Composable que representa el contenido de la pantalla de usuario.
+     *
+     * @param fondo Fondo de la pantalla de usuario.
+     * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
+     * @param dataBaseViewModel ViewModel que maneja la base de datos.
+     * @param mailDoc Correo electrónico del doctor.
+     * @param passDoc Contraseña del doctor.
+     * @param context Contexto de la aplicación.
+     * @param message Mensaje de error o confirmación.
+     * @param navController Controlador de navegación.
+     * @param sesionInit Indica si la sesión está iniciada o no.
+     */
     @androidx.annotation.RequiresApi(value = android.os.Build.VERSION_CODES.O)
     @androidx.compose.runtime.Composable()
     public static final void ContenidoUser(int fondo, @org.jetbrains.annotations.NotNull()

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:2:1-52:12
+ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:2:1-51:12
+INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:2:1-51:12
 MERGED from [com.google.maps.android:maps-compose:2.11.4] C:\AndroidSDK\caches\transforms-3\17375ce71cf353fde315b8c7ce954a23\transformed\maps-compose-2.11.4\AndroidManifest.xml:17:1-24:12
 MERGED from [com.github.bumptech.glide:compose:1.0.0-beta01] C:\AndroidSDK\caches\transforms-3\1fe1b36f98f6b93a37b26511dda5fae1\transformed\compose-1.0.0-beta01\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\AndroidSDK\caches\transforms-3\6773459b57c7618427a8f02ea2e1fc06\transformed\navigation-common-2.7.7\AndroidManifest.xml:17:1-22:12
@@ -146,13 +146,9 @@ uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:6:5-78
 	android:name
 		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:6:22-76
-uses-permission#android.permission.READ_PHONE_STATE
-ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:7:5-75
-	android:name
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:7:22-72
 application
-ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:11:5-50:19
-INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:11:5-50:19
+ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:10:5-49:19
+INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:10:5-49:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.0-beta01] C:\AndroidSDK\caches\transforms-3\7f89f27c3c02e3c0031b9412632d8493\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.0-beta01] C:\AndroidSDK\caches\transforms-3\7f89f27c3c02e3c0031b9412632d8493\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\AndroidSDK\caches\transforms-3\c9e34a67ccefa5d0c55bfd313af07317\transformed\play-services-maps-18.2.0\AndroidManifest.xml:36:5-42:19
@@ -232,51 +228,51 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\AndroidSDK\caches\transf
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.13.1] C:\AndroidSDK\caches\transforms-3\41d61e49cb6b75ad0a42ca3ec45d9e1e\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:18:9-35
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:17:9-35
 	android:label
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:16:9-41
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:15:9-41
 	android:fullBackupContent
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:14:9-54
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:13:9-54
 	android:roundIcon
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:17:9-54
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:16:9-49
 	tools:targetApi
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:20:9-29
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:19:9-29
 	android:icon
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:15:9-43
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:14:9-44
 	android:allowBackup
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:12:9-35
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:19:9-46
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:18:9-46
 	android:dataExtractionRules
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:13:9-65
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:12:9-65
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:34:9-36:70
+ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:33:9-35:70
 	android:value
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:36:13-68
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:35:13-68
 	android:name
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:35:13-58
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:34:13-58
 activity#com.example.hilfeapp.MainActivity
-ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:38:9-49:20
+ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:37:9-48:20
 	android:screenOrientation
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:40:13-49
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:39:13-49
 	android:exported
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:41:13-36
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:40:13-36
 	tools:ignore
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:43:13-53
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:42:13-53
 	android:theme
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:42:13-50
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:41:13-50
 	android:name
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:39:13-41
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:38:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:44:13-48:29
+ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:43:13-47:29
 action#android.intent.action.MAIN
-ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:45:17-69
+ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:44:17-69
 	android:name
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:45:25-66
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:44:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:47:17-77
+ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:46:17-77
 	android:name
-		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:47:27-74
+		ADDED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml:46:27-74
 uses-sdk
 INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\ProyectosAndroid\Test\app\src\main\AndroidManifest.xml
