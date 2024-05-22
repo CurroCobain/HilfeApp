@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite tests="0" failures="0" errors="0" skipped="0" time="1.716277652629E9" timestamp="2024-05-21T07:47:32" hostname="localhost">
+  <properties>
+    <property name="device" value="22120RN86G - 14" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <system-err>Exception thrown during onBeforeAll invocation of plugin AndroidTestApkInstallerPlugin: ErrorName: INSTALL_FAILED_USER_RESTRICTED
+NameSpace: DdmlibAndroidDeviceController
+ErrorCode: 1
+ErrorType: TEST
+Message: Failed to install split APK(s): [C:\ProyectosAndroid\Test\app\build\intermediates\apk\debug\app-debug.apk]
+Failed to install split APK(s): [C:\ProyectosAndroid\Test\app\build\intermediates\apk\debug\app-debug.apk]
+Failed to commit install session 1322423028 with command package install-commit 1322423028. Error: INSTALL_FAILED_USER_RESTRICTED: Install canceled by user
+com.android.ddmlib.InstallException: Failed to commit install session 1322423028 with command package install-commit 1322423028. Error: INSTALL_FAILED_USER_RESTRICTED: Install canceled by user
+	at com.android.ddmlib.SplitApkInstallerBase.installCommit(SplitApkInstallerBase.java:154)
+	at com.android.ddmlib.SplitApkInstaller.install(SplitApkInstaller.java:85)
+	at com.android.ddmlib.IDeviceSharedImpl.installPackages(IDeviceSharedImpl.java:395)
+	at com.android.ddmlib.internal.DeviceImpl.lambda$installPackages$36(DeviceImpl.java:1492)
+	at com.android.ddmlib.internal.DeviceImpl.logRun3(DeviceImpl.java:1834)
+	at com.android.ddmlib.internal.DeviceImpl.installPackages(DeviceImpl.java:1489)
+	at com.android.ddmlib.internal.DeviceImpl.lambda$installPackages$37(DeviceImpl.java:1504)
+	at com.android.ddmlib.internal.DeviceImpl.logRun3(DeviceImpl.java:1834)
+	at com.android.ddmlib.internal.DeviceImpl.installPackages(DeviceImpl.java:1500)
+	at com.android.tools.utp.plugins.deviceprovider.ddmlib.DdmlibAndroidDevice.installPackages(DdmlibAndroidDevice.kt:74)
+	at com.android.tools.utp.plugins.deviceprovider.ddmlib.DdmlibAndroidDeviceController$executeAsync$deferred$1.invokeSuspend(DdmlibAndroidDeviceController.kt:254)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:106)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:570)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:749)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:677)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:664)
+
+</system-err>
+</testsuite>
