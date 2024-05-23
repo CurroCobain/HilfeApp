@@ -59,12 +59,13 @@ class LocationViewModel(private val context: Context) : ViewModel() {
      * Método para obtener la ubicación del usuario
      */
     @SuppressLint("MissingPermission")
-    fun getUserLocation() {
+    fun getUserLocation(onSuccess: () -> Unit) {
         viewModelScope.launch {
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 if (location != null) {
                     // Actualiza el MutableStateFlow con la ubicación del usuario
                     userLocation.value = LatLng(location.latitude, location.longitude)
+                    onSuccess()
                 }
             }
         }

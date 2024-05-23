@@ -279,11 +279,11 @@ fun MapContent(
                     Button(
                         onClick = {
                             dataBaseViewModel.getUrgencies {
-                                    Toast.makeText(
-                                        context,
-                                        "Listado de urgencias actualizado",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                Toast.makeText(
+                                    context,
+                                    "Listado de urgencias actualizado",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                             dataBaseViewModel.updateMessage("")
                         },
@@ -433,6 +433,9 @@ fun MyMap(
                         // Si no hemos indicado la ambulancia en la que vamos se lanza mensaje de error y se redirige al usuario a la pantalla de opciones
                         if (dataBaseViewModel.myAmb.value != "No definida") {
                             dataBaseViewModel.intiUrg()
+                            locationViewModel.getUserLocation {
+                                dataBaseViewModel.setAmbLoc(userLocation)
+                            }
                             Toast.makeText(context, "Aviso iniciado", Toast.LENGTH_LONG).show()
                         } else {
                             Toast.makeText(
@@ -447,14 +450,17 @@ fun MyMap(
                     },
                     // Al pulsar el botón de "finalizar aviso" se llama a la función "finishUrg" del viewModel
                     onFinalizarAvisoClick = {
-                        dataBaseViewModel.finishUrg(){
+                        dataBaseViewModel.finishUrg {
                             dataBaseViewModel.setNull()
-                            dataBaseViewModel.getUrgencies { }
                         }
                         locationViewModel.openCloseEditUrg()
                         Toast.makeText(context, "Aviso finalizado", Toast.LENGTH_LONG).show()
                         if (!focus) {
                             locationViewModel.alterFocus()
+                        }
+                        dataBaseViewModel.getUrgencies { }
+                        locationViewModel.getUserLocation {
+                            dataBaseViewModel.setAmbLoc(userLocation)
                         }
                     },
                     color = color
