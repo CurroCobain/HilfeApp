@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.CameraPositionState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -32,27 +34,51 @@ class LocationViewModel(private val context: Context) : ViewModel() {
         LocationServices.getFusedLocationProviderClient(context)
     }
 
-    // texto de la dirección
+    // Texto de la dirección
     var addressText = MutableStateFlow("")
 
-    // ubicación del usuario
+    // Ubicación del usuario
     var userLocation = MutableStateFlow<LatLng?>(null)
 
-    // ubicación de la urgencia
+    // Ubicación de la urgencia
     var urgencyLocation = MutableStateFlow<LatLng?>(null)
 
+    var cameraPosition = MutableStateFlow(
+        CameraPositionState(
+            position = CameraPosition.fromLatLngZoom(
+                LatLng(0.0, 0.0),
+                16f
+            )
+        )
+    )
 
-    // indica si el foco está en urgencia o ambulancia
+    // Indica si el foco está en urgencia o ambulancia
     var focusErAmb = MutableStateFlow(false)
 
-    // se usa para mostrar el diálogo con la información de la urgencia
+    // Se usa para mostrar el diálogo con la información de la urgencia
     var editUrg = MutableStateFlow(false)
 
     /**
      * Método para cambiar el foco entre urgencia y ambulancia
      */
-    fun alterFocus(){
+    fun alterFocus() {
         focusErAmb.value = !focusErAmb.value
+        updateCameraPosition()
+    }
+
+    private fun updateCameraPosition() {
+        val position = if (focusErAmb.value) {
+            userLocation.value
+        } else {
+            urgencyLocation.value
+        }
+        if (position != null) {
+            setCameraPositionState(
+                CameraPositionState(
+                    position = CameraPosition.fromLatLngZoom(position, 16f)
+                )
+            )
+        }
     }
 
     /**
@@ -60,13 +86,11 @@ class LocationViewModel(private val context: Context) : ViewModel() {
      */
     @SuppressLint("MissingPermission")
     fun getUserLocation(onSuccess: () -> Unit) {
-        viewModelScope.launch {
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                if (location != null) {
-                    // Actualiza el MutableStateFlow con la ubicación del usuario
-                    userLocation.value = LatLng(location.latitude, location.longitude)
-                    onSuccess()
-                }
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            if (location != null) {
+                // Actualiza el MutableStateFlow con la ubicación del usuario
+                userLocation.value = LatLng(location.latitude, location.longitude)
+                onSuccess()
             }
         }
     }
@@ -74,7 +98,7 @@ class LocationViewModel(private val context: Context) : ViewModel() {
     /**
      * Establece la ubicación de la urgencia en el mapa
      */
-    fun setUrLocation(location: LatLng){
+    fun setUrLocation(location: LatLng) {
         urgencyLocation.value = location
     }
 
@@ -102,14 +126,18 @@ class LocationViewModel(private val context: Context) : ViewModel() {
     /**
      * Método para restablecer el texto de la dirección
      */
-    fun resetAddressText(){
+    fun resetAddressText() {
         addressText.value = ""
     }
 
     /**
      * Función que muestra u oculta el diálogo con la información de la urgencia
      */
-    fun openCloseEditUrg(){
+    fun openCloseEditUrg() {
         editUrg.value = !editUrg.value
+    }
+
+    fun setCameraPositionState(position: CameraPositionState) {
+        cameraPosition.value = position
     }
 }

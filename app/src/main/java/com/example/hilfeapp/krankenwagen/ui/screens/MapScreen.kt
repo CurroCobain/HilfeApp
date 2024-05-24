@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.location.Geocoder
 import android.os.Build
-import android.os.Message
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.Icon
@@ -35,9 +34,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -62,6 +61,7 @@ import com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MapType
@@ -114,6 +114,8 @@ fun MapScreen(
     val color1 by optionsViewModel.color1.collectAsState()
     val fondo by optionsViewModel.fondo.collectAsState()
     val message by dataBaseViewModel.message.collectAsState()
+    val cameraPositionState by locationViewModel.cameraPosition.collectAsState()
+
 
     // ModalNavigationDrawer para el menú de navegación
     ModalNavigationDrawer(
@@ -158,6 +160,7 @@ fun MapScreen(
                 navController,
                 color1,
                 message,
+                cameraPositionState
             )
         }
     }
@@ -200,6 +203,7 @@ fun MapContent(
     navController: NavController,
     color: Color,
     message: String,
+    cameraPositionState: CameraPositionState
 ) {
     Box(
         Modifier
@@ -239,6 +243,7 @@ fun MapContent(
                     navController,
                     color,
                     message,
+                    cameraPositionState
                 )
                 Row(
                     Modifier.padding(top = 10.dp),
@@ -248,8 +253,6 @@ fun MapContent(
                     Button(
                         onClick = {
                             if (miUrgencia != null) {
-                                locationViewModel.alterFocus()
-                            } else if (focus) {
                                 locationViewModel.alterFocus()
                             } else {
                                 Toast.makeText(
@@ -266,8 +269,7 @@ fun MapContent(
                             bottomStart = 8.dp,
                             bottomEnd = 8.dp
                         )
-                    )
-                    {
+                    ) {
                         Text(
                             text = if (focus) "Ir a Ambulancia" else "Ir a Emergencia",
                             fontWeight = FontWeight.ExtraBold, fontSize = 15.sp,
@@ -279,13 +281,8 @@ fun MapContent(
                     Button(
                         onClick = {
                             dataBaseViewModel.getUrgencies {
-                                Toast.makeText(
-                                    context,
-                                    "Listado de urgencias actualizado",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                dataBaseViewModel.updateMessage("Listado de urgencias actualizado")
                             }
-                            dataBaseViewModel.updateMessage("")
                         },
                         colors = ButtonDefaults.buttonColors(Color.White),
                         shape = RoundedCornerShape(
@@ -359,15 +356,8 @@ fun MyMap(
     navController: NavController,
     color: Color,
     message: String,
+    cameraPositionState: CameraPositionState
 ) {
-    val cameraPositionState =
-        if (focus) rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(urgencyLocation, 16f)
-        }
-        else rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(userLocation!!, 16f)
-        }
-
     GoogleMap(
         modifier = Modifier
             .fillMaxHeight(0.5f)
@@ -379,6 +369,21 @@ fun MyMap(
             mapType = MapType.HYBRID
         )
     ) {
+        LaunchedEffect(focus, userLocation, urgencyLocation) {
+            val position = if (focus) {
+                urgencyLocation
+            } else {
+                userLocation
+            }
+            if (position != null) {
+                locationViewModel.setCameraPositionState(
+                    CameraPositionState(
+                        position = CameraPosition.fromLatLngZoom(position, 16f)
+                    )
+                )
+            }
+        }
+
         if (userLocation != null) {
 
             // Cargamos el icono personalizado como un Bitmap
@@ -433,6 +438,7 @@ fun MyMap(
                         // Si no hemos indicado la ambulancia en la que vamos se lanza mensaje de error y se redirige al usuario a la pantalla de opciones
                         if (dataBaseViewModel.myAmb.value != "No definida") {
                             dataBaseViewModel.intiUrg()
+                            locationViewModel.setUrLocation(miUrgencia.location)
                             locationViewModel.getUserLocation {
                                 dataBaseViewModel.setAmbLoc(userLocation)
                             }
@@ -451,11 +457,8 @@ fun MyMap(
                     // Al pulsar el botón de "finalizar aviso" se llama a la función "finishUrg" del viewModel
                     onFinalizarAvisoClick = {
                         dataBaseViewModel.finishUrg {
-                            dataBaseViewModel.setNull{
+                            dataBaseViewModel.setNull {
                                 dataBaseViewModel.getUrgencies {}
-                            }
-                            if (!focus) {
-                                locationViewModel.alterFocus()
                             }
                             locationViewModel.getUserLocation {
                                 dataBaseViewModel.setAmbLoc(userLocation)
@@ -463,7 +466,6 @@ fun MyMap(
                         }
                         locationViewModel.openCloseEditUrg()
                         Toast.makeText(context, "Aviso finalizado", Toast.LENGTH_LONG).show()
-
                     },
                     color = color
                 )

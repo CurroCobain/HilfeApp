@@ -58,8 +58,7 @@ class DataBaseViewModel : ViewModel() {
     // urgencia actual
     val miUrgencia = MutableStateFlow<Urgencia?>(null)
 
-    // Alamacena si tenemos asignada una urgencia o no
-    val miUrgenciaState = MutableStateFlow(false)
+
 
 
 
