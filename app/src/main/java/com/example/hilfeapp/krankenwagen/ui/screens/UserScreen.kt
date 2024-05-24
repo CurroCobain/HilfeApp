@@ -152,7 +152,7 @@ fun ContenidoUser(
     context: Context,
     message: String,
     navController: NavController,
-    sesionInit: Boolean
+    sesionInit: Boolean,
 ) {
     // Contenedor principal
     Box(
@@ -270,17 +270,18 @@ fun ContenidoUser(
             {
                 Button(
                     onClick = {
-                        // Cierra la sesión y muestra un mensaje de confirmación
-                        doctorViewModel.cerrarSesion {
-                            doctorViewModel.cambiaNombre()
-                            Toast.makeText(
-                                context,
-                                "Sesión cerrada",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            doctorViewModel.trueFalseSesionIniti()
+                        dataBaseViewModel.unSetAmb {
+                            // Cierra la sesión y muestra un mensaje de confirmación
+                            doctorViewModel.cerrarSesion {
+                                doctorViewModel.cambiaNombre()
+                                Toast.makeText(
+                                    context,
+                                    "Sesión cerrada",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                doctorViewModel.trueFalseSesionIniti()
+                            }
                         }
-                        dataBaseViewModel.getUrgencies {}
                     },
                     colors = ButtonDefaults.buttonColors(Color.White),
                     shape = RoundedCornerShape(6.dp),

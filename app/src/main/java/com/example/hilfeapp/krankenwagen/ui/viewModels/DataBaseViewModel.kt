@@ -39,7 +39,6 @@ class DataBaseViewModel : ViewModel() {
     //variable que se usa para determinar la provincia por la que se filtran los datos
     val provinciaFiltrar = MutableStateFlow("")
 
-
     //variable que se usa para determinar el hospital por el que se filtran los datos
     val hospitalFiltrar = MutableStateFlow(Hospital())
 
@@ -56,9 +55,12 @@ class DataBaseViewModel : ViewModel() {
     @RequiresApi(Build.VERSION_CODES.O)
     val listEr = MutableStateFlow<MutableList<Urgencia>>(mutableListOf())
 
-
     // urgencia actual
     val miUrgencia = MutableStateFlow<Urgencia?>(null)
+
+    // Alamacena si tenemos asignada una urgencia o no
+    val miUrgenciaState = MutableStateFlow(false)
+
 
 
     /**
@@ -136,11 +138,49 @@ class DataBaseViewModel : ViewModel() {
     }
 
     /**
-     * Función para actualizar la ambulancia actual
+     * Función para actualizar la ambulancia en uso
      */
     fun setAmb(amb: String) {
         myAmb.value = amb
+        viewModelScope.launch {
+            firestore.collection("Ambulances")
+                .whereEqualTo("plate", myAmb.value)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        document.reference.update("free", true)
+                        message.value = "Ambulancia seleccionada"
+                    }
+                }
+                .addOnFailureListener {
+                    message.value = "Error al seleccionar la ambulancia"
+                }
+        }
     }
+
+    /**
+     * Función para actualizar la ambulancia en uso
+     */
+    fun unSetAmb(onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            firestore.collection("Ambulances")
+                .whereEqualTo("plate", myAmb.value)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        document.reference.update("free", false)
+                        message.value = "Ambulancia deseleccionada"
+                        onSuccess()
+                    }
+                    myAmb.value = ""
+                }
+                .addOnFailureListener {
+                    message.value = "Error al deseleccionar la ambulancia"
+                }
+        }
+    }
+
+
 
     /**
      * Función para actualizar la urgencia actual
@@ -152,6 +192,7 @@ class DataBaseViewModel : ViewModel() {
     /**
      * Función para actualizar el valor de la ambulancia asociada a la urgencia
      */
+    @RequiresApi(Build.VERSION_CODES.O)
     fun intiUrg() {
         miUrgencia.value?.ambulance = myAmb.value
         updateUrgenciasIfMatches(miUrgencia.value!!) {
@@ -208,6 +249,7 @@ class DataBaseViewModel : ViewModel() {
      * @param miUrgencia urgencia actual
      * @param onSuccess acción a ejecutar si se actualiza la ambulancia con éxito
      */
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun updateUrgenciasIfMatches(miUrgencia: Urgencia, onSuccess: () -> Unit) {
 
         val urgenciasCollection = firestore.collection("Urgencias")
@@ -240,6 +282,7 @@ class DataBaseViewModel : ViewModel() {
      * @param urgenciaId id de la urgencia
      * @param urgencia urgencia actual
      */
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun updateUrgencia(urgenciaId: String, urgencia: Urgencia) {
         val urgenciasCollection = firestore.collection("Urgencias")
 
@@ -263,6 +306,7 @@ class DataBaseViewModel : ViewModel() {
             .update(data as Map<String, Any>)
             .addOnSuccessListener {
                 // La urgencia se actualizó exitosamente
+                getUrgencies {  }
             }
             .addOnFailureListener { e ->
                 // Ocurrió un error al actualizar la urgencia
@@ -321,10 +365,10 @@ class DataBaseViewModel : ViewModel() {
      * Función para modificar el valor de miUrgencia y eliminarla del listado de urgencias sin finalizar
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    fun setNull(){
-        val ind = listEr.value.indexOf(miUrgencia.value)
-        listEr.value.removeAt(ind)
+    fun setNull(onSuccess: () -> Unit){
         miUrgencia.value = null
+        onSuccess()
     }
 }
+
 

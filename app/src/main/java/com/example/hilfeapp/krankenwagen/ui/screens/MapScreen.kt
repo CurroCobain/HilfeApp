@@ -451,17 +451,19 @@ fun MyMap(
                     // Al pulsar el botón de "finalizar aviso" se llama a la función "finishUrg" del viewModel
                     onFinalizarAvisoClick = {
                         dataBaseViewModel.finishUrg {
-                            dataBaseViewModel.setNull()
+                            dataBaseViewModel.setNull{
+                                dataBaseViewModel.getUrgencies {}
+                            }
+                            if (!focus) {
+                                locationViewModel.alterFocus()
+                            }
+                            locationViewModel.getUserLocation {
+                                dataBaseViewModel.setAmbLoc(userLocation)
+                            }
                         }
                         locationViewModel.openCloseEditUrg()
                         Toast.makeText(context, "Aviso finalizado", Toast.LENGTH_LONG).show()
-                        if (!focus) {
-                            locationViewModel.alterFocus()
-                        }
-                        dataBaseViewModel.getUrgencies { }
-                        locationViewModel.getUserLocation {
-                            dataBaseViewModel.setAmbLoc(userLocation)
-                        }
+
                     },
                     color = color
                 )
