@@ -66,7 +66,7 @@ data class Urgencia(
             val ambulance = documentSnapshot.getString("ambulance") ?: ""
             return Urgencia(id, name, doc, age, priority, location, date, issues, ambulance,false)
         }
-
+/*
         fun urgenciaToMap(urgencia: Urgencia): MutableMap<String, Any?> {
             return mutableMapOf(
                 "id" to urgencia.id,
@@ -102,6 +102,8 @@ data class Urgencia(
                 complete = map["complete"] as Boolean
             )
         }
+
+ */
     }
 
     // Constructor sin parámetros de la clase
