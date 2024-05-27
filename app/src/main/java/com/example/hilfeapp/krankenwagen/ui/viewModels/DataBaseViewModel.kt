@@ -206,8 +206,8 @@ class DataBaseViewModel : ViewModel() {
         miUrgencia.value?.complete = true
         viewModelScope.launch {
             updateUrgenciasIfMatches(miUrgencia.value!!) {}
-            onSuccess()
         }
+        onSuccess()
     }
 
 
