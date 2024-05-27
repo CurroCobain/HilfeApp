@@ -171,13 +171,15 @@ fun NavigationMenu (
                         .background(color = row2Color)
                         .clickable {
                             row2Color = Color.White
-                            if(userRegistered){
-                                navController.navigate(Routes.PantallaMap.route)
-                            }else{
-                                Toast.makeText(context,
-                                    "Por favor inicie sesión",
-                                    Toast.LENGTH_LONG)
-                                    .show()
+                            if (userRegistered) {
+                                // Verifica si ya estás en la pantalla de mapa
+                                if (navController.currentBackStackEntry?.destination?.route != Routes.PantallaMap.route) {
+                                    navController.navigate(Routes.PantallaMap.route)
+                                } else {
+                                    Toast.makeText(context, "Ya estás en la pantalla de Mapa", Toast.LENGTH_LONG).show()
+                                }
+                            } else {
+                                Toast.makeText(context, "Por favor inicie sesión", Toast.LENGTH_LONG).show()
                             }
                         }
                 ) {
@@ -195,6 +197,7 @@ fun NavigationMenu (
                         color = Color.Black
                     )
                 }
+
                 Spacer(modifier = Modifier.padding(20.dp))
 
                 // Efecto de la línea de usuario

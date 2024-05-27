@@ -49,7 +49,7 @@ class DataBaseViewModel : ViewModel() {
     val listHospitals = MutableStateFlow(mutableListOf<Hospital>())
 
     // ambulancia actual del usuario
-    val myAmb = MutableStateFlow("")
+    val myAmb = MutableStateFlow("No definida")
 
     // lista de urgencias
     @RequiresApi(Build.VERSION_CODES.O)
