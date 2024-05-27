@@ -91,22 +91,34 @@ fun MapScreen(
 ) {
     val context = LocalContext.current
     val listUrgencias by dataBaseViewModel.listEr.collectAsState()
+    val miUrgencia by dataBaseViewModel.miUrgencia.collectAsState()
 
     // Estado para controlar si el mensaje ya se ha mostrado
-    var showToast by remember { mutableStateOf(true) }
+    val showToast by locationViewModel.showToast.collectAsState()
 
     // Muestra un mensaje si hay urgencias pendientes y si aún no se ha mostrado el Toast
-    if (listUrgencias.isNotEmpty() && showToast) {
-        Toast.makeText(context, "Hay urgencias pendientes", Toast.LENGTH_SHORT).show()
-        showToast = false // Actualiza el estado para no volver a mostrar el Toast
+    if (showToast) {
+        if (listUrgencias.isNotEmpty()) {
+            Toast.makeText(context, "Hay urgencias pendientes", Toast.LENGTH_SHORT).show()
+
+        }
+        if (miUrgencia == null) {
+            Toast.makeText(context, "No tiene urgencias asignadas", Toast.LENGTH_SHORT).show()
+        }
+        locationViewModel.setToast()
     }
 
-    val miUrgencia by dataBaseViewModel.miUrgencia.collectAsState()
+
     val editUrgencia by locationViewModel.editUrg.collectAsState()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val locationText by locationViewModel.addressText.collectAsState()
     val userLocation by locationViewModel.userLocation.collectAsState()
-    locationViewModel.setUrLocation(userLocation!!)
+    if (miUrgencia != null) {
+        locationViewModel.setUrLocation(miUrgencia!!.location)
+    } else {
+        locationViewModel.setUrLocation(userLocation!!)
+    }
+
     dataBaseViewModel.setAmbLoc(userLocation!!)
     val urgencyLocation by locationViewModel.urgencyLocation.collectAsState()
     val geocoder = Geocoder(context)
@@ -252,16 +264,9 @@ fun MapContent(
                     // Botón para alternar el foco entre la ambulancia y la urgencia
                     Button(
                         onClick = {
-                            if (miUrgencia != null) {
-                                locationViewModel.alterFocus()
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "No tiene urgencias asignadas",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                            locationViewModel.alterFocus()
                         },
+                        enabled = miUrgencia != null,
                         colors = ButtonDefaults.buttonColors(Color.White),
                         shape = RoundedCornerShape(
                             topStart = 8.dp,
@@ -282,6 +287,7 @@ fun MapContent(
                         onClick = {
                             dataBaseViewModel.getUrgencies {
                                 dataBaseViewModel.updateMessage("Listado de urgencias actualizado")
+                                locationViewModel.setToast()
                             }
                         },
                         colors = ButtonDefaults.buttonColors(Color.White),
@@ -435,10 +441,11 @@ fun MyMap(
                     locationViewModel = locationViewModel,
                     // Al pulsar el botón de "iniciar aviso" se llama a la función "initUrg" del viewModel
                     onIniciarAvisoClick = {
+                        dataBaseViewModel.setUrg(miUrgencia)
+                        locationViewModel.setUrLocation(miUrgencia.location)
                         // Si no hemos indicado la ambulancia en la que vamos se lanza mensaje de error y se redirige al usuario a la pantalla de opciones
                         if (dataBaseViewModel.myAmb.value != "No definida") {
                             dataBaseViewModel.intiUrg()
-                            locationViewModel.setUrLocation(miUrgencia.location)
                             locationViewModel.getUserLocation {
                                 dataBaseViewModel.setAmbLoc(userLocation)
                             }
@@ -458,7 +465,9 @@ fun MyMap(
                     onFinalizarAvisoClick = {
                         dataBaseViewModel.finishUrg {
                             dataBaseViewModel.setNull {
-                                dataBaseViewModel.getUrgencies {}
+                                dataBaseViewModel.getUrgencies {
+                                    locationViewModel.setToast()
+                                }
                             }
                             locationViewModel.getUserLocation {
                                 dataBaseViewModel.setAmbLoc(userLocation)
@@ -473,3 +482,4 @@ fun MyMap(
         }
     }
 }
+

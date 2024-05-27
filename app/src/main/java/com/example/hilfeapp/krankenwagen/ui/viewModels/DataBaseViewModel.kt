@@ -225,8 +225,8 @@ class DataBaseViewModel : ViewModel() {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     fun getUrgencies(onSuccess: () -> Unit) {
-        listEr.value.clear()
         viewModelScope.launch {
+            listEr.value.clear()
             firestore.collection(("Urgencias"))
                 .whereEqualTo("complete", false)
                 .get()

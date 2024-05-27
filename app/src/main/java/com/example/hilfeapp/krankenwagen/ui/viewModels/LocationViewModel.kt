@@ -29,6 +29,9 @@ import kotlinx.coroutines.launch
 @SuppressLint("StaticFieldLeak")
 class LocationViewModel(private val context: Context) : ViewModel() {
 
+    //Maneja cuando se muestran avisos especiales
+    var showToast = MutableStateFlow(true)
+
     // Cliente de ubicación
     private val fusedLocationClient: FusedLocationProviderClient by lazy {
         LocationServices.getFusedLocationProviderClient(context)
@@ -139,5 +142,12 @@ class LocationViewModel(private val context: Context) : ViewModel() {
 
     fun setCameraPositionState(position: CameraPositionState) {
         cameraPosition.value = position
+    }
+
+    /**
+     * Cambia el valor de showToast
+     */
+    fun setToast(){
+        showToast.value = !showToast.value
     }
 }
