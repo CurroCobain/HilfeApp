@@ -37,7 +37,7 @@ class DataBaseViewModel : ViewModel() {
         listOf("Almeria", "Cadiz", "Cordoba", "Granada", "Huelva", "Jaen", "Malaga", "Sevilla")
 
     //variable que se usa para determinar la provincia por la que se filtran los datos
-    val provinciaFiltrar = MutableStateFlow("")
+    val provinciaFiltrar = MutableStateFlow("Provincia")
 
     //variable que se usa para determinar el hospital por el que se filtran los datos
     val hospitalFiltrar = MutableStateFlow(Hospital())

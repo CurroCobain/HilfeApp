@@ -189,7 +189,7 @@ fun ContenidoOpt(
             ) {
                 Text(
                     text = "Elija el tema",
-                    modifier = Modifier.padding(65.dp),
+                    modifier = Modifier.padding(top= 65.dp, bottom = 10.dp),
                     fontSize = 40.sp
                 )
             }
@@ -241,7 +241,19 @@ fun ContenidoOpt(
                 )
 
             }
-            Spacer(modifier = Modifier.padding(20.dp))
+            // Línea de selección de la ambulancia
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp)
+            ) {
+                Text(
+                    text = "Elija ambulancia",
+                    modifier = Modifier.padding(top = 10.dp , bottom = 20.dp),
+                    fontSize = 40.sp
+                )
+            }
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier.fillMaxWidth()

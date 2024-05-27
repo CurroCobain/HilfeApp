@@ -82,6 +82,7 @@ fun UserScreen(
     val context = LocalContext.current
     val message by doctorViewModel.sesionMessage.collectAsState()
     val sesionInit by doctorViewModel.userRegistered.collectAsState()
+    val myAmb by dataBaseViewModel.myAmb.collectAsState()
 
     // Drawer de navegación
     ModalNavigationDrawer(
@@ -122,7 +123,8 @@ fun UserScreen(
                 context,
                 message,
                 navController,
-                sesionInit
+                sesionInit,
+                myAmb
             )
         }
     }
@@ -153,6 +155,7 @@ fun ContenidoUser(
     message: String,
     navController: NavController,
     sesionInit: Boolean,
+    myAmb: String
 ) {
     // Contenedor principal
     Box(
@@ -270,8 +273,22 @@ fun ContenidoUser(
             {
                 Button(
                     onClick = {
-                        dataBaseViewModel.unSetAmb {
-                            // Cierra la sesión y muestra un mensaje de confirmación
+                        // Si hemos asignado ambulancia hay que resetarla antes de cerrar sesión
+                        if(myAmb != "No definida"){
+                            dataBaseViewModel.unSetAmb {
+                                // Cierra la sesión y muestra un mensaje de confirmación
+                                doctorViewModel.cerrarSesion {
+                                    doctorViewModel.cambiaNombre()
+                                    Toast.makeText(
+                                        context,
+                                        "Sesión cerrada",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    doctorViewModel.trueFalseSesionIniti()
+                                }
+                            }
+                        } else {
+                            // Si no hay ambulancia asignada cerramos sesión
                             doctorViewModel.cerrarSesion {
                                 doctorViewModel.cambiaNombre()
                                 Toast.makeText(
