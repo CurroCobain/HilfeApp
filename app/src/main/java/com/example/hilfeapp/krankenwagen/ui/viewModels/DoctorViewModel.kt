@@ -117,7 +117,7 @@ class DoctorViewModel : ViewModel(){
     /**
      * Cambia el valor de userRegistered
      */
-    fun trueFalseSesionIniti(){
+    fun trueFalseSesionInit(){
         userRegistered.value = !userRegistered.value
     }
 

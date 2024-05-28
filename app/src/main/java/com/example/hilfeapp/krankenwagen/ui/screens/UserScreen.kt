@@ -223,6 +223,7 @@ fun ContenidoUser(
                     onClick = {
                         // Inicia la sesión y muestra un mensaje de confirmación
                         doctorViewModel.sesionInit {
+                            doctorViewModel.trueFalseSesionInit()
                             navController.navigate(Routes.PantallaOptions.route)
                             doctorViewModel.cambiaNombre()
                             Toast.makeText(
@@ -230,11 +231,11 @@ fun ContenidoUser(
                                 "Sesión inicada correctamente",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            doctorViewModel.trueFalseSesionIniti()
                             doctorViewModel.setMessage("")
                         }
                         dataBaseViewModel.getUrgencies {}
                     },
+                    enabled = !sesionInit,
                     colors = ButtonDefaults.buttonColors(Color.White),
                     shape = RoundedCornerShape(6.dp),
                     border = BorderStroke(2.dp, Color.Black)
@@ -278,13 +279,13 @@ fun ContenidoUser(
                             dataBaseViewModel.unSetAmb {
                                 // Cierra la sesión y muestra un mensaje de confirmación
                                 doctorViewModel.cerrarSesion {
+                                    doctorViewModel.trueFalseSesionInit()
                                     doctorViewModel.cambiaNombre()
                                     Toast.makeText(
                                         context,
                                         "Sesión cerrada",
                                         Toast.LENGTH_SHORT
                                     ).show()
-                                    doctorViewModel.trueFalseSesionIniti()
                                 }
                             }
                         } else {
@@ -296,10 +297,11 @@ fun ContenidoUser(
                                     "Sesión cerrada",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                doctorViewModel.trueFalseSesionIniti()
+                                doctorViewModel.trueFalseSesionInit()
                             }
                         }
                     },
+                    enabled = sesionInit,
                     colors = ButtonDefaults.buttonColors(Color.White),
                     shape = RoundedCornerShape(6.dp),
                     border = BorderStroke(2.dp, Color.Black)
