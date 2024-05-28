@@ -10,4 +10,4 @@ https://www.figma.com/design/2OX0ARxLEKwj9LSHW02HH3/KrankenwagenApp?t=lXAQFY3x1U
 
 Enlace para descargar la app: 
 
-https://drive.google.com/file/d/1-xLBvT_uu25yZSErpcHbLxk7MeDo10bC/view?usp=drive_link
+https://drive.google.com/file/d/1NqSpJHbFEpzC_Nf6PvffZvXNUwD2jFbG/view?usp=sharing
