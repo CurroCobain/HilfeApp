@@ -428,6 +428,7 @@ fun MyMap(
                         i.location.longitude)
                     <= 20
                     ){
+                    // Mostramos un marcador que al pulsarlo nos muestra la información de la urgencia
                     Marker(
                         state = MarkerState(position = i.location),
                         snippet = locationText,
