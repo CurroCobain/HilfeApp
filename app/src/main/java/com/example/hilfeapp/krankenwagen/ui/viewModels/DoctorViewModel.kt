@@ -1,6 +1,8 @@
 package com.example.hilfeapp.krankenwagen.ui.viewModels
 
+import android.app.Application
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,6 +21,7 @@ class DoctorViewModel : ViewModel(){
     // Instancias de Firebase
     var auth: FirebaseAuth = Firebase.auth
     var firestore = Firebase.firestore
+
     // Flujo mutable para el texto del documento
     val documentText = MutableStateFlow("")
 
@@ -47,8 +50,7 @@ class DoctorViewModel : ViewModel(){
     fun sesionInit(onSuccess: () -> Unit) {
         viewModelScope.launch {
             try {
-                // Utiliza el servicio de autenticación de Firebase para validar al usuario
-                // por email y contraseña
+                // Utiliza el servicio de autenticación de Firebase para validar al usuario por email y contraseña
                 auth.signInWithEmailAndPassword(nuevoMail.value, nuevoPass.value)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -64,6 +66,7 @@ class DoctorViewModel : ViewModel(){
             }
         }
     }
+
 
     /**
      * Cierra la sesión del usuario actual

@@ -419,20 +419,28 @@ fun MyMap(
                     false
                 }
             )
-            // Por cada urgencia se muestra el icono correspondiente
             for (i in listUrgencias) {
-                Marker(
-                    state = MarkerState(position = i.location),
-                    snippet = locationText,
-                    icon = scaledIconEr,
-                    onClick = {
-                        locationViewModel.getAddressFromCoordinates(geocoder, i.location)
-                        dataBaseViewModel.setUrg(i)
-                        locationViewModel.setUrLocation(i.location)
-                        locationViewModel.openCloseEditUrg()
-                        false
-                    }
-                )
+                // Por cada urgencia si está a 20km o menos se muestra el icono correspondiente
+                if(locationViewModel.distanceBetween(
+                        userLocation.latitude,
+                        userLocation.longitude,
+                        i.location.latitude,
+                        i.location.longitude)
+                    <= 20
+                    ){
+                    Marker(
+                        state = MarkerState(position = i.location),
+                        snippet = locationText,
+                        icon = scaledIconEr,
+                        onClick = {
+                            locationViewModel.getAddressFromCoordinates(geocoder, i.location)
+                            dataBaseViewModel.setUrg(i)
+                            locationViewModel.setUrLocation(i.location)
+                            locationViewModel.openCloseEditUrg()
+                            false
+                        }
+                    )
+                }
             }
             // Se muestra el diálogo de edición de la urgencia al pulsar sobre el icono de la misma
             if (editUrgencia) {

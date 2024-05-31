@@ -15,6 +15,7 @@ import com.google.maps.android.compose.CameraPositionState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlin.math.*
 
 /**
  * ViewModel para manejar la lógica relacionada con la ubicación.
@@ -149,5 +150,29 @@ class LocationViewModel(private val context: Context) : ViewModel() {
      */
     fun setToast(){
         showToast.value = !showToast.value
+    }
+
+    /**
+     * Calcula la distancia en km entre dos puntos en el mapa
+     */
+    fun distanceBetween(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val R = 6371.0 // Radio de la Tierra en km
+
+        // Convertir coordenadas de grados a radianes
+        val lat1Rad = Math.toRadians(lat1)
+        val lon1Rad = Math.toRadians(lon1)
+        val lat2Rad = Math.toRadians(lat2)
+        val lon2Rad = Math.toRadians(lon2)
+
+        // Diferencias de coordenadas
+        val dlat = lat2Rad - lat1Rad
+        val dlon = lon2Rad - lon1Rad
+
+        // Fórmula de Haversine
+        val a = sin(dlat / 2).pow(2) + cos(lat1Rad) * cos(lat2Rad) * sin(dlon / 2).pow(2)
+        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
+        val distance = R * c
+
+        return distance
     }
 }
