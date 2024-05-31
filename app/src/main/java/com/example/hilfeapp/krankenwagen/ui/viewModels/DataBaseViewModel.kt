@@ -432,7 +432,7 @@ class DataBaseViewModel(application: Application) : AndroidViewModel(application
 
         // Crear la notificación
         val notification = NotificationCompat.Builder(context, "URGENT_CHANNEL")
-            .setSmallIcon(R.drawable.icono) // Cambia esto a tu propio icono
+            .setSmallIcon(R.drawable.ambulancia)
             .setContentTitle("Nueva urgencia")
             .setContentText("Hay una nueva urgencia que necesita atención")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
