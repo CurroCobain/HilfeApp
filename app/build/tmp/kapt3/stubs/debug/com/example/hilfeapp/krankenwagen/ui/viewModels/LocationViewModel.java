@@ -158,6 +158,9 @@ public final class LocationViewModel extends androidx.lifecycle.ViewModel {
     public final void setToast() {
     }
     
+    /**
+     * Calcula la distancia en km entre dos puntos en el mapa
+     */
     public final double distanceBetween(double lat1, double lon1, double lat2, double lon2) {
         return 0.0;
     }
