@@ -92,6 +92,7 @@ fun MapScreen(
     val context = LocalContext.current
     val listUrgencias by dataBaseViewModel.listEr.collectAsState()
     val miUrgencia by dataBaseViewModel.miUrgencia.collectAsState()
+    val updated by dataBaseViewModel.updated.collectAsState()
 
     // Estado para controlar si el mensaje ya se ha mostrado
     val showToast by locationViewModel.showToast.collectAsState()
@@ -107,7 +108,6 @@ fun MapScreen(
         }
         locationViewModel.setToast()
     }
-
 
     val editUrgencia by locationViewModel.editUrg.collectAsState()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -128,7 +128,8 @@ fun MapScreen(
     val message by dataBaseViewModel.message.collectAsState()
     val cameraPositionState by locationViewModel.cameraPosition.collectAsState()
 
-
+    // Trampa cutre para reconstruir la pantalla tras cada actualización xD
+    Text(text = updated.toString(), color = Color.Transparent)
     // ModalNavigationDrawer para el menú de navegación
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -389,7 +390,6 @@ fun MyMap(
                 )
             }
         }
-
         if (userLocation != null) {
 
             // Cargamos el icono personalizado como un Bitmap
@@ -426,7 +426,7 @@ fun MyMap(
                         userLocation.longitude,
                         i.location.latitude,
                         i.location.longitude)
-                    <= 20
+                    <= 25
                     ){
                     // Mostramos un marcador que al pulsarlo nos muestra la información de la urgencia
                     Marker(
@@ -476,6 +476,7 @@ fun MyMap(
                             dataBaseViewModel.setNull {
                                 dataBaseViewModel.getUrgencies {
                                     locationViewModel.setToast()
+                                    dataBaseViewModel.setSize()
                                 }
                             }
                             locationViewModel.getUserLocation {

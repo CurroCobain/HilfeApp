@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         val locationViewModel = LocationViewModel(this)
         val optionsViewModel = OptionsViewModel(database)
         val doctorViewModel = DoctorViewModel()
-        val dataBaseViewModel = DataBaseViewModel()
+        val dataBaseViewModel = DataBaseViewModel(application)
         locationViewModel.getUserLocation{}
         setContent {
             HilfeAppTheme {

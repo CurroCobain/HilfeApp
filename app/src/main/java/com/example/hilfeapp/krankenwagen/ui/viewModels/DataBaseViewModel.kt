@@ -1,9 +1,21 @@
 package com.example.hilfeapp.krankenwagen.ui.viewModels
 
+import android.annotation.SuppressLint
+import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hilfeapp.MainActivity
+import com.example.hilfeapp.R
 import com.example.hilfeapp.krankenwagen.data.Ambulance
 import com.example.hilfeapp.krankenwagen.data.Hospital
 import com.example.hilfeapp.krankenwagen.data.Urgencia
@@ -28,7 +40,8 @@ import kotlinx.coroutines.launch
  * @property listEr lista de las urgencias sin finalizar
  * @property miUrgencia urgencia que se está gestionando actualmente
  */
-class DataBaseViewModel : ViewModel() {
+@RequiresApi(Build.VERSION_CODES.O)
+class DataBaseViewModel(application: Application) : AndroidViewModel(application) {
     var firestore = Firebase.firestore
     val message = MutableStateFlow("")
 
@@ -58,8 +71,34 @@ class DataBaseViewModel : ViewModel() {
     // urgencia actual
     val miUrgencia = MutableStateFlow<Urgencia?>(null)
 
+    val updated = MutableStateFlow(0)
+    val urgencySize = MutableStateFlow(0)
 
 
+    init {
+        startUrgencyUpdates()
+    }
+
+    /**
+     * Inicia la actualización periódica de urgencias cada 5 segundos.
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun startUrgencyUpdates() {
+        viewModelScope.launch {
+            while (true) {
+                if(urgencySize.value < listEr.value.size){
+                    sendNewUrgencyNotification()
+                    setSize()
+                }
+                urgencySize.value = listEr.value.size
+                getUrgencies {
+                    // Callback opcional para manejar acciones después de actualizar urgencias
+                    updated.value += 1
+                }
+                delay(5000) // Espera 5 segundos antes de la próxima actualización
+            }
+        }
+    }
 
 
     /**
@@ -367,6 +406,46 @@ class DataBaseViewModel : ViewModel() {
     fun setNull(onSuccess: () -> Unit){
         miUrgencia.value = null
         onSuccess()
+    }
+    @SuppressLint("ServiceCast", "MissingPermission")
+    private fun sendNewUrgencyNotification() {
+        val context = getApplication<Application>().applicationContext
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        // Crear el canal de notificación si es necesario
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "URGENT_CHANNEL",
+                "Urgencias",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Notificaciones de nuevas urgencias"
+            }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        // Crear un intent para volver a la aplicación
+        val intent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_MUTABLE)
+
+        // Crear la notificación
+        val notification = NotificationCompat.Builder(context, "URGENT_CHANNEL")
+            .setSmallIcon(R.drawable.icono) // Cambia esto a tu propio icono
+            .setContentTitle("Nueva urgencia")
+            .setContentText("Hay una nueva urgencia que necesita atención")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent) // Asigna el PendingIntent a la notificación
+            .setAutoCancel(true) // Hace que la notificación se cierre cuando el usuario la toque
+            .build()
+
+        // Mostrar la notificación
+        NotificationManagerCompat.from(context).notify(1, notification)
+    }
+
+    fun setSize(){
+        urgencySize.value = listEr.value.size
     }
 }
 
