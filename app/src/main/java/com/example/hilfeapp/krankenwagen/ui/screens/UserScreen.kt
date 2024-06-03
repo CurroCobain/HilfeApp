@@ -80,8 +80,11 @@ fun UserScreen(
     //Estado de la contraseña
     val passDoc by doctorViewModel.nuevoPass.collectAsState()
     val context = LocalContext.current
+    // Mesnaje del sistema
     val message by doctorViewModel.sesionMessage.collectAsState()
+    // Booleano para comprobar el inicio de sesión
     val sesionInit by doctorViewModel.userRegistered.collectAsState()
+    // Matrícula de la ambulancia actual
     val myAmb by dataBaseViewModel.myAmb.collectAsState()
 
     // Drawer de navegación

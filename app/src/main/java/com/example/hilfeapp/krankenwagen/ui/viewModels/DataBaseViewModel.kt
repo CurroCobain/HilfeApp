@@ -12,11 +12,9 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hilfeapp.MainActivity
 import com.example.hilfeapp.R
-import com.example.hilfeapp.krankenwagen.data.Ambulance
 import com.example.hilfeapp.krankenwagen.data.Hospital
 import com.example.hilfeapp.krankenwagen.data.Urgencia
 import com.google.android.gms.maps.model.LatLng
@@ -71,10 +69,12 @@ class DataBaseViewModel(application: Application) : AndroidViewModel(application
     // urgencia actual
     val miUrgencia = MutableStateFlow<Urgencia?>(null)
 
+    // Contador que se usa para forzar la actualización de la pantalla
     val updated = MutableStateFlow(0)
+    // Flujo mutable que almacena el tamaño de la lista de urgencias pendientes, sirve para controlar las notificaciones
     val urgencySize = MutableStateFlow(0)
 
-
+    // Al crear el viewModel se inicia la corrutina que actualiza las urgencias y genera las notificaciones
     init {
         startUrgencyUpdates()
     }
@@ -407,12 +407,16 @@ class DataBaseViewModel(application: Application) : AndroidViewModel(application
         miUrgencia.value = null
         onSuccess()
     }
+
+    /**
+     * Función para generar las notificaciones
+     */
     @SuppressLint("ServiceCast", "MissingPermission")
     private fun sendNewUrgencyNotification() {
         val context = getApplication<Application>().applicationContext
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // Crear el canal de notificación si es necesario
+        // Crea el canal de notificación si es necesario
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 "URGENT_CHANNEL",
@@ -424,13 +428,13 @@ class DataBaseViewModel(application: Application) : AndroidViewModel(application
             notificationManager.createNotificationChannel(channel)
         }
 
-        // Crear un intent para volver a la aplicación
+        // Crea un intent para volver a la aplicación
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_MUTABLE)
 
-        // Crear la notificación
+        // Crea la notificación
         val notification = NotificationCompat.Builder(context, "URGENT_CHANNEL")
             .setSmallIcon(R.drawable.ambulancia)
             .setContentTitle("Nueva urgencia")
@@ -440,10 +444,13 @@ class DataBaseViewModel(application: Application) : AndroidViewModel(application
             .setAutoCancel(true) // Hace que la notificación se cierre cuando el usuario la toque
             .build()
 
-        // Mostrar la notificación
+        // Muestra la notificación
         NotificationManagerCompat.from(context).notify(1, notification)
     }
 
+    /**
+     * Función para actualizar el valor de urgencySize
+     */
     fun setSize(){
         urgencySize.value = listEr.value.size
     }

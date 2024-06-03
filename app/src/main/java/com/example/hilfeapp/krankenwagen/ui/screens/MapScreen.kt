@@ -89,10 +89,10 @@ fun MapScreen(
     doctorViewModel: DoctorViewModel,
     dataBaseViewModel: DataBaseViewModel
 ) {
-    val context = LocalContext.current
-    val listUrgencias by dataBaseViewModel.listEr.collectAsState()
-    val miUrgencia by dataBaseViewModel.miUrgencia.collectAsState()
-    val updated by dataBaseViewModel.updated.collectAsState()
+    val context = LocalContext.current // Contexto de la app
+    val listUrgencias by dataBaseViewModel.listEr.collectAsState() // Listado de urgencias
+    val miUrgencia by dataBaseViewModel.miUrgencia.collectAsState() // Urgencia actual del sistema
+    val updated by dataBaseViewModel.updated.collectAsState() // Contador que ayuda a reconstruir la pantalla
 
     // Estado para controlar si el mensaje ya se ha mostrado
     val showToast by locationViewModel.showToast.collectAsState()
@@ -101,7 +101,6 @@ fun MapScreen(
     if (showToast) {
         if (listUrgencias.isNotEmpty()) {
             Toast.makeText(context, "Hay urgencias pendientes", Toast.LENGTH_SHORT).show()
-
         }
         if (miUrgencia == null) {
             Toast.makeText(context, "No tiene urgencias asignadas", Toast.LENGTH_SHORT).show()
@@ -109,26 +108,35 @@ fun MapScreen(
         locationViewModel.setToast()
     }
 
-    val editUrgencia by locationViewModel.editUrg.collectAsState()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val locationText by locationViewModel.addressText.collectAsState()
-    val userLocation by locationViewModel.userLocation.collectAsState()
+    val editUrgencia by locationViewModel.editUrg.collectAsState() // Booleano para mostrar el diálogo con la información de la urgencia
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed) // Despliega o cierra el menú lateral
+    val locationText by locationViewModel.addressText.collectAsState() // Dirección de la urgencia en formato texto
+    val userLocation by locationViewModel.userLocation.collectAsState() // Coordenadas del usuario actual
+    // Si tenemos urgencia en curso se asigna la localización de la misma la la variable del viewModel que la gestiona
     if (miUrgencia != null) {
         locationViewModel.setUrLocation(miUrgencia!!.location)
+        // Si no tenemos urgencia asignada se modifica el valor que gestiona su localización para evitar el null
     } else {
         locationViewModel.setUrLocation(userLocation!!)
     }
-
+    // Se actualiza la localización de la ambulancia del usuario
     dataBaseViewModel.setAmbLoc(userLocation!!)
+    // Localización de la urgencia actual
     val urgencyLocation by locationViewModel.urgencyLocation.collectAsState()
+    // Geocoder para la gestión d coordenadas y direcciones
     val geocoder = Geocoder(context)
+    //Booleano para cambiar el foco en el mapa
     val focus by locationViewModel.focusErAmb.collectAsState()
+    // Opción de color de la app
     val color1 by optionsViewModel.color1.collectAsState()
+    //Opción de fondo de la app
     val fondo by optionsViewModel.fondo.collectAsState()
+    //Mensaje del sistema
     val message by dataBaseViewModel.message.collectAsState()
+    // Posición del mapa
     val cameraPositionState by locationViewModel.cameraPosition.collectAsState()
 
-    // Trampa cutre para reconstruir la pantalla tras cada actualización xD
+    // Ayuda para reconstruir la pantalla No visible en app
     Text(text = updated.toString(), color = Color.Transparent)
     // ModalNavigationDrawer para el menú de navegación
     ModalNavigationDrawer(
@@ -140,6 +148,7 @@ fun MapScreen(
         })
     {
         val scope = rememberCoroutineScope()
+        // Scaffold principal de la pantalla que incluye el botón para desplegar el menú lateral
         Scaffold(
             floatingActionButton = {
                 ExtendedFloatingActionButton(
@@ -157,6 +166,7 @@ fun MapScreen(
                 )
             }
         ) {
+            // Contenido de la app
             MapContent(
                 context = context,
                 locationText = locationText,
@@ -218,6 +228,7 @@ fun MapContent(
     message: String,
     cameraPositionState: CameraPositionState
 ) {
+    // Box principal ayuda para conformar el fondo
     Box(
         Modifier
             .fillMaxWidth()
@@ -231,6 +242,7 @@ fun MapContent(
                 .fillMaxWidth()
                 .fillMaxHeight()
         )
+        // Columna principal
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -276,6 +288,7 @@ fun MapContent(
                             bottomEnd = 8.dp
                         )
                     ) {
+                        // Texto del botón
                         Text(
                             text = if (focus) "Ir a Ambulancia" else "Ir a Emergencia",
                             fontWeight = FontWeight.ExtraBold, fontSize = 15.sp,
@@ -300,6 +313,7 @@ fun MapContent(
                         )
                     )
                     {
+                        // Texto del botón
                         Text(
                             text = "Actualizar lista",
                             fontWeight = FontWeight.ExtraBold, fontSize = 15.sp,
@@ -307,6 +321,7 @@ fun MapContent(
                         )
                     }
                 }
+                // Fila que muestra la dirección en formato texto
                 Row(
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, end = 20.dp)
                 ) {
@@ -365,6 +380,7 @@ fun MyMap(
     message: String,
     cameraPositionState: CameraPositionState
 ) {
+    // Implementación de google maps
     GoogleMap(
         modifier = Modifier
             .fillMaxHeight(0.5f)
@@ -376,6 +392,7 @@ fun MyMap(
             mapType = MapType.HYBRID
         )
     ) {
+        // Efecto que cambia el foco del mapa entre urgencia y ambulancia, sólo funciona cuando hay urgencia activa
         LaunchedEffect(focus, userLocation, urgencyLocation) {
             val position = if (focus) {
                 urgencyLocation
@@ -390,8 +407,8 @@ fun MyMap(
                 )
             }
         }
+        // Generamos un marcador con la ubicación del usuario y el icono de la ambulancia
         if (userLocation != null) {
-
             // Cargamos el icono personalizado como un Bitmap
             val iconBitmapEr: Bitmap =
                 BitmapFactory.decodeResource(context.resources, R.drawable.icono)
@@ -420,7 +437,7 @@ fun MyMap(
                 }
             )
             for (i in listUrgencias) {
-                // Por cada urgencia si está a 20km o menos se muestra el icono correspondiente
+                // Por cada urgencia si está a 25km o menos se muestra el icono correspondiente
                 if(locationViewModel.distanceBetween(
                         userLocation.latitude,
                         userLocation.longitude,

@@ -1,6 +1,8 @@
 package com.example.hilfeapp.krankenwagen.ui.screens
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -48,7 +50,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hilfeapp.R
-import com.example.hilfeapp.krankenwagen.data.Ambulance
 import com.example.hilfeapp.krankenwagen.data.Hospital
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DataBaseViewModel
 import com.example.hilfeapp.krankenwagen.ui.viewModels.DoctorViewModel
@@ -63,6 +64,7 @@ import kotlinx.coroutines.launch
  * @param dataBaseViewModel ViewModel que maneja la base de datos.
  * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
  */
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun OptionsScreen(
@@ -145,6 +147,7 @@ fun OptionsScreen(
  * @param listAmbs Lista de ambulancias.
  * @param myAmbulance Ambulancia seleccionada.
  */
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ContenidoOpt(
     fondo: Int,
@@ -315,6 +318,7 @@ fun ContenidoOpt(
                         )
                     }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
+                    // Desplegable con todas las provincias
                     DropdownMenu(
                         expanded = expandedCounty,
                         onDismissRequest = {
@@ -355,6 +359,7 @@ fun ContenidoOpt(
                         )
                     }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
+                    // Desplegable con los hospitales de la provincia seleccionada
                     DropdownMenu(
                         expanded = expandedHosp,
                         onDismissRequest = {
@@ -395,6 +400,7 @@ fun ContenidoOpt(
                         )
                     }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
+                    // Desplegable con las ambulancias del hospital filtrado
                     DropdownMenu(
                         expanded = expandedAmb,
                         onDismissRequest = {

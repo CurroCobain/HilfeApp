@@ -3,8 +3,9 @@ package com.example.hilfeapp.krankenwagen.data
 import com.google.android.gms.maps.model.LatLng
 
 // ------------------------------------ No se usa revisar y borrar --------------------------
+// ---------- Posible uso para ampliación de funcionalidades --------------------------------
 
-
+/*
 /**
  * Clase que enumera los tipos de ambulancias
  */
@@ -29,4 +30,6 @@ data class Ambulance(
     constructor() : this("amb1", "No definida", true, AmbulanceTypes.doctor, "", LatLng(0.0,0.0))
 }
 
+
+ */
 

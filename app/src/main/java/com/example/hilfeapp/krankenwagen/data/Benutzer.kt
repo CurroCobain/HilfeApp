@@ -1,6 +1,6 @@
 package com.example.hilfeapp.krankenwagen.data
 
-//--------------- no usado hasta ahora, comentar para posible mejora ------------------
+//--------------- no usado hasta ahora, revisar para posible mejora ------------------
 
 /*
 

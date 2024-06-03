@@ -15,15 +15,22 @@ import kotlinx.coroutines.launch
 
 
 /**
- *
+ * ViewModel que gestiona lo referente al usuario, iniciar/cerrar sesión, obtener el nombre, etc.
+ * @property sesionMessage almacena el mensaje del sistema
+ * @property nombreDoc almacena el nombre del doctor actual
+ * @property nuevoPass almacena el password del doctor actual
+ * @property nuevoMail almacena el mail del doctor actual
+ * @property userRegistered booleano que indica si hay un usuario registrado o no
  */
 class DoctorViewModel : ViewModel(){
     // Instancias de Firebase
     var auth: FirebaseAuth = Firebase.auth
     var firestore = Firebase.firestore
-
-    // Flujo mutable para el texto del documento
+/*
+    // Flujo mutable para el texto del documento de momento no se usa, guardar para posible mejora
     val documentText = MutableStateFlow("")
+
+ */
 
     // Estado del mensaje de sesión
     var sesionMessage = MutableStateFlow("")

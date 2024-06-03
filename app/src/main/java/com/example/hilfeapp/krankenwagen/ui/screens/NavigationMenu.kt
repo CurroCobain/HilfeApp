@@ -144,6 +144,7 @@ fun NavigationMenu (
                             }
                         }
                 ) {
+                    // Icono de configuración
                     Icon(
                         imageVector = Icons.Default.Build,
                         contentDescription = "Android Icon",
@@ -152,6 +153,7 @@ fun NavigationMenu (
                             .height(30.dp)
                     )
                     Spacer(modifier = Modifier.padding(start = 10.dp))
+                    // Texto de configuración
                     Text(
                         text = "Configuración",
                         fontSize = 25.sp,
@@ -172,7 +174,7 @@ fun NavigationMenu (
                         .clickable {
                             row2Color = Color.White
                             if (userRegistered) {
-                                // Verifica si ya estás en la pantalla de mapa
+                                // Verifica si ya estás en la pantalla de mapa para evitar errores en la app
                                 if (navController.currentBackStackEntry?.destination?.route != Routes.PantallaMap.route) {
                                     navController.navigate(Routes.PantallaMap.route)
                                 } else {
@@ -183,6 +185,7 @@ fun NavigationMenu (
                             }
                         }
                 ) {
+                    // Icono de mapa
                     Icon(
                         imageVector = Icons.Default.Place,
                         contentDescription = "Android Icon",
@@ -191,6 +194,7 @@ fun NavigationMenu (
                             .height(30.dp)
                     )
                     Spacer(modifier = Modifier.padding(start = 10.dp))
+                    // Texto de mapa
                     Text(
                         text = "Mapa",
                         fontSize = 25.sp,
@@ -221,6 +225,7 @@ fun NavigationMenu (
                             }
                         }
                 ) {
+                    // Icono de usuario
                     Icon(
                         imageVector = Icons.Default.Person,
                         contentDescription = "Android Icon",
@@ -229,6 +234,7 @@ fun NavigationMenu (
                             .height(30.dp)
                     )
                     Spacer(modifier = Modifier.padding(start = 10.dp))
+                    // Texto de usuario
                     Text(
                         text = "Usuario",
                         fontSize = 25.sp,
@@ -251,6 +257,7 @@ fun NavigationMenu (
                             exit = true
                         }
                 ) {
+                    // Icono de salir
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Android Icon",
@@ -259,6 +266,7 @@ fun NavigationMenu (
                             .height(30.dp)
                     )
                     Spacer(modifier = Modifier.padding(start = 10.dp))
+                    // Texto de salir
                     Text(
                         text = "Salir",
                         fontSize = 25.sp,
@@ -294,13 +302,13 @@ fun RowColorEffect(color: Color, onColorChange: (Color) -> Unit) {
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun Despedida(
-
     color1: Color
 ){
     Column(Modifier.fillMaxSize()
         .background(color = color1),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
+        // Composable para mostrar una imagen animada
         GlideImage(
             model = R.drawable.despedida,
             contentDescription = "Gif de despedida"

@@ -26,6 +26,7 @@ import kotlin.math.*
  * @property urgencyLocation coordenadas de la ubicación de la urgencia
  * @property focusErAmb indica dónde si enfoca el mapa
  * @property editUrg gestiona cuando se muestra el diálogo con la información de la urgencia
+ * @property showToast gestiona cuando se muestran aviso especiales en la app
  */
 @SuppressLint("StaticFieldLeak")
 class LocationViewModel(private val context: Context) : ViewModel() {
@@ -47,6 +48,7 @@ class LocationViewModel(private val context: Context) : ViewModel() {
     // Ubicación de la urgencia
     var urgencyLocation = MutableStateFlow<LatLng?>(null)
 
+    // Gestiona la posición del foco del mapa
     var cameraPosition = MutableStateFlow(
         CameraPositionState(
             position = CameraPosition.fromLatLngZoom(
@@ -70,6 +72,9 @@ class LocationViewModel(private val context: Context) : ViewModel() {
         updateCameraPosition()
     }
 
+    /**
+     * Actualiza la posición del foco en el mapa
+     */
     private fun updateCameraPosition() {
         val position = if (focusErAmb.value) {
             userLocation.value
@@ -153,7 +158,8 @@ class LocationViewModel(private val context: Context) : ViewModel() {
     }
 
     /**
-     * Calcula la distancia en km entre dos puntos en el mapa
+     * Calcula la distancia en kms entre dos puntos en el mapa se usa para filtrar las urgencias en el radio de acción del mapa
+     * @return devuelve la distancia en kms entre dos puntos
      */
     fun distanceBetween(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
         val R = 6371.0 // Radio de la Tierra en km
