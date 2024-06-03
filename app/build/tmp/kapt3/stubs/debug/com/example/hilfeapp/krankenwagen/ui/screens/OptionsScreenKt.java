@@ -11,6 +11,7 @@ public final class OptionsScreenKt {
      * @param dataBaseViewModel ViewModel que maneja la base de datos.
      * @param doctorViewModel ViewModel que maneja la lógica relacionada con el doctor.
      */
+    @androidx.annotation.RequiresApi(value = android.os.Build.VERSION_CODES.O)
     @android.annotation.SuppressLint(value = {"UnusedMaterial3ScaffoldPaddingParameter"})
     @androidx.compose.runtime.Composable()
     public static final void OptionsScreen(@org.jetbrains.annotations.NotNull()
@@ -33,6 +34,7 @@ public final class OptionsScreenKt {
      * @param listAmbs Lista de ambulancias.
      * @param myAmbulance Ambulancia seleccionada.
      */
+    @androidx.annotation.RequiresApi(value = android.os.Build.VERSION_CODES.O)
     @androidx.compose.runtime.Composable()
     public static final void ContenidoOpt(int fondo, @org.jetbrains.annotations.NotNull()
     com.example.hilfeapp.krankenwagen.ui.viewModels.OptionsViewModel optionsViewModel, @org.jetbrains.annotations.NotNull()

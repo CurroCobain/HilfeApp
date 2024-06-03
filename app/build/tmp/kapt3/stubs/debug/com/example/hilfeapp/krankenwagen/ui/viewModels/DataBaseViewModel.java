@@ -253,10 +253,16 @@ public final class DataBaseViewModel extends androidx.lifecycle.AndroidViewModel
     kotlin.jvm.functions.Function0<kotlin.Unit> onSuccess) {
     }
     
+    /**
+     * Función para generar las notificaciones
+     */
     @android.annotation.SuppressLint(value = {"ServiceCast", "MissingPermission"})
     private final void sendNewUrgencyNotification() {
     }
     
+    /**
+     * Función para actualizar el valor de urgencySize
+     */
     public final void setSize() {
     }
 }
