@@ -1,3 +1,4 @@
+
 package com.example.hilfeapp.krankenwagen.data
 
 import android.annotation.SuppressLint
@@ -82,8 +83,5 @@ data class Urgencia(
         "Parada cardio respiratoria",
         "No definida",
         false
-        )
+    )
 }
-
-
-
