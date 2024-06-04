@@ -77,6 +77,11 @@ attr uiZoomGestures
 attr uri
 attr useViewLifecycle
 attr zOrderOnTop
+bool enable_gcm_scheduler_default
+bool enable_system_alarm_service_default
+bool enable_system_foreground_service_default
+bool enable_system_job_service_default
+bool workmanager_test_configuration
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
 color black
@@ -360,6 +365,7 @@ string fallback_menu_item_copy_link
 string fallback_menu_item_open_in_browser
 string fallback_menu_item_share_link
 string gcm_defaultSenderId
+string gcm_fallback_notification_channel_label
 string google_api_key
 string google_app_id
 string google_crash_reporting_api_key

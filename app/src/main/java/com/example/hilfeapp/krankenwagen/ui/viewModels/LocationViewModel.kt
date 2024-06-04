@@ -3,16 +3,29 @@
 package com.example.hilfeapp.krankenwagen.ui.viewModels
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.location.Geocoder
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hilfeapp.MainActivity
+import com.example.hilfeapp.R
+import com.example.hilfeapp.krankenwagen.data.Urgencia
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import com.google.maps.android.compose.CameraPositionState
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlin.math.*
@@ -29,7 +42,8 @@ import kotlin.math.*
  * @property showToast gestiona cuando se muestran aviso especiales en la app
  */
 @SuppressLint("StaticFieldLeak")
-class LocationViewModel(private val context: Context) : ViewModel() {
+class LocationViewModel : ViewModel() {
+    lateinit var context: Context
 
     //Maneja cuando se muestran avisos especiales
     var showToast = MutableStateFlow(true)
@@ -43,7 +57,7 @@ class LocationViewModel(private val context: Context) : ViewModel() {
     var addressText = MutableStateFlow("")
 
     // Ubicación del usuario
-    var userLocation = MutableStateFlow<LatLng?>(null)
+    var userLocation = MutableStateFlow<LatLng?>(LatLng(0.0, 0.0))
 
     // Ubicación de la urgencia
     var urgencyLocation = MutableStateFlow<LatLng?>(null)
@@ -153,9 +167,10 @@ class LocationViewModel(private val context: Context) : ViewModel() {
     /**
      * Cambia el valor de showToast
      */
-    fun setToast(){
+    fun setToast() {
         showToast.value = !showToast.value
     }
+
 
     /**
      * Calcula la distancia en kms entre dos puntos en el mapa se usa para filtrar las urgencias en el radio de acción del mapa

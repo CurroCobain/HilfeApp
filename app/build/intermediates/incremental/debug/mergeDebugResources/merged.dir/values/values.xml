@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
     <attr format="reference" name="nestedScrollViewStyle"/>
+    <bool name="enable_gcm_scheduler_default">true</bool>
+    <bool name="enable_system_alarm_service_default">true</bool>
+    <bool name="enable_system_foreground_service_default">true</bool>
+    <bool name="enable_system_job_service_default">false</bool>
+    <bool name="workmanager_test_configuration">false</bool>
     <color name="androidx_core_ripple_material_light">#1f000000</color>
     <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
     <color name="black">#FF000000</color>
@@ -169,6 +174,7 @@
     <string name="fallback_menu_item_open_in_browser">Open in browser</string>
     <string name="fallback_menu_item_share_link">Share link</string>
     <string name="gcm_defaultSenderId" translatable="false">343736859964</string>
+    <string name="gcm_fallback_notification_channel_label">Miscellaneous</string>
     <string name="google_api_key" translatable="false">AIzaSyCjj8IC_-PFRsQHUMIXqmNqEHxxRZ87MF8</string>
     <string name="google_app_id" translatable="false">1:343736859964:android:e4b2e4b2a9d2b7fd9bf239</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCjj8IC_-PFRsQHUMIXqmNqEHxxRZ87MF8</string>

@@ -36,6 +36,7 @@
     <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Kopiera länk"</string>
     <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Öppna i webbläsaren"</string>
     <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Dela länk"</string>
+    <string msgid="9521340570209730" name="gcm_fallback_notification_channel_label">"Diverse"</string>
     <string msgid="6827826412747255547" name="in_progress">"Pågår"</string>
     <string msgid="7933458017204019916" name="indeterminate">"Delvis markerad"</string>
     <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Komprimera arket på nedre delen av skärmen"</string>

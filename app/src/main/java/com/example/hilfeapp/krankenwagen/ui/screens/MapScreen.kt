@@ -109,7 +109,8 @@ fun MapScreen(
     }
 
     val editUrgencia by locationViewModel.editUrg.collectAsState() // Booleano para mostrar el diálogo con la información de la urgencia
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed) // Despliega o cierra el menú lateral
+    val drawerState =
+        rememberDrawerState(initialValue = DrawerValue.Closed) // Despliega o cierra el menú lateral
     val locationText by locationViewModel.addressText.collectAsState() // Dirección de la urgencia en formato texto
     val userLocation by locationViewModel.userLocation.collectAsState() // Coordenadas del usuario actual
     // Si tenemos urgencia en curso se asigna la localización de la misma la la variable del viewModel que la gestiona
@@ -437,28 +438,20 @@ fun MyMap(
                 }
             )
             for (i in listUrgencias) {
-                // Por cada urgencia si está a 25km o menos se muestra el icono correspondiente
-                if(locationViewModel.distanceBetween(
-                        userLocation.latitude,
-                        userLocation.longitude,
-                        i.location.latitude,
-                        i.location.longitude)
-                    <= 25
-                    ){
-                    // Mostramos un marcador que al pulsarlo nos muestra la información de la urgencia
-                    Marker(
-                        state = MarkerState(position = i.location),
-                        snippet = locationText,
-                        icon = scaledIconEr,
-                        onClick = {
-                            locationViewModel.getAddressFromCoordinates(geocoder, i.location)
-                            dataBaseViewModel.setUrg(i)
-                            locationViewModel.setUrLocation(i.location)
-                            locationViewModel.openCloseEditUrg()
-                            false
-                        }
-                    )
-                }
+                // Mostramos un marcador que al pulsarlo nos muestra la información de la urgencia
+                Marker(
+                    state = MarkerState(position = i.location),
+                    snippet = locationText,
+                    icon = scaledIconEr,
+                    onClick = {
+                        locationViewModel.getAddressFromCoordinates(geocoder, i.location)
+                        dataBaseViewModel.setUrg(i)
+                        locationViewModel.setUrLocation(i.location)
+                        locationViewModel.openCloseEditUrg()
+                        false
+                    }
+                )
+
             }
             // Se muestra el diálogo de edición de la urgencia al pulsar sobre el icono de la misma
             if (editUrgencia) {

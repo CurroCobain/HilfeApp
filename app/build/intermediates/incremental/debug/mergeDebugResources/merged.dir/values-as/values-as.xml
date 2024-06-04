@@ -36,6 +36,7 @@
     <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"লিংক প্ৰতিলিপি কৰক"</string>
     <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"ব্ৰাউজাৰত খোলক"</string>
     <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"লিংক শ্বেয়াৰ কৰক"</string>
+    <string msgid="9521340570209730" name="gcm_fallback_notification_channel_label">"বিবিধ"</string>
     <string msgid="6827826412747255547" name="in_progress">"প্ৰক্ৰিয়াকৰণ কৰি থকা হৈছে"</string>
     <string msgid="7933458017204019916" name="indeterminate">"আংশিকভাৱে পৰীক্ষা কৰা হৈছে"</string>
     <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"তলৰ শ্বীটখন সংকোচন কৰক"</string>

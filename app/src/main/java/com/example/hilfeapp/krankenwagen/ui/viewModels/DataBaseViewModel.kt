@@ -1,20 +1,9 @@
 package com.example.hilfeapp.krankenwagen.ui.viewModels
 
-import android.annotation.SuppressLint
-import android.app.Application
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.hilfeapp.MainActivity
-import com.example.hilfeapp.R
 import com.example.hilfeapp.krankenwagen.data.Hospital
 import com.example.hilfeapp.krankenwagen.data.Urgencia
 import com.google.android.gms.maps.model.LatLng
@@ -22,7 +11,6 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
@@ -39,7 +27,8 @@ import kotlinx.coroutines.launch
  * @property miUrgencia urgencia que se está gestionando actualmente
  */
 @RequiresApi(Build.VERSION_CODES.O)
-class DataBaseViewModel(application: Application) : AndroidViewModel(application) {
+class DataBaseViewModel(val locationViewModel: LocationViewModel) : ViewModel() {
+
     var firestore = Firebase.firestore
     val message = MutableStateFlow("")
 
@@ -73,32 +62,6 @@ class DataBaseViewModel(application: Application) : AndroidViewModel(application
     val updated = MutableStateFlow(0)
     // Flujo mutable que almacena el tamaño de la lista de urgencias pendientes, sirve para controlar las notificaciones
     val urgencySize = MutableStateFlow(0)
-
-    // Al crear el viewModel se inicia la corrutina que actualiza las urgencias y genera las notificaciones
-    init {
-        startUrgencyUpdates()
-    }
-
-    /**
-     * Inicia la actualización periódica de urgencias cada 5 segundos.
-     */
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun startUrgencyUpdates() {
-        viewModelScope.launch {
-            while (true) {
-                if(urgencySize.value < listEr.value.size){
-                    sendNewUrgencyNotification()
-                    setSize()
-                }
-                urgencySize.value = listEr.value.size
-                getUrgencies {
-                    // Callback opcional para manejar acciones después de actualizar urgencias
-                    updated.value += 1
-                }
-                delay(5000) // Espera 5 segundos antes de la próxima actualización
-            }
-        }
-    }
 
 
     /**
@@ -271,7 +234,18 @@ class DataBaseViewModel(application: Application) : AndroidViewModel(application
                 .get()
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
-                        listEr.value.add(Urgencia.fromDocumentSnapshot(document))
+                        val tempLocation = locationViewModel.userLocation.value
+                        val newUrg = Urgencia.fromDocumentSnapshot(document)
+                        if (tempLocation != null) {
+                            if (locationViewModel.distanceBetween(
+                                    tempLocation.latitude,
+                                    tempLocation.longitude,
+                                    newUrg.location.latitude,
+                                    newUrg.location.longitude
+                                ) < 25 ){
+                                listEr.value.add(newUrg)
+                            }
+                        }
                         message.value = "Listado actualizado"
                         onSuccess()
                     }
@@ -408,45 +382,7 @@ class DataBaseViewModel(application: Application) : AndroidViewModel(application
         onSuccess()
     }
 
-    /**
-     * Función para generar las notificaciones
-     */
-    @SuppressLint("ServiceCast", "MissingPermission")
-    private fun sendNewUrgencyNotification() {
-        val context = getApplication<Application>().applicationContext
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // Crea el canal de notificación si es necesario
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                "URGENT_CHANNEL",
-                "Urgencias",
-                NotificationManager.IMPORTANCE_HIGH
-            ).apply {
-                description = "Notificaciones de nuevas urgencias"
-            }
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        // Crea un intent para volver a la aplicación
-        val intent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_MUTABLE)
-
-        // Crea la notificación
-        val notification = NotificationCompat.Builder(context, "URGENT_CHANNEL")
-            .setSmallIcon(R.drawable.ambulancia)
-            .setContentTitle("Nueva urgencia")
-            .setContentText("Hay una nueva urgencia que necesita atención")
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(pendingIntent) // Asigna el PendingIntent a la notificación
-            .setAutoCancel(true) // Hace que la notificación se cierre cuando el usuario la toque
-            .build()
-
-        // Muestra la notificación
-        NotificationManagerCompat.from(context).notify(1, notification)
-    }
 
     /**
      * Función para actualizar el valor de urgencySize
@@ -454,6 +390,5 @@ class DataBaseViewModel(application: Application) : AndroidViewModel(application
     fun setSize(){
         urgencySize.value = listEr.value.size
     }
+
 }
-
-
