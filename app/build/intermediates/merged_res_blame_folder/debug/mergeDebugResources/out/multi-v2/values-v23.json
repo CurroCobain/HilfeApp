@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.hilfeapp-mergeDebugResources-3:/values-v23/values-v23.xml",
+            "outputFile": "com.example.hilfeapp-mergeDebugResources-79:/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\3756a77ee639fb986e06ec8ad0fbd755\\transformed\\work-gcm-2.9.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\3756a77ee639fb986e06ec8ad0fbd755\\transformed\\work-gcm-2.9.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\3efe96eecb5d9c455f1f1c6a03f49565\\transformed\\work-runtime-2.9.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\3efe96eecb5d9c455f1f1c6a03f49565\\transformed\\work-runtime-2.9.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

@@ -1,130 +1,130 @@
 [
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_despedida.gif.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/despedida.gif"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_banner.png.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/banner.png"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_fondo_azul.png.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/fondo_azul.png"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-xxhdpi/ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.hilfeapp-main-7:/xml/data_extraction_rules.xml"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-mdpi/ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_icono.jpg.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/icono.jpg"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_logo.jpg.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/logo.jpg"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_icono.jpg.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/icono.jpg"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_ambulancia.png.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/ambulancia.png"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-hdpi/ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_fondo_rojo.png.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/fondo_rojo.png"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/ic_launcher_foreground.xml"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "com.example.hilfeapp-debug-81:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.hilfeapp-main-83:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/ic_launcher_background.xml"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_portada_blue.png.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/portada_blue.png"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+        "merged": "com.example.hilfeapp-debug-81:/xml_backup_rules.xml.flat",
+        "source": "com.example.hilfeapp-main-83:/xml/backup_rules.xml"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_fondo_azul.png.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/fondo_azul.png"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_fondo_verde.png.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/fondo_verde.png"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_portada_green.png.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/portada_green.png"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_portada_red.png.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/portada_red.png"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_despedida.gif.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/despedida.gif"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/xml_backup_rules.xml.flat",
-        "source": "com.example.hilfeapp-main-7:/xml/backup_rules.xml"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-xhdpi/ic_launcher_foreground.webp"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_ambulancia.png.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/ambulancia.png"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_banner.png.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/banner.png"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_fondo_verde.png.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/fondo_verde.png"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_portada_blue.png.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/portada_blue.png"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-xhdpi/ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-mdpi/ic_launcher_foreground.webp"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_portada_red.png.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/portada_red.png"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-hdpi/ic_launcher_foreground.webp"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/drawable_portada_green.png.flat",
-        "source": "com.example.hilfeapp-main-7:/drawable/portada_green.png"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_fondo_rojo.png.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/fondo_rojo.png"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "com.example.hilfeapp-debug-81:/drawable_logo.jpg.flat",
+        "source": "com.example.hilfeapp-main-83:/drawable/logo.jpg"
     },
     {
-        "merged": "com.example.hilfeapp-debug-5:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.hilfeapp-main-7:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "com.example.hilfeapp-debug-81:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.hilfeapp-main-83:/mipmap-xxxhdpi/ic_launcher.webp"
     }
 ]

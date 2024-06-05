@@ -31,7 +31,7 @@ com.example.hilfeapp.test.app-runtime-saveable-release-29 C:\AndroidSDK\caches\t
 com.example.hilfeapp.test.app-core-1.5.0-30 C:\AndroidSDK\caches\transforms-3\e1a90dca22410f8edbe44fb9ad2797df\transformed\core-1.5.0\res
 com.example.hilfeapp.test.app-lifecycle-livedata-core-2.8.0-31 C:\AndroidSDK\caches\transforms-3\f3d875d3e66c3dbe47fd2ea431ceb08c\transformed\lifecycle-livedata-core-2.8.0\res
 com.example.hilfeapp.test.app-startup-runtime-1.1.1-32 C:\AndroidSDK\caches\transforms-3\ff50d756409d8125c19099fcf6831791\transformed\startup-runtime-1.1.1\res
-com.example.hilfeapp.test.app-androidTest-33 C:\ProyectosAndroid\Test\app\build\generated\res\resValues\androidTest\debug
-com.example.hilfeapp.test.app-mergeDebugAndroidTestResources-34 C:\ProyectosAndroid\Test\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.hilfeapp.test.app-mergeDebugAndroidTestResources-35 C:\ProyectosAndroid\Test\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.hilfeapp.test.app-debugAndroidTest-36 C:\ProyectosAndroid\Test\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
+com.example.hilfeapp.test.app-androidTest-33 C:\ProyectosAndroid\HilfeApp\app\build\generated\res\resValues\androidTest\debug
+com.example.hilfeapp.test.app-mergeDebugAndroidTestResources-34 C:\ProyectosAndroid\HilfeApp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.hilfeapp.test.app-mergeDebugAndroidTestResources-35 C:\ProyectosAndroid\HilfeApp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.hilfeapp.test.app-debugAndroidTest-36 C:\ProyectosAndroid\HilfeApp\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

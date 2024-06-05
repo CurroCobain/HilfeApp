@@ -65,7 +65,8 @@ data class Urgencia(
             }
             val issues = documentSnapshot.getString("issues") ?: ""
             val ambulance = documentSnapshot.getString("ambulance") ?: ""
-            return Urgencia(id, name, doc, age, priority, location, date, issues, ambulance,false)
+            val complete = documentSnapshot.getBoolean("complete") ?: false
+            return Urgencia(id, name, doc, age, priority, location, date, issues, ambulance, complete)
         }
 
     }

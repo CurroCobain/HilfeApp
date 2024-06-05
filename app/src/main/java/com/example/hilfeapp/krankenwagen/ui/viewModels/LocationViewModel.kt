@@ -78,12 +78,22 @@ class LocationViewModel : ViewModel() {
     // Se usa para mostrar el diálogo con la información de la urgencia
     var editUrg = MutableStateFlow(false)
 
+    // Se usa para indicar si una urgencia ha sido iniciada o no
+    val initializated = MutableStateFlow(false)
+
     /**
      * Método para cambiar el foco entre urgencia y ambulancia
      */
     fun alterFocus() {
         focusErAmb.value = !focusErAmb.value
         updateCameraPosition()
+    }
+
+    /**
+     * Comprueba si la urgencia tiene una ambulancia asignada y actualiza el valor de initializated en función del resultado
+     */
+    fun checkInitializated(miUrgencia: Urgencia){
+        initializated.value = miUrgencia.ambulance != "No definida"
     }
 
     /**
@@ -145,6 +155,7 @@ class LocationViewModel : ViewModel() {
             }
         }
     }
+
 
     /**
      * Método para restablecer el texto de la dirección

@@ -33,6 +33,7 @@ fun UrgenciaDialog(
     onFinalizarAvisoClick: () -> Unit,
     color: Color,
 ) {
+    val initializated by locationViewModel.initializated.collectAsState()
     // Muestra un cuadro de diálogo.
     Dialog(
         onDismissRequest = { locationViewModel.openCloseEditUrg() },
@@ -70,7 +71,8 @@ fun UrgenciaDialog(
                             modifier = Modifier.padding(8.dp),
                             colors = ButtonDefaults.buttonColors(color),
                             shape = RoundedCornerShape(6.dp),
-                            border = BorderStroke(2.dp, Color.Black)
+                            border = BorderStroke(2.dp, Color.Black),
+                            enabled = !initializated
                         ) {
                             Text("Iniciar aviso")
                         }
@@ -81,7 +83,8 @@ fun UrgenciaDialog(
                             modifier = Modifier.padding(8.dp),
                             colors = ButtonDefaults.buttonColors(color),
                             shape = RoundedCornerShape(6.dp),
-                            border = BorderStroke(2.dp, Color.Black)
+                            border = BorderStroke(2.dp, Color.Black),
+                            enabled = initializated
                         ) {
                             Text("Finalizar aviso")
                         }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.hilfeapp-mergeDebugResources-3:/values-v21/values-v21.xml",
+            "outputFile": "com.example.hilfeapp-mergeDebugResources-79:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\41d61e49cb6b75ad0a42ca3ec45d9e1e\\transformed\\core-1.13.1\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\41d61e49cb6b75ad0a42ca3ec45d9e1e\\transformed\\core-1.13.1\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\c219011b8f7e40ed2d352dd26f073e0e\\transformed\\credentials-play-services-auth-1.2.0-rc01\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\c219011b8f7e40ed2d352dd26f073e0e\\transformed\\credentials-play-services-auth-1.2.0-rc01\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

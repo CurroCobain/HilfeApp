@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.hilfeapp-mergeDebugResources-3:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.example.hilfeapp-mergeDebugResources-79:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\25f8684f7775e26fd34871d112c1086d\\transformed\\play-services-auth-20.7.0\\res\\values-watch-v20\\values.xml",
+                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\25f8684f7775e26fd34871d112c1086d\\transformed\\play-services-auth-20.7.0\\res\\values-watch-v20\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",

@@ -451,8 +451,9 @@ fun MyMap(
             }
             // Se muestra el diálogo de edición de la urgencia al pulsar sobre el icono de la misma
             if (editUrgencia) {
+                locationViewModel.checkInitializated(miUrgencia!!)
                 UrgenciaDialog(
-                    urgencia = miUrgencia!!,
+                    urgencia = miUrgencia,
                     locationViewModel = locationViewModel,
                     // Al pulsar el botón de "iniciar aviso" se llama a la función "initUrg" del viewModel
                     onIniciarAvisoClick = {
