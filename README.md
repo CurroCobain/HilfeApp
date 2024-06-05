@@ -1,8 +1,10 @@
 #HilfeApp
 
-Aplicación para gestión de emergencias sanitarias, aplicación principal "Krankenwagen App"
-
 Autor: Francisco Muñoz Mariscal
+
+Aplicación para gestión de emergencias sanitarias 
+
+Aplicación principal "Krankenwagen App"
 
 Enlace al prototipado: 
 
