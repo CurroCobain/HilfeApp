@@ -2,13 +2,9 @@
 package com.example.hilfeapp.krankenwagen.data
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.DocumentSnapshot
-import java.sql.Timestamp
-import java.time.LocalDateTime
-import java.time.ZoneOffset
+import com.google.firebase.Timestamp
 
 /**
  * Clase "Urgencia", que almacena la información de la emergencia para transmitirla al
@@ -59,10 +55,7 @@ data class Urgencia(
             } else {
                 LatLng(0.0, 0.0)
             }
-            var date = documentSnapshot.getDate("date") as? Timestamp
-            if(date == null){
-                date = Timestamp(System.currentTimeMillis())
-            }
+            val date = documentSnapshot.getTimestamp("date") ?: Timestamp.now()
             val issues = documentSnapshot.getString("issues") ?: ""
             val ambulance = documentSnapshot.getString("ambulance") ?: ""
             val complete = documentSnapshot.getBoolean("complete") ?: false
@@ -80,7 +73,7 @@ data class Urgencia(
         24,
         1,
         LatLng(36.678804, -6.143728),
-        Timestamp(System.currentTimeMillis()),
+        Timestamp.now(),
         "Parada cardio respiratoria",
         "No definida",
         false

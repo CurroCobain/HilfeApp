@@ -1,44 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.hilfeapp-mergeDebugResources-79:/values-kk/values-kk.xml",
+            "outputFile": "com.example.hilfeapp-mergeDebugResources-3:/values-kk/values-kk.xml",
             "map": [
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\d6b761d5da2cfa876e3b0ec21bd6d175\\transformed\\play-services-gcm-17.0.0\\res\\values-kk\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "190",
-                        "endColumns": "95",
-                        "endOffsets": "285"
-                    },
-                    "to": {
-                        "startLines": "38",
-                        "startColumns": "4",
-                        "startOffsets": "4153",
-                        "endColumns": "99",
-                        "endOffsets": "4248"
-                    }
-                },
-                {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\dbf4020b4060244d2fb341cb7a994da0\\transformed\\play-services-base-18.5.0\\res\\values-kk\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,292,441,563,665,801,923,1042,1147,1308,1410,1563,1688,1837,1990,2049,2104",
-                        "endColumns": "98,148,121,101,135,121,118,104,160,101,152,124,148,152,58,54,73",
-                        "endOffsets": "291,440,562,664,800,922,1041,1146,1307,1409,1562,1687,1836,1989,2048,2103,2177"
-                    },
-                    "to": {
-                        "startLines": "13,14,15,16,17,18,19,20,22,23,24,25,26,27,28,29,30",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "1225,1328,1481,1607,1713,1853,1979,2102,2375,2540,2646,2803,2932,3085,3242,3305,3364",
-                        "endColumns": "102,152,125,105,139,125,122,108,164,105,156,128,152,156,62,58,77",
-                        "endOffsets": "1323,1476,1602,1708,1848,1974,2097,2206,2535,2641,2798,2927,3080,3237,3300,3359,3437"
-                    }
-                },
-                {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\7a9976455e8b8c76f4d6f3a78ee9e3d6\\transformed\\play-services-basement-18.4.0\\res\\values-kk\\values.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\7a9976455e8b8c76f4d6f3a78ee9e3d6\\transformed\\play-services-basement-18.4.0\\res\\values-kk\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -55,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\50ebfab819d96c9a52696d2111f9f9f9\\transformed\\browser-1.4.0\\res\\values-kk\\values-kk.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\50ebfab819d96c9a52696d2111f9f9f9\\transformed\\browser-1.4.0\\res\\values-kk\\values-kk.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -72,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\41d61e49cb6b75ad0a42ca3ec45d9e1e\\transformed\\core-1.13.1\\res\\values-kk\\values-kk.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\41d61e49cb6b75ad0a42ca3ec45d9e1e\\transformed\\core-1.13.1\\res\\values-kk\\values-kk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -89,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\92704d4a791ab843f24f16059507c164\\transformed\\credentials-1.2.0-rc01\\res\\values-kk\\values-kk.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\92704d4a791ab843f24f16059507c164\\transformed\\credentials-1.2.0-rc01\\res\\values-kk\\values-kk.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -106,7 +72,7 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\571e2f3985ae7c5ad244709bc8681f11\\transformed\\ui-release\\res\\values-kk\\values-kk.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\571e2f3985ae7c5ad244709bc8681f11\\transformed\\ui-release\\res\\values-kk\\values-kk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -123,7 +89,41 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\30382cb32de9f021f2837d4b1f07d34d\\transformed\\foundation-release\\res\\values-kk\\values-kk.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\dbf4020b4060244d2fb341cb7a994da0\\transformed\\play-services-base-18.5.0\\res\\values-kk\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,292,441,563,665,801,923,1042,1147,1308,1410,1563,1688,1837,1990,2049,2104",
+                        "endColumns": "98,148,121,101,135,121,118,104,160,101,152,124,148,152,58,54,73",
+                        "endOffsets": "291,440,562,664,800,922,1041,1146,1307,1409,1562,1687,1836,1989,2048,2103,2177"
+                    },
+                    "to": {
+                        "startLines": "13,14,15,16,17,18,19,20,22,23,24,25,26,27,28,29,30",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1225,1328,1481,1607,1713,1853,1979,2102,2375,2540,2646,2803,2932,3085,3242,3305,3364",
+                        "endColumns": "102,152,125,105,139,125,122,108,164,105,156,128,152,156,62,58,77",
+                        "endOffsets": "1323,1476,1602,1708,1848,1974,2097,2206,2535,2641,2798,2927,3080,3237,3300,3359,3437"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\f583ab392ffc5ae1d0aaaa22069975c3\\transformed\\material3-release\\res\\values-kk\\values-kk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,173,291,406,522,624,725,843,981,1106,1231,1315,1418,1508,1605,1721,1845,1953,2095,2235,2367,2526,2649,2764,2883,2998,3089,3187,3310,3445,3549,3660,3766,3905,4050,4158,4258,4344,4437,4530,4638,4724,4808,4912,5001,5086,5187,5291,5388,5484,5571,5675,5774,5872,6009,6099,6210",
+                        "endColumns": "117,117,114,115,101,100,117,137,124,124,83,102,89,96,115,123,107,141,139,131,158,122,114,118,114,90,97,122,134,103,110,105,138,144,107,99,85,92,92,107,85,83,103,88,84,100,103,96,95,86,103,98,97,136,89,110,100",
+                        "endOffsets": "168,286,401,517,619,720,838,976,1101,1226,1310,1413,1503,1600,1716,1840,1948,2090,2230,2362,2521,2644,2759,2878,2993,3084,3182,3305,3440,3544,3655,3761,3900,4045,4153,4253,4339,4432,4525,4633,4719,4803,4907,4996,5081,5182,5286,5383,5479,5566,5670,5769,5867,6004,6094,6205,6306"
+                    },
+                    "to": {
+                        "startLines": "41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "4427,4545,4663,4778,4894,4996,5097,5215,5353,5478,5603,5687,5790,5880,5977,6093,6217,6325,6467,6607,6739,6898,7021,7136,7255,7370,7461,7559,7682,7817,7921,8032,8138,8277,8422,8530,8630,8716,8809,8902,9010,9096,9180,9284,9373,9458,9559,9663,9760,9856,9943,10047,10146,10244,10381,10471,10582",
+                        "endColumns": "117,117,114,115,101,100,117,137,124,124,83,102,89,96,115,123,107,141,139,131,158,122,114,118,114,90,97,122,134,103,110,105,138,144,107,99,85,92,92,107,85,83,103,88,84,100,103,96,95,86,103,98,97,136,89,110,100",
+                        "endOffsets": "4540,4658,4773,4889,4991,5092,5210,5348,5473,5598,5682,5785,5875,5972,6088,6212,6320,6462,6602,6734,6893,7016,7131,7250,7365,7456,7554,7677,7812,7916,8027,8133,8272,8417,8525,8625,8711,8804,8897,9005,9091,9175,9279,9368,9453,9554,9658,9755,9851,9938,10042,10141,10239,10376,10466,10577,10678"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\30382cb32de9f021f2837d4b1f07d34d\\transformed\\foundation-release\\res\\values-kk\\values-kk.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -140,20 +140,20 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\f583ab392ffc5ae1d0aaaa22069975c3\\transformed\\material3-release\\res\\values-kk\\values-kk.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\d6b761d5da2cfa876e3b0ec21bd6d175\\transformed\\play-services-gcm-17.0.0\\res\\values-kk\\values.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,173,291,406,522,624,725,843,981,1106,1231,1315,1418,1508,1605,1721,1845,1953,2095,2235,2367,2526,2649,2764,2883,2998,3089,3187,3310,3445,3549,3660,3766,3905,4050,4158,4258,4344,4437,4530,4638,4724,4808,4912,5001,5086,5187,5291,5388,5484,5571,5675,5774,5872,6009,6099,6210",
-                        "endColumns": "117,117,114,115,101,100,117,137,124,124,83,102,89,96,115,123,107,141,139,131,158,122,114,118,114,90,97,122,134,103,110,105,138,144,107,99,85,92,92,107,85,83,103,88,84,100,103,96,95,86,103,98,97,136,89,110,100",
-                        "endOffsets": "168,286,401,517,619,720,838,976,1101,1226,1310,1413,1503,1600,1716,1840,1948,2090,2230,2362,2521,2644,2759,2878,2993,3084,3182,3305,3440,3544,3655,3761,3900,4045,4153,4253,4339,4432,4525,4633,4719,4803,4907,4996,5081,5182,5286,5383,5479,5566,5670,5769,5867,6004,6094,6205,6306"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "190",
+                        "endColumns": "95",
+                        "endOffsets": "285"
                     },
                     "to": {
-                        "startLines": "41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "4427,4545,4663,4778,4894,4996,5097,5215,5353,5478,5603,5687,5790,5880,5977,6093,6217,6325,6467,6607,6739,6898,7021,7136,7255,7370,7461,7559,7682,7817,7921,8032,8138,8277,8422,8530,8630,8716,8809,8902,9010,9096,9180,9284,9373,9458,9559,9663,9760,9856,9943,10047,10146,10244,10381,10471,10582",
-                        "endColumns": "117,117,114,115,101,100,117,137,124,124,83,102,89,96,115,123,107,141,139,131,158,122,114,118,114,90,97,122,134,103,110,105,138,144,107,99,85,92,92,107,85,83,103,88,84,100,103,96,95,86,103,98,97,136,89,110,100",
-                        "endOffsets": "4540,4658,4773,4889,4991,5092,5210,5348,5473,5598,5682,5785,5875,5972,6088,6212,6320,6462,6602,6734,6893,7016,7131,7250,7365,7456,7554,7677,7812,7916,8027,8133,8272,8417,8525,8625,8711,8804,8897,9005,9091,9175,9279,9368,9453,9554,9658,9755,9851,9938,10042,10141,10239,10376,10466,10577,10678"
+                        "startLines": "38",
+                        "startColumns": "4",
+                        "startOffsets": "4153",
+                        "endColumns": "99",
+                        "endOffsets": "4248"
                     }
                 }
             ]

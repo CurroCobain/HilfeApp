@@ -1,7 +1,7 @@
-#Wed Jun 05 10:39:06 CEST 2024
-base.0=C\:\\ProyectosAndroid\\HilfeApp\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
-base.1=C\:\\ProyectosAndroid\\HilfeApp\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
-base.2=C\:\\ProyectosAndroid\\HilfeApp\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\6\\classes.dex
+#Sat Jun 08 12:08:47 CEST 2024
+base.0=C\:\\Users\\Cobain\\Documents\\Programacion\\Proyectos\\HilfeApp\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
+base.1=C\:\\Users\\Cobain\\Documents\\Programacion\\Proyectos\\HilfeApp\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
+base.2=C\:\\Users\\Cobain\\Documents\\Programacion\\Proyectos\\HilfeApp\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\6\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=6/classes.dex

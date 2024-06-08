@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.hilfeapp.test.app-mergeDebugAndroidTestResources-34:/values-vi/values-vi.xml",
+            "outputFile": "com.example.hilfeapp.test.app-mergeDebugAndroidTestResources-1:/values-vi/values-vi.xml",
             "map": [
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\41d61e49cb6b75ad0a42ca3ec45d9e1e\\transformed\\core-1.13.1\\res\\values-vi\\values-vi.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\41d61e49cb6b75ad0a42ca3ec45d9e1e\\transformed\\core-1.13.1\\res\\values-vi\\values-vi.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\571e2f3985ae7c5ad244709bc8681f11\\transformed\\ui-release\\res\\values-vi\\values-vi.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\571e2f3985ae7c5ad244709bc8681f11\\transformed\\ui-release\\res\\values-vi\\values-vi.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

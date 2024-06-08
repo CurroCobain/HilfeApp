@@ -1,95 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.hilfeapp-mergeDebugResources-79:/values-fr-rCA/values-fr-rCA.xml",
+            "outputFile": "com.example.hilfeapp-mergeDebugResources-3:/values-fr-rCA/values-fr-rCA.xml",
             "map": [
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\dbf4020b4060244d2fb341cb7a994da0\\transformed\\play-services-base-18.5.0\\res\\values-fr-rCA\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "197,299,475,601,706,873,1002,1119,1228,1419,1527,1708,1840,1996,2171,2240,2303",
-                        "endColumns": "101,175,125,104,166,128,116,108,190,107,180,131,155,174,68,62,79",
-                        "endOffsets": "298,474,600,705,872,1001,1118,1227,1418,1526,1707,1839,1995,2170,2239,2302,2382"
-                    },
-                    "to": {
-                        "startLines": "13,14,15,16,17,18,19,20,22,23,24,25,26,27,28,29,30",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "1250,1356,1536,1666,1775,1946,2079,2200,2474,2669,2781,2966,3102,3262,3441,3514,3581",
-                        "endColumns": "105,179,129,108,170,132,120,112,194,111,184,135,159,178,72,66,83",
-                        "endOffsets": "1351,1531,1661,1770,1941,2074,2195,2308,2664,2776,2961,3097,3257,3436,3509,3576,3660"
-                    }
-                },
-                {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\d6b761d5da2cfa876e3b0ec21bd6d175\\transformed\\play-services-gcm-17.0.0\\res\\values-fr-rCA\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "194",
-                        "endColumns": "97",
-                        "endOffsets": "291"
-                    },
-                    "to": {
-                        "startLines": "38",
-                        "startColumns": "4",
-                        "startOffsets": "4389",
-                        "endColumns": "101",
-                        "endOffsets": "4486"
-                    }
-                },
-                {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\41d61e49cb6b75ad0a42ca3ec45d9e1e\\transformed\\core-1.13.1\\res\\values-fr-rCA\\values-fr-rCA.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,153,255,354,456,560,664,778",
-                        "endColumns": "97,101,98,101,103,103,113,100",
-                        "endOffsets": "148,250,349,451,555,659,773,874"
-                    },
-                    "to": {
-                        "startLines": "4,5,6,7,8,9,10,106",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "340,438,540,639,741,845,949,11866",
-                        "endColumns": "97,101,98,101,103,103,113,100",
-                        "endOffsets": "433,535,634,736,840,944,1058,11962"
-                    }
-                },
-                {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\92704d4a791ab843f24f16059507c164\\transformed\\credentials-1.2.0-rc01\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\30382cb32de9f021f2837d4b1f07d34d\\transformed\\foundation-release\\res\\values-fr-rCA\\values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
-                        "startOffsets": "55,171",
-                        "endColumns": "115,118",
-                        "endOffsets": "166,285"
+                        "startOffsets": "55,143",
+                        "endColumns": "87,94",
+                        "endOffsets": "138,233"
                     },
                     "to": {
-                        "startLines": "2,3",
+                        "startLines": "110,111",
                         "startColumns": "4,4",
-                        "startOffsets": "105,221",
-                        "endColumns": "115,118",
-                        "endOffsets": "216,335"
+                        "startOffsets": "12237,12325",
+                        "endColumns": "87,94",
+                        "endOffsets": "12320,12415"
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\50ebfab819d96c9a52696d2111f9f9f9\\transformed\\browser-1.4.0\\res\\values-fr-rCA\\values-fr-rCA.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,162,264,383",
-                        "endColumns": "106,101,118,104",
-                        "endOffsets": "157,259,378,483"
-                    },
-                    "to": {
-                        "startLines": "31,35,36,37",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "3665,4063,4165,4284",
-                        "endColumns": "106,101,118,104",
-                        "endOffsets": "3767,4160,4279,4384"
-                    }
-                },
-                {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\571e2f3985ae7c5ad244709bc8681f11\\transformed\\ui-release\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\571e2f3985ae7c5ad244709bc8681f11\\transformed\\ui-release\\res\\values-fr-rCA\\values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -106,7 +38,24 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\f583ab392ffc5ae1d0aaaa22069975c3\\transformed\\material3-release\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\41d61e49cb6b75ad0a42ca3ec45d9e1e\\transformed\\core-1.13.1\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,153,255,354,456,560,664,778",
+                        "endColumns": "97,101,98,101,103,103,113,100",
+                        "endOffsets": "148,250,349,451,555,659,773,874"
+                    },
+                    "to": {
+                        "startLines": "4,5,6,7,8,9,10,106",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "340,438,540,639,741,845,949,11866",
+                        "endColumns": "97,101,98,101,103,103,113,100",
+                        "endOffsets": "433,535,634,736,840,944,1058,11962"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\f583ab392ffc5ae1d0aaaa22069975c3\\transformed\\material3-release\\res\\values-fr-rCA\\values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -123,7 +72,41 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\7a9976455e8b8c76f4d6f3a78ee9e3d6\\transformed\\play-services-basement-18.4.0\\res\\values-fr-rCA\\values.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\92704d4a791ab843f24f16059507c164\\transformed\\credentials-1.2.0-rc01\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,171",
+                        "endColumns": "115,118",
+                        "endOffsets": "166,285"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "105,221",
+                        "endColumns": "115,118",
+                        "endOffsets": "216,335"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\d6b761d5da2cfa876e3b0ec21bd6d175\\transformed\\play-services-gcm-17.0.0\\res\\values-fr-rCA\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "194",
+                        "endColumns": "97",
+                        "endOffsets": "291"
+                    },
+                    "to": {
+                        "startLines": "38",
+                        "startColumns": "4",
+                        "startOffsets": "4389",
+                        "endColumns": "101",
+                        "endOffsets": "4486"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\7a9976455e8b8c76f4d6f3a78ee9e3d6\\transformed\\play-services-basement-18.4.0\\res\\values-fr-rCA\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -140,20 +123,37 @@
                     }
                 },
                 {
-                    "source": "C:\\AndroidSDK\\caches\\transforms-3\\30382cb32de9f021f2837d4b1f07d34d\\transformed\\foundation-release\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\dbf4020b4060244d2fb341cb7a994da0\\transformed\\play-services-base-18.5.0\\res\\values-fr-rCA\\values.xml",
                     "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,143",
-                        "endColumns": "87,94",
-                        "endOffsets": "138,233"
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "197,299,475,601,706,873,1002,1119,1228,1419,1527,1708,1840,1996,2171,2240,2303",
+                        "endColumns": "101,175,125,104,166,128,116,108,190,107,180,131,155,174,68,62,79",
+                        "endOffsets": "298,474,600,705,872,1001,1118,1227,1418,1526,1707,1839,1995,2170,2239,2302,2382"
                     },
                     "to": {
-                        "startLines": "110,111",
-                        "startColumns": "4,4",
-                        "startOffsets": "12237,12325",
-                        "endColumns": "87,94",
-                        "endOffsets": "12320,12415"
+                        "startLines": "13,14,15,16,17,18,19,20,22,23,24,25,26,27,28,29,30",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1250,1356,1536,1666,1775,1946,2079,2200,2474,2669,2781,2966,3102,3262,3441,3514,3581",
+                        "endColumns": "105,179,129,108,170,132,120,112,194,111,184,135,159,178,72,66,83",
+                        "endOffsets": "1351,1531,1661,1770,1941,2074,2195,2308,2664,2776,2961,3097,3257,3436,3509,3576,3660"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Cobain\\Documents\\Programacion\\Segundo\\ProyectosAndroid\\FinalInterfacesMovil\\gradle\\caches\\transforms-3\\50ebfab819d96c9a52696d2111f9f9f9\\transformed\\browser-1.4.0\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,162,264,383",
+                        "endColumns": "106,101,118,104",
+                        "endOffsets": "157,259,378,483"
+                    },
+                    "to": {
+                        "startLines": "31,35,36,37",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "3665,4063,4165,4284",
+                        "endColumns": "106,101,118,104",
+                        "endOffsets": "3767,4160,4279,4384"
                     }
                 }
             ]

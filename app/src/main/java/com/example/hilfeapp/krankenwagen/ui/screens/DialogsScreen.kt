@@ -1,5 +1,6 @@
 package com.example.hilfeapp.krankenwagen.ui.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.hilfeapp.krankenwagen.data.Urgencia
 import com.example.hilfeapp.krankenwagen.ui.viewModels.LocationViewModel
+import com.google.firebase.Timestamp
+import java.text.SimpleDateFormat
 
 /**
  * Función composable que muestra un cuadro de diálogo con los detalles de una urgencia.
@@ -55,7 +58,7 @@ fun UrgenciaDialog(
                     Text("Nombre: ${urgencia.name}")
                     Text("Edad: ${urgencia.age}")
                     Text("Prioridad: ${urgencia.priority}")
-                    Text("Fecha: ${urgencia.date}")
+                    Text("Fecha: ${dateToString(urgencia.date!!)}")
                     Text("Descripción: ${urgencia.issues}")
                     Text("Ambulancia: ${urgencia.ambulance}")
                     Spacer(modifier = Modifier.height(16.dp))
@@ -93,4 +96,11 @@ fun UrgenciaDialog(
             }
         }
     )
+}
+
+@SuppressLint("SimpleDateFormat")
+private fun dateToString(date: Timestamp): String{
+    val sdf = SimpleDateFormat("HH:mm:ss dd/MM")
+    val todate = date.toDate()
+    return sdf.format(todate)
 }
