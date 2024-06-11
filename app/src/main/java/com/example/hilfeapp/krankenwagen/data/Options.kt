@@ -25,7 +25,10 @@ data class Options(
     var color1: Float,
     var color2: Float,
     var color3: Float,
-    var fondo: Int,
+    var color4: Float,
+    var color5: Float,
+    var color6: Float,
+    //var fondo: Int,
     var image: Int
 ) {
     @PrimaryKey(autoGenerate = true)

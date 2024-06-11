@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,6 +38,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -74,7 +78,7 @@ fun UserScreen(
     // Estado del color de la aplicación
     val color1 by optionsViewModel.color1.collectAsState()
     // Estado del fondo
-    val fondo by optionsViewModel.fondo.collectAsState()
+    val color2 by optionsViewModel.color2.collectAsState()
     // Estado del mail
     val mailDoc by doctorViewModel.nuevoMail.collectAsState()
     //Estado de la contraseña
@@ -102,7 +106,10 @@ fun UserScreen(
         Scaffold(
             floatingActionButton = {
                 ExtendedFloatingActionButton(
-                    modifier = Modifier.padding(bottom = 20.dp),
+                    modifier = Modifier.padding(bottom = 20.dp)
+                        .border(
+                            shape = RoundedCornerShape(12.dp),
+                            border = BorderStroke(2.dp, Color.Black)),
                     containerColor = color1,
                     text = { Text("Menú", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp) },
                     icon = { Icon(Icons.Filled.Menu, contentDescription = "") },
@@ -118,7 +125,8 @@ fun UserScreen(
         ) {
             // Contenido de la pantalla usuario
             ContenidoUser(
-                fondo,
+                color1,
+                color2,
                 doctorViewModel,
                 dataBaseViewModel,
                 mailDoc,
@@ -149,7 +157,8 @@ fun UserScreen(
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ContenidoUser(
-    fondo: Int,
+    color1: Color,
+    color2: Color,
     doctorViewModel: DoctorViewModel,
     dataBaseViewModel: DataBaseViewModel,
     mailDoc: String,
@@ -165,15 +174,17 @@ fun ContenidoUser(
         Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        color1,
+                        color2
+                    ),
+                    start = Offset(0f, 0f),
+                    end = Offset.Infinite
+                )
+            )
     ) {
-        // Fondo de la pantalla de usuario
-        Image(
-            painter = painterResource(id = fondo),
-            contentDescription = "Fondo",
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-        )
         // Columna para organizar los elementos de la pantalla de usuario
         Column(
             modifier = Modifier
@@ -186,7 +197,8 @@ fun ContenidoUser(
                 Text(
                     text = if(!sesionInit) "Inicie sesión por favor"
                     else "Bienvenido Dr",
-                    fontSize = 30.sp
+                    fontSize = 30.sp,
+                    color = Color.Black
                 )
             }
 

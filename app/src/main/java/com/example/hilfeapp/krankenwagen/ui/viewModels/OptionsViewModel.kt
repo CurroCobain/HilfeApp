@@ -24,9 +24,13 @@ class OptionsViewModel(private val database: AppDatabase) : ViewModel() {
 
     // Flujo mutable para el color principal de la aplicación
     val color1 = MutableStateFlow(Color(227, 176, 176))
+    val color2 = MutableStateFlow(Color(255,100,100))
 
+    /*
     // Flujo mutable para el fondo de la aplicación
     val fondo = MutableStateFlow(R.drawable.fondo_rojo)
+
+     */
 
     // Flujo mutable para la imagen de carga inicial de la aplicación
     val initialImage = MutableStateFlow(R.drawable.portada_red)
@@ -39,7 +43,8 @@ class OptionsViewModel(private val database: AppDatabase) : ViewModel() {
             options?.let {
                 // Se actualizan los valores de los flujos con las opciones recuperadas de la base de datos
                 color1.value = Color(it.color1, it.color2, it.color3)
-                fondo.value = it.fondo
+                color2.value = Color(it.color4, it.color5, it.color6)
+                //fondo.value = it.fondo
                 initialImage.value = it.image
             }
         }
@@ -54,26 +59,29 @@ class OptionsViewModel(private val database: AppDatabase) : ViewModel() {
             0 -> {
                 // Se actualizan los flujos en función del tema elegido
                 color1.value = Color(227, 176, 176)
-                fondo.value = R.drawable.fondo_rojo
+                color2.value = Color(255,100,100)
+                //fondo.value = R.drawable.fondo_rojo
                 initialImage.value = R.drawable.portada_red
                 // Se guarda el tema seleccionado en la base de datos
-                viewModelScope.launch { saveOptions(color1.value, fondo.value, initialImage.value) }
+                viewModelScope.launch { saveOptions(color1.value, color2.value, initialImage.value) }
             }
             1 -> {
                 // Se actualizan los flujos en función del tema elegido
                 color1.value = Color(176, 227, 178)
-                fondo.value = R.drawable.fondo_verde
+                color2.value = Color(34, 139, 34)
+                //fondo.value = R.drawable.fondo_verde
                 initialImage.value = R.drawable.portada_green
                 // Se guarda el tema seleccionado en la base de datos
-                viewModelScope.launch { saveOptions(color1.value, fondo.value, initialImage.value) }
+                viewModelScope.launch { saveOptions(color1.value, color2.value, initialImage.value) }
             }
             2 -> {
                 // Se actualizan los flujos en función del tema elegido
                 color1.value = Color(176, 187, 227)
-                fondo.value = R.drawable.fondo_azul
+                color2.value = Color(25, 25, 112)
+                //fondo.value = R.drawable.fondo_azul
                 initialImage.value = R.drawable.portada_blue
                 // Se guarda el tema seleccionado en la base de datos
-                viewModelScope.launch { saveOptions(color1.value, fondo.value, initialImage.value) }
+                viewModelScope.launch { saveOptions(color1.value, color2.value, initialImage.value) }
             }
         }
     }
@@ -84,13 +92,15 @@ class OptionsViewModel(private val database: AppDatabase) : ViewModel() {
      * @param fondo Recurso de fondo de la aplicación.
      * @param image Recurso de imagen de carga inicial de la aplicación.
      */
-    private suspend fun saveOptions(color1: Color, fondo: Int, image: Int) {
+    private suspend fun saveOptions(color1: Color, color2: Color, image: Int) {
         // Extraemos los componentes de color ARGB
-        val argb = color1.toArgb()
-        val color1Int = Color(android.graphics.Color.red(argb), android.graphics.Color.green(argb), android.graphics.Color.blue(argb))
+        val argb1 = color1.toArgb()
+        val argb2 = color2.toArgb()
+        val color1Int = Color(android.graphics.Color.red(argb1), android.graphics.Color.green(argb1), android.graphics.Color.blue(argb1))
+        val color2Int = Color(android.graphics.Color.red(argb2), android.graphics.Color.green(argb2), android.graphics.Color.blue(argb2))
 
 
-        val options = Options(color1Int.red, color1Int.green, color1Int.blue, fondo, image)
+        val options = Options(color1Int.red, color1Int.green, color1Int.blue, color2Int.red, color2Int.green, color2Int.blue, image)
         // Eliminamos la entrada existente en la base de datos (si existe)
         database.optionsDao().deleteAllOptions()
         database.optionsDao().insertOptions(options)

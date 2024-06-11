@@ -8,8 +8,10 @@ import android.location.Geocoder
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,6 +43,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -127,7 +131,7 @@ fun MapScreen(
     // Opción de color de la app
     val color1 by optionsViewModel.color1.collectAsState()
     //Opción de fondo de la app
-    val fondo by optionsViewModel.fondo.collectAsState()
+    val color2 by optionsViewModel.color2.collectAsState()
     //Mensaje del sistema
     val message by dataBaseViewModel.message.collectAsState()
     // Posición del mapa
@@ -149,9 +153,12 @@ fun MapScreen(
         Scaffold(
             floatingActionButton = {
                 ExtendedFloatingActionButton(
-                    modifier = Modifier.padding(bottom = 20.dp),
+                    modifier = Modifier.padding(bottom = 20.dp)
+                        .border(
+                            shape = RoundedCornerShape(12.dp),
+                            border = BorderStroke(2.dp, Color.Black)),
                     containerColor = color1,
-                    text = { Text("Menú", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp) },
+                    text = { Text("Menú", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = Color.Black) },
                     icon = { Icon(Icons.Filled.Menu, contentDescription = "") },
                     onClick = {
                         scope.launch {
@@ -172,13 +179,13 @@ fun MapScreen(
                 locationViewModel = locationViewModel,
                 geocoder = geocoder,
                 focus = focus,
-                fondo = fondo,
+                color1,
+                color2,
                 dataBaseViewModel,
                 listUrgencias,
                 miUrgencia,
                 editUrgencia,
                 navController,
-                color1,
                 message,
                 cameraPositionState
             )
@@ -215,13 +222,13 @@ fun MapContent(
     locationViewModel: LocationViewModel,
     geocoder: Geocoder,
     focus: Boolean,
-    fondo: Int,
+    color1: Color,
+    color2: Color,
     dataBaseViewModel: DataBaseViewModel,
     listUrgencias: MutableList<Urgencia>,
     miUrgencia: Urgencia?,
     editUrgencia: Boolean,
     navController: NavController,
-    color: Color,
     message: String,
     cameraPositionState: CameraPositionState
 ) {
@@ -230,15 +237,17 @@ fun MapContent(
         Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        color1,
+                        color2
+                    ),
+                    start = Offset(0f, 0f),
+                    end = Offset.Infinite
+                )
+            )
     ) {
-        // Imagen de fondo
-        Image(
-            painter = painterResource(id = fondo),
-            contentDescription = "Fondo",
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-        )
         // Columna principal
         Column(
             modifier = Modifier.fillMaxSize()
@@ -263,7 +272,7 @@ fun MapContent(
                     miUrgencia,
                     editUrgencia,
                     navController,
-                    color,
+                    color1,
                     message,
                     cameraPositionState
                 )
@@ -283,7 +292,8 @@ fun MapContent(
                             topEnd = 8.dp,
                             bottomStart = 8.dp,
                             bottomEnd = 8.dp
-                        )
+                        ),
+                        border = BorderStroke(2.dp, Color.Black)
                     ) {
                         // Texto del botón
                         Text(
@@ -307,7 +317,8 @@ fun MapContent(
                             topEnd = 8.dp,
                             bottomStart = 8.dp,
                             bottomEnd = 8.dp
-                        )
+                        ),
+                        border = BorderStroke(2.dp, Color.Black)
                     )
                     {
                         // Texto del botón
@@ -331,7 +342,8 @@ fun MapContent(
                         Text(
                             text = locationText,
                             Modifier.padding(start = 10.dp, top = 10.dp, end = 10.dp),
-                            fontSize = 20.sp
+                            fontSize = 20.sp,
+                            color = Color.Black
                         )
                     }
                 }
@@ -373,7 +385,7 @@ fun MyMap(
     miUrgencia: Urgencia?,
     editUrgencia: Boolean,
     navController: NavController,
-    color: Color,
+    color1: Color,
     message: String,
     cameraPositionState: CameraPositionState
 ) {
@@ -493,7 +505,7 @@ fun MyMap(
                         locationViewModel.openCloseEditUrg()
                         Toast.makeText(context, "Aviso finalizado", Toast.LENGTH_LONG).show()
                     },
-                    color = color
+                    color = color1
                 )
             }
         }

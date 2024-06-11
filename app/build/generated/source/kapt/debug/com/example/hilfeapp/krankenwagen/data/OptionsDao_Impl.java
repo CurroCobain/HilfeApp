@@ -38,7 +38,7 @@ public final class OptionsDao_Impl implements OptionsDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR ABORT INTO `options` (`color1`,`color2`,`color3`,`fondo`,`image`,`id`) VALUES (?,?,?,?,?,nullif(?, 0))";
+        return "INSERT OR ABORT INTO `options` (`color1`,`color2`,`color3`,`color4`,`color5`,`color6`,`image`,`id`) VALUES (?,?,?,?,?,?,?,nullif(?, 0))";
       }
 
       @Override
@@ -47,9 +47,11 @@ public final class OptionsDao_Impl implements OptionsDao {
         statement.bindDouble(1, entity.getColor1());
         statement.bindDouble(2, entity.getColor2());
         statement.bindDouble(3, entity.getColor3());
-        statement.bindLong(4, entity.getFondo());
-        statement.bindLong(5, entity.getImage());
-        statement.bindLong(6, entity.getId());
+        statement.bindDouble(4, entity.getColor4());
+        statement.bindDouble(5, entity.getColor5());
+        statement.bindDouble(6, entity.getColor6());
+        statement.bindLong(7, entity.getImage());
+        statement.bindLong(8, entity.getId());
       }
     };
     this.__preparedStmtOfDeleteAllOptions = new SharedSQLiteStatement(__db) {
@@ -117,7 +119,9 @@ public final class OptionsDao_Impl implements OptionsDao {
           final int _cursorIndexOfColor1 = CursorUtil.getColumnIndexOrThrow(_cursor, "color1");
           final int _cursorIndexOfColor2 = CursorUtil.getColumnIndexOrThrow(_cursor, "color2");
           final int _cursorIndexOfColor3 = CursorUtil.getColumnIndexOrThrow(_cursor, "color3");
-          final int _cursorIndexOfFondo = CursorUtil.getColumnIndexOrThrow(_cursor, "fondo");
+          final int _cursorIndexOfColor4 = CursorUtil.getColumnIndexOrThrow(_cursor, "color4");
+          final int _cursorIndexOfColor5 = CursorUtil.getColumnIndexOrThrow(_cursor, "color5");
+          final int _cursorIndexOfColor6 = CursorUtil.getColumnIndexOrThrow(_cursor, "color6");
           final int _cursorIndexOfImage = CursorUtil.getColumnIndexOrThrow(_cursor, "image");
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
           final Options _result;
@@ -128,11 +132,15 @@ public final class OptionsDao_Impl implements OptionsDao {
             _tmpColor2 = _cursor.getFloat(_cursorIndexOfColor2);
             final float _tmpColor3;
             _tmpColor3 = _cursor.getFloat(_cursorIndexOfColor3);
-            final int _tmpFondo;
-            _tmpFondo = _cursor.getInt(_cursorIndexOfFondo);
+            final float _tmpColor4;
+            _tmpColor4 = _cursor.getFloat(_cursorIndexOfColor4);
+            final float _tmpColor5;
+            _tmpColor5 = _cursor.getFloat(_cursorIndexOfColor5);
+            final float _tmpColor6;
+            _tmpColor6 = _cursor.getFloat(_cursorIndexOfColor6);
             final int _tmpImage;
             _tmpImage = _cursor.getInt(_cursorIndexOfImage);
-            _result = new Options(_tmpColor1,_tmpColor2,_tmpColor3,_tmpFondo,_tmpImage);
+            _result = new Options(_tmpColor1,_tmpColor2,_tmpColor3,_tmpColor4,_tmpColor5,_tmpColor6,_tmpImage);
             final long _tmpId;
             _tmpId = _cursor.getLong(_cursorIndexOfId);
             _result.setId(_tmpId);

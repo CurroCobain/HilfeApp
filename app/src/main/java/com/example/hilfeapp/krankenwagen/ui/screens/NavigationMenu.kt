@@ -311,7 +311,8 @@ fun Despedida(
         // Composable para mostrar una imagen animada
         GlideImage(
             model = R.drawable.despedida,
-            contentDescription = "Gif de despedida"
+            contentDescription = "Gif de despedida",
+            modifier = Modifier.fillMaxSize()
         )
     }
 }

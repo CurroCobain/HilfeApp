@@ -77,7 +77,9 @@ fun UrgenciaDialog(
                             border = BorderStroke(2.dp, Color.Black),
                             enabled = !initializated
                         ) {
-                            Text("Iniciar aviso")
+                            Text("Iniciar aviso",
+                                color = Color.Black
+                            )
                         }
 
                         // Botón para finalizar el aviso.
@@ -89,7 +91,9 @@ fun UrgenciaDialog(
                             border = BorderStroke(2.dp, Color.Black),
                             enabled = initializated
                         ) {
-                            Text("Finalizar aviso")
+                            Text("Finalizar aviso",
+                                color = Color.Black
+                            )
                         }
                     }
                 }

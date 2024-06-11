@@ -3,6 +3,7 @@ package com.example.hilfeapp.krankenwagen.ui.screens
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -43,6 +44,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -78,7 +81,7 @@ fun OptionsScreen(
     // Estado del color de la aplicación
     val color1 by optionsViewModel.color1.collectAsState()
     // Estado del fondo
-    val fondo by optionsViewModel.fondo.collectAsState()
+    val color2 by optionsViewModel.color2.collectAsState()
     // Listas de provincias, hospitales y ambulancias
     val listCounty = dataBaseViewModel.tempCounty
     val listHosp by dataBaseViewModel.listHospitals.collectAsState()
@@ -103,7 +106,10 @@ fun OptionsScreen(
         Scaffold(
             floatingActionButton = {
                 ExtendedFloatingActionButton(
-                    modifier = Modifier.padding(bottom = 20.dp),
+                    modifier = Modifier.padding(bottom = 20.dp)
+                        .border(
+                            shape = RoundedCornerShape(12.dp),
+                            border = BorderStroke(2.dp, Color.Black)),
                     containerColor = color1,
                     text = { Text("Menú", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp) },
                     icon = { Icon(Icons.Filled.Menu, contentDescription = "") },
@@ -119,7 +125,8 @@ fun OptionsScreen(
         ) {
             // Contenido de las opciones
             ContenidoOpt(
-                fondo,
+                color1,
+                color2,
                 optionsViewModel,
                 dataBaseViewModel,
                 selectedHosp,
@@ -150,7 +157,8 @@ fun OptionsScreen(
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ContenidoOpt(
-    fondo: Int,
+    color1: Color,
+    color2: Color,
     optionsViewModel: OptionsViewModel,
     dataBaseViewModel: DataBaseViewModel,
     selectedHosp: Hospital,
@@ -170,15 +178,17 @@ fun ContenidoOpt(
         Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        color1,
+                        color2
+                    ),
+                    start = Offset(0f, 0f),
+                    end = Offset.Infinite
+                )
+            )
     ) {
-        // Fondo de la pantalla de opciones
-        Image(
-            painter = painterResource(id = fondo),
-            contentDescription = "Fondo",
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-        )
         // Columna para organizar los elementos de las opciones
         Column(
             modifier = Modifier.fillMaxSize()
@@ -193,7 +203,8 @@ fun ContenidoOpt(
                 Text(
                     text = "Elija el tema",
                     modifier = Modifier.padding(top= 65.dp, bottom = 10.dp),
-                    fontSize = 40.sp
+                    fontSize = 40.sp,
+                    color = Color.Black
                 )
             }
             // Selección de tema
@@ -254,7 +265,8 @@ fun ContenidoOpt(
                 Text(
                     text = "Elija ambulancia",
                     modifier = Modifier.padding(top = 10.dp , bottom = 20.dp),
-                    fontSize = 40.sp
+                    fontSize = 40.sp,
+                    color = Color.Black
                 )
             }
             Row(
@@ -267,7 +279,8 @@ fun ContenidoOpt(
                         modifier = Modifier
                             .clickable { expandedCounty = true }
                             .background(color = Color.White),
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
                     )
                 }
                 // Texto elige hospital
@@ -280,7 +293,8 @@ fun ContenidoOpt(
                                 }
                             }
                             .background(color = Color.White),
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
                     )
                 }
                 // Texto elige ambulancia
@@ -293,7 +307,8 @@ fun ContenidoOpt(
                                 }
                             }
                             .background(color = Color.White),
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
                     )
                 }
             }
@@ -314,7 +329,8 @@ fun ContenidoOpt(
                                 .padding(8.dp)
                                 .sizeIn(minWidth = 100.dp, minHeight = 30.dp),
                             fontSize = 25.sp,
-                            fontWeight = FontWeight.ExtraBold
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Color.Black
                         )
                     }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
@@ -356,6 +372,7 @@ fun ContenidoOpt(
                                 .padding(8.dp),
                             fontSize = 25.sp,
                             fontWeight = FontWeight.ExtraBold,
+                            color = Color.Black
                         )
                     }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
@@ -396,7 +413,8 @@ fun ContenidoOpt(
                                 .padding(8.dp)
                             .sizeIn(minWidth = 100.dp, minHeight = 30.dp),
                             fontSize = 25.sp,
-                            fontWeight = FontWeight.ExtraBold
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Color.Black
                         )
                     }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
