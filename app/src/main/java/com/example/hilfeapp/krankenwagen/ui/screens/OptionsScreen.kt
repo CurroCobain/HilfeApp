@@ -437,7 +437,8 @@ fun ContenidoOpt(
                                 onClick = {
                                     dataBaseViewModel.setAmb(amb)
                                     expandedAmb =
-                                        false // Actualiza el estado de expansión al hacer clic en un elemento del menú
+                                            // Actualiza el estado de expansión al hacer clic en un elemento del menú
+                                        false
                                 })
                         }
                     }
