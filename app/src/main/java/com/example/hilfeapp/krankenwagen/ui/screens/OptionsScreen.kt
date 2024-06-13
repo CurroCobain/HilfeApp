@@ -49,6 +49,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -327,10 +328,11 @@ fun ContenidoOpt(
                             text = " $selectedCounty ".uppercase(), // Mostrar la provincia actual
                             modifier = Modifier
                                 .padding(8.dp)
-                                .sizeIn(minWidth = 100.dp, minHeight = 30.dp),
+                                .fillMaxWidth(0.9f),
                             fontSize = 25.sp,
                             fontWeight = FontWeight.ExtraBold,
-                            color = Color.Black
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
                         )
                     }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
@@ -369,10 +371,12 @@ fun ContenidoOpt(
                         Text(
                             text = " ${selectedHosp.name} ".uppercase(), // Mostrar el hospital actual
                             modifier = Modifier
-                                .padding(8.dp),
+                                .padding(8.dp)
+                                .fillMaxWidth(0.9f),
                             fontSize = 25.sp,
                             fontWeight = FontWeight.ExtraBold,
-                            color = Color.Black
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
                         )
                     }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
@@ -411,10 +415,11 @@ fun ContenidoOpt(
                             text = " $myAmbulance ", // Mostrar ambulancia actual
                             modifier = Modifier
                                 .padding(8.dp)
-                            .sizeIn(minWidth = 100.dp, minHeight = 30.dp),
+                                .fillMaxWidth(0.9f),
                             fontSize = 25.sp,
                             fontWeight = FontWeight.ExtraBold,
-                            color = Color.Black
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
                         )
                     }
                     Spacer(modifier = Modifier.padding(start = 8.dp))
